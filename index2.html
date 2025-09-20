@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lumpia Ayam - Comment - KuliNastra</title>
-    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="public/style/style2.css">
 </head>
 <body>
     <main class="container">
@@ -36,11 +36,15 @@
         </section>
         
         <nav class="tabs">
-            <button class="tab">Deskripsi</button>
-            <button class="tab active">Comment</button>
+            <button class="tab" onclick="showTab('description')">Deskripsi</button>
+            <button class="tab active" onclick="showTab('comment')">Comment</button>
         </nav>
         
-        <section class="comment-section">
+        <section class="description tab-content" id="description">
+            <p>Lumpia ayam khas KuliNastra dibuat dari kulit lumpia yang tipis dan renyah, berisi isian ayam cincang yang dibumbui dengan rempah pilihan. Teksturnya gurih, dengan cita rasa yang seimbang antara renyah di luar dan lembut di dalam. Cocok disajikan sebagai camilan sore, hidangan pendamping, atau teman minum teh bersama keluarga.</p>
+        </section>
+        
+        <section class="comment-section tab-content active" id="comment">
             <div class="rating-section">
                 <h3>Rating</h3>
                 <div class="stars">⭐⭐⭐⭐⭐</div>
@@ -144,5 +148,7 @@
             </div>
         </section>
     </main>
+    
+    <script src="public/script/script.js"></script>
 </body>
 </html>

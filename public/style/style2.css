@@ -131,11 +131,25 @@ body {
     background-color: #4CAF50;
 }
 
-.comment-section {
+.tab-content {
+    display: none;
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.description {
+    /* Description specific styles already defined in tab-content */
+}
+
+.comment-section {
+    /* Comment section styles already defined in tab-content */
 }
 
 .rating-section {
