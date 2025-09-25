@@ -1,0 +1,37 @@
+body {
+  background-color: #fefbe7;
+}
+
+.navbar {
+  background-color: #2e7d32;
+}
+
+.navbar-brand {
+  color: #fff !important;
+  font-weight: bold;
+}
+
+.filter-box {
+  background: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card img {
+  height: 160px;
+  object-fit: cover;
+}
+
+.rating {
+  color: #f4b400;
+  margin: 0;
+}
+
+footer {
+  background-color: #2e7d32;
+  color: white;
+  padding: 20px;
+  margin-top: 40px;
+  text-align: center;
+}
