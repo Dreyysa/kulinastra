@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumpia Ayam - Comment - KuliNastra</title>
-    <link rel="stylesheet" href="public/style/style2.css">
+    <title>Lumpia Ayam - KuliNastra</title>
+    <link rel="stylesheet" href="../public/css/product-detail.css">
 </head>
 <body>
     <main class="container">
         <section class="product-section">
             <div class="product-image">
-                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAC0ALwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9k=" alt="Lumpia Ayam">
+                <img src="../public/assets/images/products/lumpia.jpg" alt="Lumpia Ayam">
             </div>
             
             <div class="product-info">
@@ -36,15 +36,15 @@
         </section>
         
         <nav class="tabs">
-            <button class="tab" onclick="showTab('description')">Deskripsi</button>
-            <button class="tab active" onclick="showTab('comment')">Comment</button>
+            <button class="tab active" onclick="showTab('description')">Deskripsi</button>
+            <button class="tab" onclick="showTab('comment')">Comment</button>
         </nav>
         
-        <section class="description tab-content" id="description">
+        <section class="description tab-content active" id="description">
             <p>Lumpia ayam khas KuliNastra dibuat dari kulit lumpia yang tipis dan renyah, berisi isian ayam cincang yang dibumbui dengan rempah pilihan. Teksturnya gurih, dengan cita rasa yang seimbang antara renyah di luar dan lembut di dalam. Cocok disajikan sebagai camilan sore, hidangan pendamping, atau teman minum teh bersama keluarga.</p>
         </section>
         
-        <section class="comment-section tab-content active" id="comment">
+        <section class="comment-section tab-content" id="comment">
             <div class="rating-section">
                 <h3>Rating</h3>
                 <div class="stars">⭐⭐⭐⭐⭐</div>
@@ -52,7 +52,7 @@
             
             <div class="comment-form">
                 <textarea placeholder="Tambahkan komentar" rows="4"></textarea>
-                <button class="submit-btn">Simpan</button>
+                <button class="submit-btn" onclick="addComment()">Simpan</button>
             </div>
             
             <div class="comments-list">
@@ -149,6 +149,6 @@
         </section>
     </main>
     
-    <script src="public/script/script.js"></script>
+    <script src="../public/js/script.js"></script>
 </body>
 </html>
