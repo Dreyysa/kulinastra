@@ -145,11 +145,11 @@ body {
 }
 
 .description {
-    /* Description specific styles already defined in tab-content */
+    /* Description specific styles already defined above */
 }
 
 .comment-section {
-    /* Comment section styles already defined in tab-content */
+    /* Comment section styles */
 }
 
 .rating-section {
@@ -357,10 +357,10 @@ body {
     .price {
         font-size: 1.8em;
     }
-    
+
     .comment-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
     }
 }
