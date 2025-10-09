@@ -122,6 +122,60 @@
           "date": "2024-01-07"
         }
       ]
+    },
+
+      {
+      "id": "apem",
+      "name": "Apem",
+      "price": 3000,
+      "image": "../public/assets/images/products/apem.png",
+      "description": "Apem tradisional khas KuliNastra dibuat dari adonan tepung beras yang difermentasi, menghasilkan tekstur lembut dan aroma harum khas kelapa. Rasanya manis legit dengan sentuhan gurih dari santan, menghadirkan cita rasa klasik yang autentik. Kue ini cocok disajikan sebagai camilan sore, hidangan penutup, atau teman minum teh dan kopi bersama keluarga.",
+      "categories": ["manis", "nabati", "jajan"],
+      "rating": 5,
+      "stock": "Tersedia",
+      "comments": [
+        {
+          "id": 1,
+          "username": "Sukma",
+          "rating": 5,
+          "text": "gila enak banget",
+          "date": "2024-01-13"
+        },
+        {
+          "id": 2,
+          "username": "Dika",
+          "rating": 5,
+          "text": "apemnya enak.",
+          "date": "2024-01-07"
+        }
+      ]
+    },
+
+          {
+      "id": "arem-arem",
+      "name": "Arem-arem",
+      "price": 3000,
+      "image": "../public/assets/images/products/arem.png",
+      "description": "Arem-arem tradisional khas KuliNastra dibuat dari nasi pulen yang dibungkus daun pisang, berisi tumisan lauk seperti ayam, tempe, atau sayuran berbumbu gurih. Proses pengukusan membuatnya memiliki aroma harum daun pisang dan rasa yang lezat serta mengenyangkan. Hidangan ini cocok disajikan sebagai bekal perjalanan, menu sarapan, atau camilan tradisional yang hangat dan mengenyangkan.",
+      "categories": ["gurih", "hewani", "jajan"],
+      "rating": 4,
+      "stock": "Tersedia",
+      "comments": [
+        {
+          "id": 1,
+          "username": "Mulyono",
+          "rating": 5,
+          "text": "Sangat Recommended",
+          "date": "2024-01-13"
+        },
+        {
+          "id": 2,
+          "username": "Teddy",
+          "rating": 3,
+          "text": "arem-aremnya datang tidak sesuai ekspetasi.",
+          "date": "2024-01-07"
+        }
+      ]
     }
   ]
 }
