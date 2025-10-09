@@ -48,8 +48,7 @@ header img {
 /* Hero Section */
 .hero {
   position: relative;
-  background: url("../../public/assets/images/products/bg.png") center/cover
-    no-repeat;
+  background: url("../assets/images/products/bg.png") center/cover no-repeat;
   color: white;
   text-align: left;
   padding: 100px 20px;
@@ -156,8 +155,7 @@ header img {
 
 /* Products Section */
 .products-section {
-  background: url("../../public/assets/images/products/wave.png") no-repeat
-    center center;
+  background: url("../assets/images/products/wave.png") no-repeat center center;
   background-size: cover; /* biar nutup full */
   padding: 100px 20px;
 }
@@ -186,6 +184,13 @@ header img {
   padding: 15px;
   text-align: center;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .product-image {
