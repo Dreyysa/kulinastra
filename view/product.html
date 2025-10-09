@@ -7,6 +7,98 @@
   <title>KuliNastra - Produk Kami</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="../public/css/product.css" rel="stylesheet">
+  <style>
+    /* Additional styles for better product display */
+    .product-card {
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      height: 100%;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      width: 100%;
+    }
+    
+    .card-body {
+      padding: 15px;
+    }
+    
+    .card-title {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    
+    .card-text {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+    
+    .rating {
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+    
+    .filter-box {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .filter-box h5 {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    
+    .filter-box h6 {
+      font-weight: 600;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+    
+    .form-check {
+      margin-bottom: 8px;
+    }
+    
+    .navbar {
+      background-color: #4CAF50;
+      padding: 1rem 0;
+    }
+    
+    .navbar-brand {
+      color: white !important;
+      font-size: 1.5rem;
+    }
+    
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 50px;
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 40px;
+      font-size: 1.2rem;
+      color: #666;
+    }
+  </style>
 </head>
 
 <body>
@@ -31,23 +123,23 @@
           <h5>Filters</h5>
           <hr>
           <h6>Jenis Makanan</h6>
-          <div class="form-check"><input class="form-check-input" type="checkbox" id="manis"><label
+          <div class="form-check"><input class="form-check-input filter-category" type="checkbox" id="manis" value="manis"><label
               class="form-check-label" for="manis">Manis</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox" id="gurih"><label
+          <div class="form-check"><input class="form-check-input filter-category" type="checkbox" id="gurih" value="gurih"><label
               class="form-check-label" for="gurih">Gurih</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox" id="nabati"><label
+          <div class="form-check"><input class="form-check-input filter-category" type="checkbox" id="nabati" value="nabati"><label
               class="form-check-label" for="nabati">Nabati</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox" id="hewani"><label
+          <div class="form-check"><input class="form-check-input filter-category" type="checkbox" id="hewani" value="hewani"><label
               class="form-check-label" for="hewani">Hewani</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox" id="jajan"><label
+          <div class="form-check"><input class="form-check-input filter-category" type="checkbox" id="jajan" value="jajan"><label
               class="form-check-label" for="jajan">Jajan</label></div>
-          <div class="form-check"><input class="form-check-input" type="checkbox" id="makanan-berat"><label
+          <div class="form-check"><input class="form-check-input filter-category" type="checkbox" id="makanan-berat" value="makanan-berat"><label
               class="form-check-label" for="makanan-berat">Makanan Berat</label></div>
 
           <hr>
           <h6>Harga</h6>
-          <input type="number" class="form-control mb-2" placeholder="Harga Minimum">
-          <input type="number" class="form-control mb-2" placeholder="Harga Maksimum">
+          <input type="number" class="form-control mb-2" id="min-price" placeholder="Harga Minimum">
+          <input type="number" class="form-control mb-2" id="max-price" placeholder="Harga Maksimum">
 
           <hr>
           <h6>Rating</h6>
@@ -72,6 +164,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../public/js/products.js"></script>
+  <script src="../public/js/filter.js"></script>
 </body>
 
 </html>

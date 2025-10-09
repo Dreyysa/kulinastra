@@ -32,6 +32,12 @@ async function loadProductsData() {
     const data = await response.json();
     productsData = data.products;
     console.log("Products loaded:", productsData.length);
+    
+    // Notify filter.js that products are loaded
+    if (window.setAllProducts) {
+      window.setAllProducts(productsData);
+    }
+    
     return productsData;
   } catch (error) {
     console.error("Error loading products data:", error);
@@ -47,7 +53,7 @@ async function displayProducts() {
 
   // Show loading state
   productsContainer.innerHTML =
-    '<div class="col-12"><div class="loading"></div></div>';
+    '<div class="col-12"><div class="loading">Memuat produk...</div></div>';
 
   const products = await loadProductsData();
 
