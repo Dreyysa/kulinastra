@@ -17,8 +17,10 @@ function initializeFilters() {
     checkbox.addEventListener('change', () => {
       console.log("Category checkbox changed:", checkbox.value, checkbox.checked);
       applyFilters();
-      // Auto-close filter sidebar when checkbox is clicked
-      setTimeout(() => closeFilterSidebar(), 300);
+      // Hanya close sidebar jika checkbox DI-CHECK (bukan di-uncheck)
+      if (checkbox.checked) {
+        setTimeout(() => closeFilterSidebar(), 300);
+      }
     });
   });
 
@@ -39,7 +41,10 @@ function initializeFilters() {
     ratingCheckbox.addEventListener('change', () => {
       console.log("Rating checkbox changed:", ratingCheckbox.checked);
       applyFilters();
-      setTimeout(() => closeFilterSidebar(), 300);
+      // Hanya close sidebar jika checkbox DI-CHECK (bukan di-uncheck)
+      if (ratingCheckbox.checked) {
+        setTimeout(() => closeFilterSidebar(), 300);
+      }
     });
   }
   
@@ -51,10 +56,10 @@ function closeFilterSidebar() {
   const filterColumn = document.querySelector('.col-md-3');
   if (!filterColumn || !filterColumn.querySelector('.filter-box')) return;
   
-  const filterIcon = document.getElementById('filter-icon');
+  const filterIconSpan = document.querySelector('#filter-prefix-badge #filter-icon');
   
   filterColumn.style.display = 'none';
-  if (filterIcon) filterIcon.textContent = '▼';
+  if (filterIconSpan) filterIconSpan.textContent = '▼';
   isFilterOpen = false;
   console.log("Filter sidebar closed after selection");
 }
@@ -64,10 +69,10 @@ function openFilterSidebar() {
   const filterColumn = document.querySelector('.col-md-3');
   if (!filterColumn || !filterColumn.querySelector('.filter-box')) return;
   
-  const filterIcon = document.getElementById('filter-icon');
+  const filterIconSpan = document.querySelector('#filter-prefix-badge #filter-icon');
   
   filterColumn.style.display = 'block';
-  if (filterIcon) filterIcon.textContent = '▲';
+  if (filterIconSpan) filterIconSpan.textContent = '▲';
   isFilterOpen = true;
   console.log("Filter sidebar opened after badge removed");
 }
@@ -107,16 +112,16 @@ function toggleFilterPanel() {
   const filterColumn = document.querySelector('.col-md-3');
   if (!filterColumn || !filterColumn.querySelector('.filter-box')) return;
   
-  const filterIcon = document.getElementById('filter-icon');
+  const filterIconSpan = document.querySelector('#filter-prefix-badge #filter-icon');
   
   if (isFilterOpen) {
     filterColumn.style.display = 'none';
-    if (filterIcon) filterIcon.textContent = '▼';
+    if (filterIconSpan) filterIconSpan.textContent = '▼';
     isFilterOpen = false;
     console.log("Filter panel closed");
   } else {
     filterColumn.style.display = 'block';
-    if (filterIcon) filterIcon.textContent = '▲';
+    if (filterIconSpan) filterIconSpan.textContent = '▲';
     isFilterOpen = true;
     console.log("Filter panel opened");
   }
@@ -157,14 +162,14 @@ function applyFilters() {
   console.log("Price range:", minPrice, maxPrice);
   console.log("Rating 4+:", rating4Plus);
 
-  // Update filter badges
-  updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus);
-
-  // Filter products
+  // Filter products - FIXED: Using every() instead of some()
   const filteredProducts = allProducts.filter(product => {
     let categoryMatch = true;
     if (selectedCategories.length > 0) {
-      categoryMatch = product.categories.some(cat => selectedCategories.includes(cat));
+      // Produk harus memiliki SEMUA kategori yang dipilih (AND logic)
+      categoryMatch = selectedCategories.every(selectedCat => 
+        product.categories.includes(selectedCat)
+      );
     }
 
     const priceMatch = product.price >= minPrice && product.price <= maxPrice;
@@ -174,7 +179,12 @@ function applyFilters() {
   });
 
   console.log("Filtered products:", filteredProducts.length, "out of", allProducts.length);
+  
+  // Display products first
   displayFilteredProducts(filteredProducts);
+  
+  // Then update badges - ini penting dilakukan setelah display
+  updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus);
 }
 
 // Update filter badges
@@ -185,8 +195,6 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
     return;
   }
   
-  badgeContainer.innerHTML = '';
-  
   const hasActiveFilters = selectedCategories.length > 0 || 
                           minPrice > 0 || 
                           maxPrice < Infinity || 
@@ -194,42 +202,73 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
   
   if (!hasActiveFilters) {
     badgeContainer.style.display = 'none';
+    badgeContainer.innerHTML = '';
     console.log("No active filters, hiding badge container");
+    // Buka kembali sidebar filter agar user bisa memilih filter lagi
+    const filterColumn = document.querySelector('.col-md-3');
+    if (filterColumn) {
+      filterColumn.style.display = 'block';
+      isFilterOpen = true;
+    }
     return;
+  }
+  
+  // Cek apakah prefix badge sudah ada, jika belum buat baru
+  let prefixBadge = document.getElementById('filter-prefix-badge');
+  const needsRebuild = !prefixBadge;
+  
+  if (needsRebuild) {
+    badgeContainer.innerHTML = '';
+  } else {
+    // Hapus semua badge kecuali prefix badge
+    const badges = badgeContainer.querySelectorAll('span:not(#filter-prefix-badge)');
+    badges.forEach(badge => badge.remove());
   }
   
   badgeContainer.style.display = 'flex';
   console.log("Showing badge container with filters");
   
-  const prefixBadge = document.createElement('span');
-  prefixBadge.id = 'filter-prefix-badge';
-  prefixBadge.style.cssText = `
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 12px;
-    background-color: transparent;
-    color: #333;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  `;
-  prefixBadge.innerHTML = '<span id="filter-icon" style="margin-right: 3px;">▼</span> Filters <span style="margin: 0 5px;">›</span>';
-  
-  prefixBadge.addEventListener('click', () => {
-    console.log("Prefix badge clicked");
-    toggleFilterPanel();
-  });
-  
-  prefixBadge.addEventListener('mouseenter', () => {
-    prefixBadge.style.backgroundColor = '#f0f0f0';
-  });
-  prefixBadge.addEventListener('mouseleave', () => {
-    prefixBadge.style.backgroundColor = 'transparent';
-  });
-  
-  badgeContainer.appendChild(prefixBadge);
+  // Hanya buat prefix badge jika belum ada
+  if (needsRebuild) {
+    prefixBadge = document.createElement('span');
+    prefixBadge.id = 'filter-prefix-badge';
+    prefixBadge.style.cssText = `
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      background-color: transparent;
+      color: #333;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    `;
+    
+    // Set icon berdasarkan status sidebar
+    const iconText = isFilterOpen ? '▲' : '▼';
+    prefixBadge.innerHTML = `<span id="filter-icon" style="margin-right: 3px;">${iconText}</span> Filters <span style="margin: 0 5px;">›</span>`;
+    
+    prefixBadge.addEventListener('click', () => {
+      console.log("Prefix badge clicked");
+      toggleFilterPanel();
+    });
+    
+    prefixBadge.addEventListener('mouseenter', () => {
+      prefixBadge.style.backgroundColor = '#f0f0f0';
+    });
+    prefixBadge.addEventListener('mouseleave', () => {
+      prefixBadge.style.backgroundColor = 'transparent';
+    });
+    
+    badgeContainer.appendChild(prefixBadge);
+  } else {
+    // Update icon saat badge sudah ada
+    const filterIconSpan = prefixBadge.querySelector('#filter-icon');
+    if (filterIconSpan) {
+      filterIconSpan.textContent = isFilterOpen ? '▲' : '▼';
+    }
+  }
   
   const categoryNames = {
     'manis': 'Manis',
@@ -246,7 +285,10 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
       if (checkbox) {
         checkbox.checked = false;
         console.log(`Unchecked category: ${category}`);
-        applyFilters();
+        // Gunakan requestAnimationFrame untuk memastikan DOM update selesai
+        requestAnimationFrame(() => {
+          applyFilters();
+        });
       }
     });
     badgeContainer.appendChild(badge);
@@ -268,8 +310,10 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
       if (minPriceInput) minPriceInput.value = '';
       if (maxPriceInput) maxPriceInput.value = '';
       console.log('Cleared price filters');
-      applyFilters();
-      openFilterSidebar(); // buka sidebar setelah badge harga dihapus
+      // Gunakan requestAnimationFrame untuk memastikan DOM update selesai
+      requestAnimationFrame(() => {
+        applyFilters();
+      });
     });
     badgeContainer.appendChild(badge);
   }
@@ -280,8 +324,10 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
       if (ratingCheckbox) {
         ratingCheckbox.checked = false;
         console.log('Unchecked rating filter');
-        applyFilters();
-        openFilterSidebar(); // buka sidebar setelah rating dihapus
+        // Gunakan requestAnimationFrame untuk memastikan DOM update selesai
+        requestAnimationFrame(() => {
+          applyFilters();
+        });
       }
     });
     badgeContainer.appendChild(badge);
@@ -312,7 +358,7 @@ function createFilterBadge(text, onRemove) {
   
   badge.addEventListener('click', () => {
     onRemove();
-    openFilterSidebar(); // buka sidebar lagi setelah badge dihapus
+    // Jangan buka sidebar saat badge diklik
   });
   
   badge.addEventListener('mouseenter', () => {
@@ -344,8 +390,32 @@ function displayFilteredProducts(products) {
   }
 
   products.forEach(product => {
-    const productCard = createProductCard(product);
-    productsContainer.appendChild(productCard);
+    // Gunakan fungsi createProductCard dari products.js jika ada
+    if (typeof createProductCard === 'function') {
+      const productCard = createProductCard(product);
+      productsContainer.appendChild(productCard);
+    } else {
+      // Fallback: buat card sendiri jika fungsi tidak tersedia
+      const col = document.createElement('div');
+      col.className = 'col-md-4 col-sm-6 mb-4';
+      
+      const stars = '⭐'.repeat(product.rating);
+      const categories = product.categories.join(', ');
+      
+      col.innerHTML = `
+        <div class="card shadow-sm product-card" onclick="goToProductDetail('${product.id}')">
+          <img src="${product.image}" class="card-img-top" alt="${product.name}">
+          <div class="card-body">
+            <h6 class="card-title">${product.name}</h6>
+            <p class="card-text text-success">Rp. ${product.price.toLocaleString('id-ID')}</p>
+            <p class="rating">${stars}</p>
+            <small class="text-muted">${categories}</small>
+          </div>
+        </div>
+      `;
+      
+      productsContainer.appendChild(col);
+    }
   });
 }
 
