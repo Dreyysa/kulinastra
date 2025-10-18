@@ -151,7 +151,7 @@ header img {
 }
 
 .learn-more-btn:hover {
-  background: #ffffff;
+  background: #1b5e20;
 }
 
 /* Products Section */
@@ -165,12 +165,26 @@ header img {
 .products-container {
   max-width: 1000px;
   margin: auto;
+  display: block;
+  align-items: center;
 }
 
 .products-container h2 {
-  font-size: 22px;
+  font-size: 32px;
   font-weight: bold;
   margin-bottom: 30px;
+  display: block;
+  text-align: center;
+}
+
+.products-section h2::after {
+  content: "";
+  display: block;
+  width: 119px; /* panjang garis */
+  height: 4px; /* tebal garis */
+  background-color: #347928; /* warna hijau */
+  border-radius: 10px; /* biar ujungnya bulat */
+  margin: 8px auto 0; /* tengah & kasih jarak */
 }
 
 .products-grid {
@@ -181,31 +195,57 @@ header img {
 }
 
 .product-card {
-  background: white;
-  border-radius: 12px;
-  padding: 15px;
+  width: 200px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
   text-align: center;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 15px;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .product-image {
-  font-size: 40px;
-  margin-bottom: 10px;
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 112%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  margin-left: -13px;
 }
 
 .product-name {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 400;
+  color: #222;
+  padding: 10px 0;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+}
+
+.btn-view {
+  display: flex;
+  justify-content: flex-end; /* dorong tombol ke kanan */
+  margin-top: 20px;
 }
 
 .view-all-btn {
-  background: #2e7d32;
+  background: #47A24A;
   color: white;
   border: none;
   padding: 10px 25px;
   border-radius: 20px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 20px;
   transition: 0.3s;
 }
 
@@ -264,6 +304,10 @@ footer {
   }
 
   .about-container h2 {
+    font-size: 32px;
+  }
+
+  .products-container h2 {
     font-size: 32px;
   }
 
