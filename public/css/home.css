@@ -48,8 +48,7 @@ header img {
 /* Hero Section */
 .hero {
   position: relative;
-  background: url("../../public/assets/images/products/bg.png") center/cover
-    no-repeat;
+  background: url("../assets/images/products/bg.png") center/cover no-repeat;
   color: white;
   text-align: left;
   padding: 100px 20px;
@@ -156,8 +155,7 @@ header img {
 
 /* Products Section */
 .products-section {
-  background: url("../../public/assets/images/products/wave.png") no-repeat
-    center center;
+  background: url("../assets/images/products/wave.png") no-repeat center center;
   background-size: cover; /* biar nutup full */
   padding: 100px 20px;
 }
