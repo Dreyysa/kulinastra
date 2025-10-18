@@ -1,8 +1,14 @@
-// Filter functionality for products
-let allProducts = [];
-let isFilterOpen = false;
+// ========================================
+// FILTER FUNCTIONALITY FOR PRODUCTS
+// ========================================
 
-// Initialize filters
+// Global variables
+let allProducts = [];
+let isFilterOpen = true;
+
+// ========================================
+// INITIALIZE FILTERS
+// ========================================
 function initializeFilters() {
   console.log("Initializing filters...");
   
@@ -17,14 +23,14 @@ function initializeFilters() {
     checkbox.addEventListener('change', () => {
       console.log("Category checkbox changed:", checkbox.value, checkbox.checked);
       applyFilters();
-      // Hanya close sidebar jika checkbox DI-CHECK (bukan di-uncheck)
+      // Close sidebar only if checkbox is CHECKED (not unchecked)
       if (checkbox.checked) {
         setTimeout(() => closeFilterSidebar(), 300);
       }
     });
   });
 
-  // Price filters (hapus auto-close saat blur)
+  // Price filters
   const minPriceInput = document.getElementById('min-price');
   const maxPriceInput = document.getElementById('max-price');
   
@@ -41,7 +47,7 @@ function initializeFilters() {
     ratingCheckbox.addEventListener('change', () => {
       console.log("Rating checkbox changed:", ratingCheckbox.checked);
       applyFilters();
-      // Hanya close sidebar jika checkbox DI-CHECK (bukan di-uncheck)
+      // Close sidebar only if checkbox is CHECKED
       if (ratingCheckbox.checked) {
         setTimeout(() => closeFilterSidebar(), 300);
       }
@@ -51,37 +57,66 @@ function initializeFilters() {
   console.log("Filters initialized successfully");
 }
 
-// Close filter sidebar (only when user selects an option)
+// ========================================
+// CLOSE FILTER SIDEBAR
+// ========================================
 function closeFilterSidebar() {
-  const filterColumn = document.querySelector('.col-md-3');
-  if (!filterColumn || !filterColumn.querySelector('.filter-box')) return;
+  const filterSidebar = document.getElementById('filter-sidebar');
+  const productsColumn = document.getElementById('products-column');
   
-  const filterIconSpan = document.querySelector('#filter-prefix-badge #filter-icon');
+  if (!filterSidebar) return;
   
-  filterColumn.style.display = 'none';
+  filterSidebar.classList.add('hidden');
+  if (productsColumn) {
+    productsColumn.classList.add('full-width');
+  }
+  
+  const filterIconSpan = document.querySelector('#filter-icon');
   if (filterIconSpan) filterIconSpan.textContent = '▼';
+  
   isFilterOpen = false;
   console.log("Filter sidebar closed after selection");
 }
 
-// Open filter sidebar (ketika badge dihapus)
+// ========================================
+// OPEN FILTER SIDEBAR
+// ========================================
 function openFilterSidebar() {
-  const filterColumn = document.querySelector('.col-md-3');
-  if (!filterColumn || !filterColumn.querySelector('.filter-box')) return;
+  const filterSidebar = document.getElementById('filter-sidebar');
+  const productsColumn = document.getElementById('products-column');
   
-  const filterIconSpan = document.querySelector('#filter-prefix-badge #filter-icon');
+  if (!filterSidebar) return;
   
-  filterColumn.style.display = 'block';
+  filterSidebar.classList.remove('hidden');
+  if (productsColumn) {
+    productsColumn.classList.remove('full-width');
+  }
+  
+  const filterIconSpan = document.querySelector('#filter-icon');
   if (filterIconSpan) filterIconSpan.textContent = '▲';
+  
   isFilterOpen = true;
   console.log("Filter sidebar opened after badge removed");
 }
 
-// Create filter badge container
+// ========================================
+// TOGGLE FILTER PANEL
+// ========================================
+function toggleFilterPanel() {
+  if (isFilterOpen) {
+    closeFilterSidebar();
+  } else {
+    openFilterSidebar();
+  }
+}
+
+// ========================================
+// CREATE FILTER BADGE CONTAINER
+// ========================================
 function createFilterBadgeContainer() {
-  const productsContainer = document.getElementById('products-container');
-  if (!productsContainer) {
-    console.log("Products container not found");
+  const productsColumn = document.getElementById('products-column');
+  if (!productsColumn) {
+    console.log("Products column not found");
     return;
   }
   
@@ -93,41 +128,14 @@ function createFilterBadgeContainer() {
   
   badgeContainer = document.createElement('div');
   badgeContainer.id = 'filter-badge-container';
-  badgeContainer.className = 'mb-3';
-  badgeContainer.style.cssText = `
-    margin-bottom: 15px;
-    padding: 10px 0;
-    display: none;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-  `;
+  productsColumn.insertBefore(badgeContainer, productsColumn.firstChild);
   
-  productsContainer.parentElement.insertBefore(badgeContainer, productsContainer);
   console.log("Badge container created");
 }
 
-// Toggle filter panel
-function toggleFilterPanel() {
-  const filterColumn = document.querySelector('.col-md-3');
-  if (!filterColumn || !filterColumn.querySelector('.filter-box')) return;
-  
-  const filterIconSpan = document.querySelector('#filter-prefix-badge #filter-icon');
-  
-  if (isFilterOpen) {
-    filterColumn.style.display = 'none';
-    if (filterIconSpan) filterIconSpan.textContent = '▼';
-    isFilterOpen = false;
-    console.log("Filter panel closed");
-  } else {
-    filterColumn.style.display = 'block';
-    if (filterIconSpan) filterIconSpan.textContent = '▲';
-    isFilterOpen = true;
-    console.log("Filter panel opened");
-  }
-}
-
-// Apply all filters
+// ========================================
+// APPLY ALL FILTERS
+// ========================================
 function applyFilters() {
   console.log("Applying filters...");
   const productsContainer = document.getElementById('products-container');
@@ -162,11 +170,11 @@ function applyFilters() {
   console.log("Price range:", minPrice, maxPrice);
   console.log("Rating 4+:", rating4Plus);
 
-  // Filter products - FIXED: Using every() instead of some()
+  // Filter products - Using every() for AND logic
   const filteredProducts = allProducts.filter(product => {
     let categoryMatch = true;
     if (selectedCategories.length > 0) {
-      // Produk harus memiliki SEMUA kategori yang dipilih (AND logic)
+      // Product must have ALL selected categories (AND logic)
       categoryMatch = selectedCategories.every(selectedCat => 
         product.categories.includes(selectedCat)
       );
@@ -183,11 +191,13 @@ function applyFilters() {
   // Display products first
   displayFilteredProducts(filteredProducts);
   
-  // Then update badges - ini penting dilakukan setelah display
+  // Then update badges
   updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus);
 }
 
-// Update filter badges
+// ========================================
+// UPDATE FILTER BADGES
+// ========================================
 function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus) {
   const badgeContainer = document.getElementById('filter-badge-container');
   if (!badgeContainer) {
@@ -204,23 +214,19 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
     badgeContainer.style.display = 'none';
     badgeContainer.innerHTML = '';
     console.log("No active filters, hiding badge container");
-    // Buka kembali sidebar filter agar user bisa memilih filter lagi
-    const filterColumn = document.querySelector('.col-md-3');
-    if (filterColumn) {
-      filterColumn.style.display = 'block';
-      isFilterOpen = true;
-    }
+    // Reopen filter sidebar so user can select filters again
+    openFilterSidebar();
     return;
   }
   
-  // Cek apakah prefix badge sudah ada, jika belum buat baru
+  // Check if prefix badge already exists
   let prefixBadge = document.getElementById('filter-prefix-badge');
   const needsRebuild = !prefixBadge;
   
   if (needsRebuild) {
     badgeContainer.innerHTML = '';
   } else {
-    // Hapus semua badge kecuali prefix badge
+    // Remove all badges except prefix badge
     const badges = badgeContainer.querySelectorAll('span:not(#filter-prefix-badge)');
     badges.forEach(badge => badge.remove());
   }
@@ -228,48 +234,22 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
   badgeContainer.style.display = 'flex';
   console.log("Showing badge container with filters");
   
-  // Hanya buat prefix badge jika belum ada
+  // Create prefix badge only if it doesn't exist
   if (needsRebuild) {
     prefixBadge = document.createElement('span');
     prefixBadge.id = 'filter-prefix-badge';
-    prefixBadge.style.cssText = `
-      display: inline-flex;
-      align-items: center;
-      padding: 6px 12px;
-      background-color: transparent;
-      color: #333;
-      font-size: 14px;
-      font-weight: 500;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    `;
     
-    // Set icon berdasarkan status sidebar
-    const iconText = isFilterOpen ? '▲' : '▼';
-    prefixBadge.innerHTML = `<span id="filter-icon" style="margin-right: 3px;">${iconText}</span> Filters <span style="margin: 0 5px;">›</span>`;
+    // Filter icon SVG
+    const filterIcon = `<svg class="filter-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+    </svg>`;
     
-    prefixBadge.addEventListener('click', () => {
-      console.log("Prefix badge clicked");
-      toggleFilterPanel();
-    });
-    
-    prefixBadge.addEventListener('mouseenter', () => {
-      prefixBadge.style.backgroundColor = '#f0f0f0';
-    });
-    prefixBadge.addEventListener('mouseleave', () => {
-      prefixBadge.style.backgroundColor = 'transparent';
-    });
+    prefixBadge.innerHTML = `${filterIcon}<span>Filters</span><span class="badge-separator">›</span>`;
     
     badgeContainer.appendChild(prefixBadge);
-  } else {
-    // Update icon saat badge sudah ada
-    const filterIconSpan = prefixBadge.querySelector('#filter-icon');
-    if (filterIconSpan) {
-      filterIconSpan.textContent = isFilterOpen ? '▲' : '▼';
-    }
   }
   
+  // Category names mapping
   const categoryNames = {
     'manis': 'Manis',
     'gurih': 'Gurih',
@@ -279,13 +259,14 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
     'makanan-berat': 'Makanan Berat'
   };
   
+  // Add category badges
   selectedCategories.forEach(category => {
     const badge = createFilterBadge(categoryNames[category] || category, () => {
       const checkbox = document.getElementById(category);
       if (checkbox) {
         checkbox.checked = false;
         console.log(`Unchecked category: ${category}`);
-        // Gunakan requestAnimationFrame untuk memastikan DOM update selesai
+        // Use requestAnimationFrame to ensure DOM update is complete
         requestAnimationFrame(() => {
           applyFilters();
         });
@@ -294,6 +275,7 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
     badgeContainer.appendChild(badge);
   });
   
+  // Add price badge
   if (minPrice > 0 || maxPrice < Infinity) {
     let priceText = '';
     if (minPrice > 0 && maxPrice < Infinity) {
@@ -310,7 +292,7 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
       if (minPriceInput) minPriceInput.value = '';
       if (maxPriceInput) maxPriceInput.value = '';
       console.log('Cleared price filters');
-      // Gunakan requestAnimationFrame untuk memastikan DOM update selesai
+      // Use requestAnimationFrame to ensure DOM update is complete
       requestAnimationFrame(() => {
         applyFilters();
       });
@@ -318,13 +300,14 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
     badgeContainer.appendChild(badge);
   }
   
+  // Add rating badge
   if (rating4Plus) {
     const badge = createFilterBadge('Rating ⭐ 4+', () => {
       const ratingCheckbox = document.getElementById('rating4');
       if (ratingCheckbox) {
         ratingCheckbox.checked = false;
         console.log('Unchecked rating filter');
-        // Gunakan requestAnimationFrame untuk memastikan DOM update selesai
+        // Use requestAnimationFrame to ensure DOM update is complete
         requestAnimationFrame(() => {
           applyFilters();
         });
@@ -334,22 +317,12 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
   }
 }
 
-// Create individual filter badge
+// ========================================
+// CREATE INDIVIDUAL FILTER BADGE
+// ========================================
 function createFilterBadge(text, onRemove) {
   const badge = document.createElement('span');
-  badge.style.cssText = `
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 12px;
-    background-color: #e8f5e9;
-    color: #2e7d32;
-    font-size: 13px;
-    font-weight: 500;
-    border-radius: 16px;
-    border: 1px solid #4CAF50;
-    cursor: pointer;
-    transition: all 0.2s;
-  `;
+  badge.className = 'filter-badge';
   
   badge.innerHTML = `
     ${text}
@@ -358,7 +331,6 @@ function createFilterBadge(text, onRemove) {
   
   badge.addEventListener('click', () => {
     onRemove();
-    // Jangan buka sidebar saat badge diklik
   });
   
   badge.addEventListener('mouseenter', () => {
@@ -374,7 +346,9 @@ function createFilterBadge(text, onRemove) {
   return badge;
 }
 
-// Display filtered products
+// ========================================
+// DISPLAY FILTERED PRODUCTS
+// ========================================
 function displayFilteredProducts(products) {
   const productsContainer = document.getElementById('products-container');
   if (!productsContainer) {
@@ -385,41 +359,56 @@ function displayFilteredProducts(products) {
   productsContainer.innerHTML = '';
 
   if (products.length === 0) {
-    productsContainer.innerHTML = '<div class="col-12"><p class="text-center text-muted">Tidak ada produk yang sesuai dengan filter.</p></div>';
+    productsContainer.innerHTML = '<div class="text-center text-muted" style="grid-column: 1 / -1; padding: 40px;">Tidak ada produk yang sesuai dengan filter.</div>';
     return;
   }
 
   products.forEach(product => {
-    // Gunakan fungsi createProductCard dari products.js jika ada
+    // Use createProductCard function from products.js if available
     if (typeof createProductCard === 'function') {
       const productCard = createProductCard(product);
       productsContainer.appendChild(productCard);
     } else {
-      // Fallback: buat card sendiri jika fungsi tidak tersedia
-      const col = document.createElement('div');
-      col.className = 'col-md-4 col-sm-6 mb-4';
+      // Fallback: create card manually if function not available
+      const wrapper = document.createElement('div');
+      wrapper.className = 'product-card-wrapper';
+      wrapper.onclick = () => {
+        window.location.href = `product-detail.html?id=${product.id}`;
+      };
       
       const stars = '⭐'.repeat(product.rating);
-      const categories = product.categories.join(', ');
+      const categoryNames = {
+        'manis': 'Manis',
+        'gurih': 'Gurih',
+        'nabati': 'Nabati',
+        'hewani': 'Hewani',
+        'jajan': 'Jajan',
+        'makanan-berat': 'Makanan Berat'
+      };
+      const categories = product.categories
+        .map(cat => categoryNames[cat] || cat)
+        .join(', ');
       
-      col.innerHTML = `
-        <div class="card shadow-sm product-card" onclick="goToProductDetail('${product.id}')">
-          <img src="${product.image}" class="card-img-top" alt="${product.name}">
-          <div class="card-body">
-            <h6 class="card-title">${product.name}</h6>
-            <p class="card-text text-success">Rp. ${product.price.toLocaleString('id-ID')}</p>
-            <p class="rating">${stars}</p>
-            <small class="text-muted">${categories}</small>
-          </div>
+      wrapper.innerHTML = `
+        <div class="product-image-wrapper">
+          <img src="${product.image}" alt="${product.name}" class="product-image" onerror="this.src='https://via.placeholder.com/200x200?text=No+Image'">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">${product.name}</h3>
+          <p class="product-price">Rp ${product.price.toLocaleString('id-ID')}</p>
+          <p class="product-rating">${stars}</p>
+          <p class="product-categories">${categories}</p>
         </div>
       `;
       
-      productsContainer.appendChild(col);
+      productsContainer.appendChild(wrapper);
     }
   });
 }
 
-// Store products data when loaded
+// ========================================
+// LOAD AND STORE PRODUCTS
+// ========================================
 async function loadAndStoreProducts() {
   console.log("Loading and storing products...");
   allProducts = await loadProductsData();
@@ -438,12 +427,18 @@ async function loadAndStoreProducts() {
   }
 }
 
+// ========================================
+// WINDOW FUNCTION TO SET PRODUCTS
+// ========================================
 window.setAllProducts = function(products) {
   console.log("Setting all products from products.js:", products.length);
   allProducts = products;
   initializeFilters();
 }
 
+// ========================================
+// INITIALIZE ON PAGE LOAD
+// ========================================
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM loaded, checking page...");
@@ -465,3 +460,8 @@ if (document.readyState === 'loading') {
     }, 100);
   }
 }
+
+// ========================================
+// LOG INITIALIZATION
+// ========================================
+console.log("filter.js loaded successfully");
