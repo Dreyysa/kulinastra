@@ -49,57 +49,43 @@
 
         <section class="comment-section tab-content" id="comment">
             <div class="rating-section">
-                <h3>Rating</h3>
-                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <h3>Rating Produk</h3>
+                <div class="overall-rating">
+                    <div class="stars-display" id="overall-stars">⭐⭐⭐⭐⭐</div>
+                    <div class="rating-text" id="rating-text">Berdasarkan komentar pengguna</div>
+                </div>
             </div>
 
             <div class="comment-form">
-                <textarea placeholder="Tambahkan komentar" rows="4"></textarea>
-                <button class="submit-btn" onclick="addComment()">Simpan</button>
+                <h4>Tambah Komentar</h4>
+                <div class="form-group">
+                    <label for="username">Nama:</label>
+                    <input type="text" id="username" placeholder="Masukkan nama Anda" maxlength="50">
+                </div>
+                <div class="form-group">
+                    <label for="user-rating">Rating:</label>
+                    <div class="rating-input">
+                        <span class="star" data-rating="1">⭐</span>
+                        <span class="star" data-rating="2">⭐</span>
+                        <span class="star" data-rating="3">⭐</span>
+                        <span class="star" data-rating="4">⭐</span>
+                        <span class="star" data-rating="5">⭐</span>
+                    </div>
+                    <div class="rating-label" id="rating-label">Pilih rating</div>
+                </div>
+                <div class="form-group">
+                    <label for="comment-text">Komentar:</label>
+                    <textarea id="comment-text" placeholder="Bagikan pengalaman Anda tentang produk ini..." rows="4" maxlength="500"></textarea>
+                    <div class="char-count" id="char-count">0/500 karakter</div>
+                </div>
+                <button class="submit-btn" onclick="addComment()">Kirim Komentar</button>
             </div>
 
-            <div class="comments-list">
-                <div class="comment-item">
-                    <div class="comment-header">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <div class="user-info">
-                            <div class="user-avatar"></div>
-                            <div class="user-details">
-                                <div class="username">Anton</div>
-                                <div class="comment-text">enak banget</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="comment-item">
-                    <div class="comment-header">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <div class="user-info">
-                            <div class="user-avatar"></div>
-                            <div class="user-details">
-                                <div class="username">Anton</div>
-                                <div class="comment-text">enak banget</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="comment-item">
-                    <div class="comment-header">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <div class="user-info">
-                            <div class="user-avatar"></div>
-                            <div class="user-details">
-                                <div class="username">Anton</div>
-                                <div class="comment-text">enak banget</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="comments-list" id="comments-list">
+                <!-- Comments will be loaded here -->
             </div>
 
-            <button class="load-more-btn">Lihat Semua</button>
+            <button class="load-more-btn" id="load-more-btn" onclick="loadMoreComments()" style="display: none;">Lihat Lebih Banyak</button>
         </section>
 
         <section class="related-products">
