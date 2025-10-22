@@ -7,12 +7,22 @@
     <link rel="stylesheet" href="../public/css/home.css" />
   </head>
   <body>
-    <!-- Navbar -->
+    <!-- NAVBAR -->
     <header>
-      <div class="menu-icon">☰</div>
+      <div class="menu-icon" id="menu-icon">☰</div>
       <div class="logo">KuliNastra</div>
       <img src="../public/assets/images/products/logo.png" alt="Logo KN" />
     </header>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="side-menu">
+      <span class="close-btn" id="close-btn">✕</span>
+      <li><a href="#beranda">Beranda</a></li>
+      <li><a href="about.html">Tentang Kami</a></li>
+      <li><a href="#produk">Produk</a></li>
+      <li><a href="#testimoni">Testimoni</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </div>
 
     <!-- hero secion -->
     <section class="hero">
@@ -41,7 +51,9 @@
           kuliner yang berkesan bagi setiap pelanggan.
         </div>
         <div class="btn-wrapper">
-          <button class="learn-more-btn">Pelajari Selengkapnya</button>
+          <button class="learn-more-btn">
+            <a href="about.html">Pelajari Selengkapnya</a>
+          </button>
         </div>
         <div style="clear: both"></div>
       </div>
@@ -54,31 +66,45 @@
         <div class="products-grid">
           <div class="product-card">
             <div class="product-image">
-              <img src="../public/assets/images/products/onde-onde.png" alt="onde-onde">
+              <img
+                src="../public/assets/images/products/onde-onde.png"
+                alt="onde-onde"
+              />
             </div>
             <div class="product-name">Onde - onde</div>
           </div>
           <div class="product-card">
             <div class="product-image">
-              <img src="../public/assets/images/products/kueTalam.png" alt="kue Talam">
+              <img
+                src="../public/assets/images/products/kueTalam.png"
+                alt="kue Talam"
+              />
             </div>
             <div class="product-name">Kue Talam</div>
           </div>
           <div class="product-card">
             <div class="product-image">
-              <img src="../public/assets/images/products/gethukLindri.png" alt="Getuk Lindri">
+              <img
+                src="../public/assets/images/products/gethukLindri.png"
+                alt="Getuk Lindri"
+              />
             </div>
             <div class="product-name">Getuk Lindri</div>
           </div>
           <div class="product-card">
             <div class="product-image">
-              <img src="../public/assets/images/products/lemper.png" alt="Lemper">
+              <img
+                src="../public/assets/images/products/lemper.png"
+                alt="Lemper"
+              />
             </div>
             <div class="product-name">Lemper</div>
           </div>
         </div>
         <div class="btn-view">
-          <button class="view-all-btn">Selengkapnya</button>
+          <button class="view-all-btn">
+            <a href="#produk">Selengkapnya</a>
+          </button>
         </div>
         <div style="clear: both"></div>
       </div>
@@ -88,5 +114,7 @@
     <footer>
       UMKM KuliNastra. Jl. Melati Indah No. 23, Kota Nusantara, Jawa Tengah
     </footer>
+
+    <script src="../public/js/hamburger-menu.js"></script>
   </body>
 </html>
