@@ -220,9 +220,9 @@ header img {
 
 /* Products Section */
 .products-section {
-  background: url("../assets/images/products/wave.png") no-repeat center center;
+  background: url("../assets/images/logo/wave.png") no-repeat center center;
   background-size: cover; /* biar nutup full */
-  padding: 100px 20px;
+  padding: 200px 200px;
 }
 
 .products-container {
@@ -269,11 +269,6 @@ header img {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin: 10px;
   border: none;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .product-image {

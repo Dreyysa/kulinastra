@@ -44,17 +44,8 @@ body {
   overflow: hidden;
 }
 
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-.product-card .card-img-top {
-  transition: transform 0.3s ease;
-}
-
 .product-card:hover .card-img-top {
-  transform: scale(1.05);
+  transform: scale(1.01);
 }
 
 .product-card .card-title {
@@ -89,15 +80,6 @@ body {
   border-top: 4px solid #2e7d32;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 /* Responsive Design */
