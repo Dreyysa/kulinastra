@@ -1,5 +1,22 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
   background-color: #fefbe7;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  line-height: 1.6;
 }
 
 /* Navbar */
@@ -7,51 +24,23 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #347b1b; /* hijau */
-  color: #fff;
-  padding: 15px 20px;
   position: sticky;
   top: 0;
   z-index: 10;
 }
 
 .menu-icon {
-  font-size: 26px;
-  cursor: pointer;
-}
 
-.logo {
-  font-size: 40px;
-  font-family: monospace;
-  letter-spacing: 1px;
-}
-
-header img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  border-radius: 50%;
-  border: 2px solid #ccc;
-}
-
-/* ==== SIDEBAR MENU (STYLE MIRIP GAMBAR) ==== */
 .side-menu {
   position: fixed;
   top: 0;
   left: -260px;
   width: 260px;
-  height: 330px;
-  background-color: #347b1b; /* hijau tua seperti di gambar */
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   padding: 30px 30px;
-  box-sizing: border-box;
-  transition: left 0.35s ease-in-out;
-  z-index: 9999;
-  font-family: "Poppins", Arial, sans-serif;
-  list-style: none;
 }
 
 .side-menu.active {
@@ -65,23 +54,12 @@ header img {
   font-weight: 500;
   margin: 13px 0;
   display: block;
-  transition: all 4s ease-in-out; /* smoother & faster transition */
-  list-style: none;
-}
-
-/* Hover effect */
+ 
 .side-menu a:hover {
   text-decoration: underline;
   text-underline-offset: 5px;
 }
 
-.side-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* Tombol close (X) */
 .close-btn {
   position: absolute;
   top: 28px;
@@ -90,7 +68,6 @@ header img {
   font-weight: 600;
   color: #fff;
   cursor: pointer;
-  transition: transform 0.2s ease;
 }
 
 /* Filter Box */
@@ -164,67 +141,77 @@ header img {
   animation: spin 1s linear infinite;
 }
 
-/* Footer */
-footer {
-  background: #2e7d32;
-  color: white;
-  text-align: center;
-  padding: 15px 10px;
-  font-size: 20px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .filter-box {
-    margin-bottom: 20px;
-  }
-
-  .product-card {
-    margin-bottom: 20px;
-  }
-}
-
-/* Informasi Kontak */
-.contact-link {
-  color: #d4a017;
-  text-decoration: none;
-}
-.contact-link:hover {
-  text-decoration: underline;
-}
-
-/* Formulir Kontak */
-.contact-form {
-  background: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-.contact-form label {
-  color: #d4a017;
+/* === Breadcrumb Filter Badges === */
+#filter-badge-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #111;
+  font-size: 15px;
   font-weight: 500;
+  margin-top: 10px;
+  flex-wrap: wrap;
 }
 
-/* Tombol WhatsApp */
-.btn-whatsapp {
-  background-color: #25d366;
-  color: white;
-  font-weight: bold;
-  border-radius: 25px;
-  padding: 8px 20px;
+.filter-breadcrumb {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-}
-.btn-whatsapp:hover {
-  background-color: #1ebe57;
-  color: white;
+  color: #111;
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
-/* Footer */
+.filter-breadcrumb:hover {
+  color: #2e7d32;
+}
+
+.filter-breadcrumb i {
+  font-size: 16px;
+}
+
+.filter-label {
+  font-weight: 700;
+}
+
+.filter-arrow {
+  font-size: 16px;
+  margin: 0 3px;
+  color: #666;
+}
+
+.filter-breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #f2f4f6;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #222;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.filter-breadcrumb-item:hover {
+  background-color: #e0e0e0;
+}
+
+.filter-breadcrumb-item .close-icon {
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 4px;
+  color: #444;
+  transition: color 0.2s;
+}
+
+.filter-breadcrumb-item:hover .close-icon {
+  color: #000;
+}
+
+/* Footer (Sticky & Rapi) */
 footer {
   background-color: #2e7d32;
   color: white;
-  padding: 20px;
-  margin-top: 40px;
   text-align: center;
 }
