@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lumpia Ayam - KuliNastra</title>
     <link rel="stylesheet" href="../public/css/product-detail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -31,9 +34,7 @@
                 </div>
 
                 <button class="whatsapp-btn">
-                    Pesan via Whatsapp
-                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDBDNS4zNzMgMCAwIDUuMzczIDAgMTJDMCAxNC4yNTEgMC42NTEgMTYuMzI2IDEuNzg2IDE4LjEwNkwwIDI0TDYuMDk0IDIyLjI2MkM3Ljc2MiAyMy4yNDUgOS43ODQgMjMuOCAxMiAyMy44QzE4LjYyNyAyMy44IDI0IDE4LjQyNyAyNCAxMkMyNCA1LjM3MyAxOC42MjcgMCAxMiAwWk0xMiAyMS44QzEwLjEyNiAyMS44IDguNDA4IDIxLjMzOCA2LjkzIDIwLjUwOEw0LjIgMjEuNkw1LjMzIDE4Ljk5MkM0LjM0NCAxNy40MDUgMy44IDE1LjU2MiAzLjggMTIuNkMzLjggNy40NDQgNy44NDQgMy40IDEyLjQgMy40QzE3LjE1NiAzLjQgMjEuMiA3LjQ0NCAyMS4yIDEyLjZDMjEuMiAxNy43NTYgMTcuMTU2IDIxLjggMTIgMjEuOFoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xOCA5LjZIMTYuMlY3LjhIMTIuNlYxNi4ySDEwLjhWNy44SDcuMlY5LjZINS40VjE2LjJINy4yVjE4SDEwLjhWMTYuMkgxMi42VjE4SDE2LjJWMTYuMkgxOFY5LjZaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K"
-                        alt="WhatsApp Icon">
+                    Pesan via Whatsapp <i class="fa-brands fa-whatsapp"></i>
                 </button>
             </div>
         </section>
@@ -49,57 +50,42 @@
 
         <section class="comment-section tab-content" id="comment">
             <div class="rating-section">
-                <h3>Rating</h3>
-                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <h3>Rating Produk</h3>
+                <div class="overall-rating">
+                    <div class="stars-display" id="overall-stars">⭐⭐⭐⭐⭐</div>
+                    <div class="rating-text" id="rating-text">Berdasarkan komentar pengguna</div>
+                </div>
             </div>
 
             <div class="comment-form">
-                <textarea placeholder="Tambahkan komentar" rows="4"></textarea>
+                <div class="form-group">
+                    <label for="username">Nama:</label>
+                    <input type="text" id="username" placeholder="Nama (opsional)" maxlength="50">
+                </div>
+                <div class="form-group">
+                    <label for="user-rating">Rating:</label>
+                    <div class="rating-input">
+                        <span class="star" data-rating="1">⭐</span>
+                        <span class="star" data-rating="2">⭐</span>
+                        <span class="star" data-rating="3">⭐</span>
+                        <span class="star" data-rating="4">⭐</span>
+                        <span class="star" data-rating="5">⭐</span>
+                    </div>
+                    <div class="rating-label" id="rating-label">Pilih rating</div>
+                </div>
+                <div class="form-group">
+                    <textarea id="comment-text" placeholder="Tambahkan komentar" rows="4" maxlength="500"></textarea>
+                    <div class="char-count" id="char-count">0/500 karakter</div>
+                </div>
                 <button class="submit-btn" onclick="addComment()">Simpan</button>
             </div>
 
-            <div class="comments-list">
-                <div class="comment-item">
-                    <div class="comment-header">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <div class="user-info">
-                            <div class="user-avatar"></div>
-                            <div class="user-details">
-                                <div class="username">Anton</div>
-                                <div class="comment-text">enak banget</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="comment-item">
-                    <div class="comment-header">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <div class="user-info">
-                            <div class="user-avatar"></div>
-                            <div class="user-details">
-                                <div class="username">Anton</div>
-                                <div class="comment-text">enak banget</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="comment-item">
-                    <div class="comment-header">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <div class="user-info">
-                            <div class="user-avatar"></div>
-                            <div class="user-details">
-                                <div class="username">Anton</div>
-                                <div class="comment-text">enak banget</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="comments-list" id="comments-list">
+                <!-- Comments will be loaded here -->
             </div>
 
-            <button class="load-more-btn">Lihat Semua</button>
+            <button class="load-more-btn" id="load-more-btn" onclick="loadMoreComments()" style="display: none;">Lihat
+                Semua</button>
         </section>
 
         <section class="related-products">

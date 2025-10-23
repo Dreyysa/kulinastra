@@ -179,3 +179,32 @@ body {
         font-size: 18px;
     }
 }
+
+/* Loading and Error States */
+.loading {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 1.1em;
+    color: #666;
+    font-style: italic;
+}
+
+.no-testimonials {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 1.1em;
+    color: #888;
+    font-style: italic;
+    grid-column: 1 / -1;
+}
+
+.error {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 1.1em;
+    color: #e74c3c;
+    background-color: #fdf2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    grid-column: 1 / -1;
+}

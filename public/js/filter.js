@@ -1,14 +1,8 @@
-// ========================================
-// FILTER FUNCTIONALITY FOR PRODUCTS
-// ========================================
-
-// Global variables
+// Filter functionality for products
 let allProducts = [];
-let isFilterOpen = true;
+let isFilterOpen = false;
 
-// ========================================
-// INITIALIZE FILTERS
-// ========================================
+// Initialize filters
 function initializeFilters() {
   console.log("Initializing filters...");
   
@@ -23,14 +17,14 @@ function initializeFilters() {
     checkbox.addEventListener('change', () => {
       console.log("Category checkbox changed:", checkbox.value, checkbox.checked);
       applyFilters();
-      // Close sidebar only if checkbox is CHECKED (not unchecked)
+      // Hanya close sidebar jika checkbox DI-CHECK (bukan di-uncheck)
       if (checkbox.checked) {
         setTimeout(() => closeFilterSidebar(), 300);
       }
     });
   });
 
-  // Price filters
+  // Price filters (hapus auto-close saat blur)
   const minPriceInput = document.getElementById('min-price');
   const maxPriceInput = document.getElementById('max-price');
   
@@ -47,7 +41,7 @@ function initializeFilters() {
     ratingCheckbox.addEventListener('change', () => {
       console.log("Rating checkbox changed:", ratingCheckbox.checked);
       applyFilters();
-      // Close sidebar only if checkbox is CHECKED
+      // Hanya close sidebar jika checkbox DI-CHECK (bukan di-uncheck)
       if (ratingCheckbox.checked) {
         setTimeout(() => closeFilterSidebar(), 300);
       }
@@ -57,66 +51,37 @@ function initializeFilters() {
   console.log("Filters initialized successfully");
 }
 
-// ========================================
-// CLOSE FILTER SIDEBAR
-// ========================================
+// Close filter sidebar (only when user selects an option)
 function closeFilterSidebar() {
-  const filterSidebar = document.getElementById('filter-sidebar');
-  const productsColumn = document.getElementById('products-column');
+  const filterColumn = document.querySelector('.col-md-3');
+  if (!filterColumn || !filterColumn.querySelector('.filter-box')) return;
   
-  if (!filterSidebar) return;
+  const filterIconSpan = document.querySelector('#filter-prefix-badge #filter-icon');
   
-  filterSidebar.classList.add('hidden');
-  if (productsColumn) {
-    productsColumn.classList.add('full-width');
-  }
-  
-  const filterIconSpan = document.querySelector('#filter-icon');
+  filterColumn.style.display = 'none';
   if (filterIconSpan) filterIconSpan.textContent = '▼';
-  
   isFilterOpen = false;
   console.log("Filter sidebar closed after selection");
 }
 
-// ========================================
-// OPEN FILTER SIDEBAR
-// ========================================
+// Open filter sidebar (ketika badge dihapus)
 function openFilterSidebar() {
-  const filterSidebar = document.getElementById('filter-sidebar');
-  const productsColumn = document.getElementById('products-column');
+  const filterColumn = document.querySelector('.col-md-3');
+  if (!filterColumn || !filterColumn.querySelector('.filter-box')) return;
   
-  if (!filterSidebar) return;
+  const filterIconSpan = document.querySelector('#filter-prefix-badge #filter-icon');
   
-  filterSidebar.classList.remove('hidden');
-  if (productsColumn) {
-    productsColumn.classList.remove('full-width');
-  }
-  
-  const filterIconSpan = document.querySelector('#filter-icon');
+  filterColumn.style.display = 'block';
   if (filterIconSpan) filterIconSpan.textContent = '▲';
-  
   isFilterOpen = true;
   console.log("Filter sidebar opened after badge removed");
 }
 
-// ========================================
-// TOGGLE FILTER PANEL
-// ========================================
-function toggleFilterPanel() {
-  if (isFilterOpen) {
-    closeFilterSidebar();
-  } else {
-    openFilterSidebar();
-  }
-}
-
-// ========================================
-// CREATE FILTER BADGE CONTAINER
-// ========================================
+// Create filter badge container
 function createFilterBadgeContainer() {
-  const productsColumn = document.getElementById('products-column');
-  if (!productsColumn) {
-    console.log("Products column not found");
+  const productsContainer = document.getElementById('products-container');
+  if (!productsContainer) {
+    console.log("Products container not found");
     return;
   }
   
@@ -128,14 +93,41 @@ function createFilterBadgeContainer() {
   
   badgeContainer = document.createElement('div');
   badgeContainer.id = 'filter-badge-container';
-  productsColumn.insertBefore(badgeContainer, productsColumn.firstChild);
+  badgeContainer.className = 'mb-3';
+  badgeContainer.style.cssText = `
+    margin-bottom: 15px;
+    padding: 10px 0;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  `;
   
+  productsContainer.parentElement.insertBefore(badgeContainer, productsContainer);
   console.log("Badge container created");
 }
 
-// ========================================
-// APPLY ALL FILTERS
-// ========================================
+// Toggle filter panel
+function toggleFilterPanel() {
+  const filterColumn = document.querySelector('.col-md-3');
+  if (!filterColumn || !filterColumn.querySelector('.filter-box')) return;
+  
+  const filterIconSpan = document.querySelector('#filter-prefix-badge #filter-icon');
+  
+  if (isFilterOpen) {
+    filterColumn.style.display = 'none';
+    if (filterIconSpan) filterIconSpan.textContent = '▼';
+    isFilterOpen = false;
+    console.log("Filter panel closed");
+  } else {
+    filterColumn.style.display = 'block';
+    if (filterIconSpan) filterIconSpan.textContent = '▲';
+    isFilterOpen = true;
+    console.log("Filter panel opened");
+  }
+}
+
+// Apply all filters
 function applyFilters() {
   console.log("Applying filters...");
   const productsContainer = document.getElementById('products-container');
@@ -170,11 +162,11 @@ function applyFilters() {
   console.log("Price range:", minPrice, maxPrice);
   console.log("Rating 4+:", rating4Plus);
 
-  // Filter products - Using every() for AND logic
+  // Filter products - FIXED: Using every() instead of some()
   const filteredProducts = allProducts.filter(product => {
     let categoryMatch = true;
     if (selectedCategories.length > 0) {
-      // Product must have ALL selected categories (AND logic)
+      // Produk harus memiliki SEMUA kategori yang dipilih (AND logic)
       categoryMatch = selectedCategories.every(selectedCat => 
         product.categories.includes(selectedCat)
       );
@@ -191,13 +183,11 @@ function applyFilters() {
   // Display products first
   displayFilteredProducts(filteredProducts);
   
-  // Then update badges
+  // Then update badges - ini penting dilakukan setelah display
   updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus);
 }
 
-// ========================================
-// UPDATE FILTER BADGES
-// ========================================
+// Update filter badges
 function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus) {
   const badgeContainer = document.getElementById('filter-badge-container');
   if (!badgeContainer) {
@@ -214,19 +204,23 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
     badgeContainer.style.display = 'none';
     badgeContainer.innerHTML = '';
     console.log("No active filters, hiding badge container");
-    // Reopen filter sidebar so user can select filters again
-    openFilterSidebar();
+    // Buka kembali sidebar filter agar user bisa memilih filter lagi
+    const filterColumn = document.querySelector('.col-md-3');
+    if (filterColumn) {
+      filterColumn.style.display = 'block';
+      isFilterOpen = true;
+    }
     return;
   }
   
-  // Check if prefix badge already exists
+  // Cek apakah prefix badge sudah ada, jika belum buat baru
   let prefixBadge = document.getElementById('filter-prefix-badge');
   const needsRebuild = !prefixBadge;
   
   if (needsRebuild) {
     badgeContainer.innerHTML = '';
   } else {
-    // Remove all badges except prefix badge
+    // Hapus semua badge kecuali prefix badge
     const badges = badgeContainer.querySelectorAll('span:not(#filter-prefix-badge)');
     badges.forEach(badge => badge.remove());
   }
@@ -234,22 +228,48 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
   badgeContainer.style.display = 'flex';
   console.log("Showing badge container with filters");
   
-  // Create prefix badge only if it doesn't exist
+  // Hanya buat prefix badge jika belum ada
   if (needsRebuild) {
     prefixBadge = document.createElement('span');
     prefixBadge.id = 'filter-prefix-badge';
+    prefixBadge.style.cssText = `
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      background-color: transparent;
+      color: #333;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    `;
     
-    // Filter icon SVG
-    const filterIcon = `<svg class="filter-icon-svg" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
-    </svg>`;
+    // Set icon berdasarkan status sidebar
+    const iconText = isFilterOpen ? '▲' : '▼';
+    prefixBadge.innerHTML = `<span id="filter-icon" style="margin-right: 3px;">${iconText}</span> Filters <span style="margin: 0 5px;">›</span>`;
     
-    prefixBadge.innerHTML = `${filterIcon}<span>Filters</span><span class="badge-separator">›</span>`;
+    prefixBadge.addEventListener('click', () => {
+      console.log("Prefix badge clicked");
+      toggleFilterPanel();
+    });
+    
+    prefixBadge.addEventListener('mouseenter', () => {
+      prefixBadge.style.backgroundColor = '#f0f0f0';
+    });
+    prefixBadge.addEventListener('mouseleave', () => {
+      prefixBadge.style.backgroundColor = 'transparent';
+    });
     
     badgeContainer.appendChild(prefixBadge);
+  } else {
+    // Update icon saat badge sudah ada
+    const filterIconSpan = prefixBadge.querySelector('#filter-icon');
+    if (filterIconSpan) {
+      filterIconSpan.textContent = isFilterOpen ? '▲' : '▼';
+    }
   }
   
-  // Category names mapping
   const categoryNames = {
     'manis': 'Manis',
     'gurih': 'Gurih',
@@ -259,14 +279,13 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
     'makanan-berat': 'Makanan Berat'
   };
   
-  // Add category badges
   selectedCategories.forEach(category => {
     const badge = createFilterBadge(categoryNames[category] || category, () => {
       const checkbox = document.getElementById(category);
       if (checkbox) {
         checkbox.checked = false;
         console.log(`Unchecked category: ${category}`);
-        // Use requestAnimationFrame to ensure DOM update is complete
+        // Gunakan requestAnimationFrame untuk memastikan DOM update selesai
         requestAnimationFrame(() => {
           applyFilters();
         });
@@ -275,7 +294,6 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
     badgeContainer.appendChild(badge);
   });
   
-  // Add price badge
   if (minPrice > 0 || maxPrice < Infinity) {
     let priceText = '';
     if (minPrice > 0 && maxPrice < Infinity) {
@@ -292,7 +310,7 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
       if (minPriceInput) minPriceInput.value = '';
       if (maxPriceInput) maxPriceInput.value = '';
       console.log('Cleared price filters');
-      // Use requestAnimationFrame to ensure DOM update is complete
+      // Gunakan requestAnimationFrame untuk memastikan DOM update selesai
       requestAnimationFrame(() => {
         applyFilters();
       });
@@ -300,14 +318,13 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
     badgeContainer.appendChild(badge);
   }
   
-  // Add rating badge
   if (rating4Plus) {
     const badge = createFilterBadge('Rating ⭐ 4+', () => {
       const ratingCheckbox = document.getElementById('rating4');
       if (ratingCheckbox) {
         ratingCheckbox.checked = false;
         console.log('Unchecked rating filter');
-        // Use requestAnimationFrame to ensure DOM update is complete
+        // Gunakan requestAnimationFrame untuk memastikan DOM update selesai
         requestAnimationFrame(() => {
           applyFilters();
         });
@@ -317,12 +334,22 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
   }
 }
 
-// ========================================
-// CREATE INDIVIDUAL FILTER BADGE
-// ========================================
+// Create individual filter badge
 function createFilterBadge(text, onRemove) {
   const badge = document.createElement('span');
-  badge.className = 'filter-badge';
+  badge.style.cssText = `
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 16px;
+    border: 1px solid #4CAF50;
+    cursor: pointer;
+    transition: all 0.2s;
+  `;
   
   badge.innerHTML = `
     ${text}
@@ -331,6 +358,7 @@ function createFilterBadge(text, onRemove) {
   
   badge.addEventListener('click', () => {
     onRemove();
+    // Jangan buka sidebar saat badge diklik
   });
   
   badge.addEventListener('mouseenter', () => {
@@ -346,9 +374,7 @@ function createFilterBadge(text, onRemove) {
   return badge;
 }
 
-// ========================================
-// DISPLAY FILTERED PRODUCTS
-// ========================================
+// Display filtered products
 function displayFilteredProducts(products) {
   const productsContainer = document.getElementById('products-container');
   if (!productsContainer) {
@@ -359,56 +385,41 @@ function displayFilteredProducts(products) {
   productsContainer.innerHTML = '';
 
   if (products.length === 0) {
-    productsContainer.innerHTML = '<div class="text-center text-muted" style="grid-column: 1 / -1; padding: 40px;">Tidak ada produk yang sesuai dengan filter.</div>';
+    productsContainer.innerHTML = '<div class="col-12"><p class="text-center text-muted">Tidak ada produk yang sesuai dengan filter.</p></div>';
     return;
   }
 
   products.forEach(product => {
-    // Use createProductCard function from products.js if available
+    // Gunakan fungsi createProductCard dari products.js jika ada
     if (typeof createProductCard === 'function') {
       const productCard = createProductCard(product);
       productsContainer.appendChild(productCard);
     } else {
-      // Fallback: create card manually if function not available
-      const wrapper = document.createElement('div');
-      wrapper.className = 'product-card-wrapper';
-      wrapper.onclick = () => {
-        window.location.href = `product-detail.html?id=${product.id}`;
-      };
+      // Fallback: buat card sendiri jika fungsi tidak tersedia
+      const col = document.createElement('div');
+      col.className = 'col-md-4 col-sm-6 mb-4';
       
       const stars = '⭐'.repeat(product.rating);
-      const categoryNames = {
-        'manis': 'Manis',
-        'gurih': 'Gurih',
-        'nabati': 'Nabati',
-        'hewani': 'Hewani',
-        'jajan': 'Jajan',
-        'makanan-berat': 'Makanan Berat'
-      };
-      const categories = product.categories
-        .map(cat => categoryNames[cat] || cat)
-        .join(', ');
+      const categories = product.categories.join(', ');
       
-      wrapper.innerHTML = `
-        <div class="product-image-wrapper">
-          <img src="${product.image}" alt="${product.name}" class="product-image" onerror="this.src='https://via.placeholder.com/200x200?text=No+Image'">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">${product.name}</h3>
-          <p class="product-price">Rp ${product.price.toLocaleString('id-ID')}</p>
-          <p class="product-rating">${stars}</p>
-          <p class="product-categories">${categories}</p>
+      col.innerHTML = `
+        <div class="card shadow-sm product-card" onclick="goToProductDetail('${product.id}')">
+          <img src="${product.image}" class="card-img-top" alt="${product.name}">
+          <div class="card-body">
+            <h6 class="card-title">${product.name}</h6>
+            <p class="card-text text-success">Rp. ${product.price.toLocaleString('id-ID')}</p>
+            <p class="rating">${stars}</p>
+            <small class="text-muted">${categories}</small>
+          </div>
         </div>
       `;
       
-      productsContainer.appendChild(wrapper);
+      productsContainer.appendChild(col);
     }
   });
 }
 
-// ========================================
-// LOAD AND STORE PRODUCTS
-// ========================================
+// Store products data when loaded
 async function loadAndStoreProducts() {
   console.log("Loading and storing products...");
   allProducts = await loadProductsData();
@@ -427,18 +438,12 @@ async function loadAndStoreProducts() {
   }
 }
 
-// ========================================
-// WINDOW FUNCTION TO SET PRODUCTS
-// ========================================
 window.setAllProducts = function(products) {
   console.log("Setting all products from products.js:", products.length);
   allProducts = products;
   initializeFilters();
 }
 
-// ========================================
-// INITIALIZE ON PAGE LOAD
-// ========================================
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM loaded, checking page...");
@@ -460,8 +465,3 @@ if (document.readyState === 'loading') {
     }, 100);
   }
 }
-
-// ========================================
-// LOG INITIALIZATION
-// ========================================
-console.log("filter.js loaded successfully");
