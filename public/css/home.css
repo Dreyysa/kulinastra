@@ -107,9 +107,9 @@ header img {
   transition: transform 0.2s ease;
 }
 
-.close-btn:hover {
+/* .close-btn:hover {
   transform: rotate(90deg);
-}
+} */
 
 /* Hero Section */
 .hero {

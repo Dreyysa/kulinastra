@@ -107,9 +107,9 @@ header img {
   transition: transform 0.2s ease;
 }
 
-.close-btn:hover {
+/* .close-btn:hover {
   transform: rotate(90deg);
-}
+} */
 
 /* Hero Section */
 .hero {
@@ -214,59 +214,67 @@ header img {
 .services-contact {
   background-color: #fffbea;
   text-align: center;
-  padding: 60px 20px;
-  color: #333;
+  padding: 80px 20px 100px;
+  color: #1b1b1b;
+  font-family: "Poppins", sans-serif;
 }
 
-/* Bagian Judul */
+/* Judul Section */
 .services h2,
 .contact h2 {
   font-size: 28px;
-  font-weight: 600;
-  margin-bottom: 25px;
+  font-weight: 700;
+  margin-bottom: 35px;
   position: relative;
   display: inline-block;
+  color: #2a2a2a;
 }
 
 .services h2::after,
 .contact h2::after {
   content: "";
   display: block;
-  width: 100px;
-  height: 3px;
-  background-color: #4a8c36;
-  border-radius: 5px;
+  width: 120px;
+  height: 4px;
+  background-color: #347928;
+  border-radius: 10px;
   margin: 5px auto 0;
 }
 
-/* Grid Layanan */
+/* === Bagian Layanan === */
 .services-grid {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 60px;
+  gap: 100px;
   flex-wrap: wrap;
-  margin-bottom: 70px;
+  margin-bottom: 100px;
+}
+
+.service-item {
+  text-align: center;
 }
 
 .service-item img {
-  width: 90px;
-  height: 90px;
+  width: 110px;
+  height: 110px;
   object-fit: contain;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .service-item p {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1c1c1c;
 }
 
-/* Contact */
+/* === Bagian Kontak === */
 .contact-info {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 80px;
+  margin-top: 40px;
   flex-wrap: wrap;
 }
 
@@ -275,26 +283,23 @@ header img {
 }
 
 .contact-item img {
-  width: 50px;
-  height: 50px;
-  margin-bottom: 10px;
+  width: 65px;
+  height: 65px;
+  margin-bottom: 15px;
 }
 
-.email {
-  color: #caa92a;
-  font-weight: 500;
-}
-
+.email,
 .phone {
-  color: #caa92a;
+  font-size: 18px;
+  color: #d2b136;
   font-weight: 500;
 }
 
 .divider {
   width: 3px;
-  height: 60px;
-  background-color: #4a8c36;
-  border-radius: 5px;
+  height: 80px;
+  background-color: #4f7c32;
+  border-radius: 4px;
 }
 
 /* Footer */
