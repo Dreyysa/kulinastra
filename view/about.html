@@ -1,354 +1,120 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KuliNastra - Kuliner Nusantara</title>
+    <link rel="stylesheet" href="../public/css/about.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <header>
+      <div class="menu-icon" id="menu-icon">☰</div>
+      <div class="logo">KuliNastra</div>
+      <img src="../public/assets/images/logo/logo.png" alt="Logo KN" />
+    </header>
 
-/* Body */
-body {
-  background-color: #fdfcf6;
-  color: #333;
-  line-height: 1.6;
-}
+    <!-- Side Menu -->
+    <div class="side-menu" id="side-menu">
+      <span class="close-btn" id="close-btn">✕</span>
+      <a href="../index.html">Beranda</a>
+      <a href="#">Tentang Kami</a>
+      <a href="product.html">Produk</a>
+      <a href="testimoni.html">Testimoni</a>
+      <a href="contact.html">Kontak</a>
+    </div>
 
-/* Navbar */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #347b1b; /* hijau */
-  color: #fff;
-  padding: 15px 20px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
+    <!-- hero section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Jejak Rasa Nusantara</h1>
+        <p>
+          “Kulinastra lahir dari cinta pada kuliner tradisional. Kami merawat
+          resep warisan leluhur dan menghadirkannya kembali dengan sentuhan
+          modern, agar kenangan rasa Nusantara selalu hidup di setiap generasi.”
+        </p>
+      </div>
+    </section>
 
-.menu-icon {
-  font-size: 26px;
-  cursor: pointer;
-}
+    <!-- about section -->
+    <section class="about-section">
+      <div class="about-container">
+        <h2>Tentang Kami</h2>
+        <div class="about-content">
+          <p>
+            KuliNastra (Kuliner Nusantara) adalah sebuah UMKM yang berdiri pada
+            tahun 2023 di Sidoarjo, Jawa Timur, dan bergerak di bidang jajanan
+            tradisional dengan sentuhan modern. Visi KuliNastra adalah menjadi
+            pelopor jajanan nusantara yang higienis, modern, dan mudah dijangkau
+            masyarakat, sekaligus melestarikan cita rasa warisan kuliner
+            Indonesia agar tetap dikenal generasi muda. Produk utama yang
+            ditawarkan antara lain klepon isi cokelat dan gula merah, getuk
+            aneka rasa, kue putu modern dengan varian keju serta cokelat, dadar
+            gulung pandan, hingga onde-onde wijen mini. Semua jajanan dibuat
+            dari bahan alami tanpa pengawet, diolah dengan standar higienis, dan
+            dikemas secara menarik agar sesuai dengan selera pasar masa kini.
+          </p>
+          <p>
+            Dalam pemasarannya, KuliNastra menargetkan remaja, mahasiswa, hingga
+            keluarga yang ingin menikmati nostalgia jajanan tradisional.
+            Strategi promosi dilakukan melalui booth offline di pusat keramaian,
+            media sosial, marketplace, hingga layanan pesan-antar makanan,
+            dengan branding modern bernuansa etnik serta tagline “Rasa Nusantara
+            dalam Genggaman”.
+          </p>
+          <p>
+            Selain fokus pada bisnis, KuliNastra juga memiliki misi sosial
+            dengan membuka lapangan kerja bagi masyarakat sekitar dan
+            memberdayakan ibu rumah tangga untuk ikut serta dalam proses
+            produksi. Dengan konsep ini, KuliNastra tidak hanya hadir sebagai
+            usaha kuliner, tetapi juga sebagai wadah pelestarian kearifan lokal
+            sekaligus pemberdayaan ekonomi masyarakat.
+          </p>
+          <em>-Rasa Nusantara dalam Genggaman-</em>
+        </div>
+      </div>
+    </section>
 
-.logo {
-  font-size: 40px;
-  font-family: monospace;
-  letter-spacing: 1px;
-}
+    <section class="services-contact">
+      <div class="services">
+        <h2>Layanan Kami</h2>
+        <div class="services-grid">
+          <div class="service-item">
+            <img src="../public/assets/images/icons/pesan-antar.png" alt="Catering" />
+            <p>Pesan Antar</p>
+          </div>
+          <div class="service-item">
+            <img src="../public/assets/images/icons/catering.png" alt="Catering" />
+            <p>Catering</p>
+          </div>
+          <div class="service-item">
+            <img src="../public/assets/images/icons/hampers.png" alt="Hampers" />
+            <p>Hampers</p>
+          </div>
+        </div>
+      </div>
 
-header img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  border-radius: 50%;
-  border: 2px solid #ccc;
-}
+      <div class="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-info">
+          <div class="contact-item">
+            <img src="../public/assets/images/icons/gmail.png" alt="Email" />
+            <p class="email">kulinastra@gmail.com</p>
+          </div>
+          <div class="divider"></div>
+          <div class="contact-item">
+            <img src="../public/assets/images/icons/WA.png" alt="Telepon" />
+            <p class="phone">+62 812-3456-7890</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-/* ==== SIDEBAR MENU (STYLE MIRIP GAMBAR) ==== */
-.side-menu {
-  position: fixed;
-  top: 0;
-  left: -260px;
-  width: 260px;
-  height: 330px;
-  background-color: #347b1b; /* hijau tua seperti di gambar */
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 30px 30px;
-  box-sizing: border-box;
-  transition: left 0.35s ease-in-out;
-  z-index: 9999;
-  font-family: "Poppins", Arial, sans-serif;
-  list-style: none;
-}
+    <!-- footer -->
+    <footer>
+      UMKM KuliNastra. Jl. Melati Indah No. 23, Kota Nusantara, Jawa Tengah
+    </footer>
 
-.side-menu.active {
-  left: 0;
-}
-
-.side-menu a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: 500;
-  margin: 13px 0;
-  display: block;
-  transition: all 4s ease-in-out; /* smoother & faster transition */
-  list-style: none;
-}
-
-/* Hover effect */
-.side-menu a:hover {
-  text-decoration: underline;
-  text-underline-offset: 5px;
-}
-
-.side-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* Tombol close (X) */
-.close-btn {
-  position: absolute;
-  top: 28px;
-  right: 30px;
-  font-size: 36px;
-  font-weight: 600;
-  color: #fff;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-/* Hero Section */
-.hero {
-  position: relative;
-  background: url("../../public/assets/images/products/bg.png") center/cover
-    no-repeat;
-  color: white;
-  text-align: center;
-  padding: 100px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* overlay */
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
-}
-
-.hero h1 {
-  font-size: 40px;
-  font-weight: 100;
-  margin-bottom: 15px;
-  margin-left: 20px;
-}
-
-.hero p {
-  font-size: 16px;
-  color: #ddd;
-  margin-left: 20px;
-  margin: 40px;
-}
-
-.hero img {
-  position: relative;
-  z-index: 2;
-  width: 150px;
-  opacity: 0.9;
-  margin-right: 40px;
-}
-
-/* About Section */
-.about-section {
-  padding: 60px 20px;
-  background: #fffbea;
-}
-
-.about-container {
-  width: 90%; /* lebar kontainer hampir full layar */
-  max-width: 1200px; /* biar nggak terlalu lebar di layar gede */
-  margin-left: 143px;
-  text-align: center;
-}
-
-.about-container h2 {
-  font-size: 32px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  display: inline-block;
-}
-
-.about-section h2::after {
-  content: "";
-  display: block;
-  width: 119px; /* panjang garis */
-  height: 4px; /* tebal garis */
-  background-color: #347928; /* warna hijau */
-  border-radius: 10px; /* biar ujungnya bulat */
-  margin: 0px auto 0; /* tengah & kasih jarak */
-}
-
-.about-content {
-  color: #020000ff;
-  padding: 25px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-  font-size: 27px;
-}
-
-.about-content p {
-  margin: 30px;
-}
-
-.about-content em {
-  display: block;
-  text-align: center;
-  font-style: italic;
-  color: #020000ff;
-}
-
-.services-contact {
-  background-color: #fffbea;
-  text-align: center;
-  padding: 80px 20px 100px;
-  color: #1b1b1b;
-  font-family: "Poppins", sans-serif;
-}
-
-/* Judul Section */
-.services h2,
-.contact h2 {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 35px;
-  position: relative;
-  display: inline-block;
-  color: #2a2a2a;
-}
-
-.services h2::after,
-.contact h2::after {
-  content: "";
-  display: block;
-  width: 120px;
-  height: 4px;
-  background-color: #347928;
-  border-radius: 10px;
-  margin: 5px auto 0;
-}
-
-/* === Bagian Layanan === */
-.services-grid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 100px;
-  flex-wrap: wrap;
-  margin-bottom: 100px;
-}
-
-.service-item {
-  text-align: center;
-}
-
-.service-item img {
-  width: 110px;
-  height: 110px;
-  object-fit: contain;
-  margin-bottom: 15px;
-}
-
-.service-item p {
-  font-size: 20px;
-  font-weight: 600;
-  color: #1c1c1c;
-}
-
-/* === Bagian Kontak === */
-.contact-info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 80px;
-  margin-top: 40px;
-  flex-wrap: wrap;
-}
-
-.contact-item {
-  text-align: center;
-}
-
-.contact-item img {
-  width: 65px;
-  height: 65px;
-  margin-bottom: 15px;
-}
-
-.email,
-.phone {
-  font-size: 18px;
-  color: #d2b136;
-  font-weight: 500;
-}
-
-.divider {
-  width: 3px;
-  height: 80px;
-  background-color: #4f7c32;
-  border-radius: 4px;
-}
-
-/* Footer */
-footer {
-  background: #2e7d32;
-  color: white;
-  text-align: center;
-  padding: 15px 10px;
-  font-size: 20px;
-}
-
-/* Responsive */
-@media (min-width: 768px) {
-  .hero h1 {
-    font-size: 36px;
-  }
-
-  .hero p {
-    font-size: 18px;
-  }
-
-  .hero img {
-    width: 180px;
-  }
-
-  .about-container h2 {
-    font-size: 27px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .hero {
-    padding: 150px 80px;
-  }
-
-  .hero-logo {
-    font-size: 42px;
-  }
-
-  .hero-content {
-    max-width: 70%;
-  }
-
-  .hero h1 {
-    font-size: 67px;
-  }
-
-  .hero p {
-    font-size: 32px;
-  }
-
-  .about-container h2 {
-    font-size: 32px;
-  }
-
-  .hero img {
-    width: 280px;
-  }
-}
+    <script src="../public/js/hamburger-menu.js"></script>
+  </body>
+</html>
