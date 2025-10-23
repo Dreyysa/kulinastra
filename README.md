@@ -112,37 +112,4 @@ Website KuliNastra dilengkapi dengan sistem filter yang canggih untuk membantu p
 4. **Accessibility** - Mendukung keyboard navigation dan screen reader
 5. **Extensible** - Mudah ditambahkan filter baru di masa depan
 
-## 🔧 **Cara Menambahkan Filter Baru**
-
-Untuk menambahkan filter baru, ikuti langkah berikut:
-
-1. **Tambahkan HTML** di `view/product.html`:
-```html
-<div class="form-check">
-  <input class="form-check-input filter-category" type="checkbox" id="filter-baru" value="filter-baru">
-  <label class="form-check-label" for="filter-baru">Filter Baru</label>
-</div>
-```
-
-2. **Tambahkan Logika** di `public/js/filter.js`:
-```javascript
-// Di dalam applyFilters()
-const filterBaru = document.getElementById('filter-baru')?.checked || false;
-
-// Di dalam kondisi filter
-const filterBaruMatch = !filterBaru || p.kategoriBaru === true;
-return categoryMatch && priceMatch && ratingMatch && filterBaruMatch;
-```
-
-3. **Update Badge** di `updateFilterBadges()`:
-```javascript
-if (filterBaru) {
-  const badge = createClosableBadge('Filter Baru', () => {
-    document.getElementById('filter-baru').checked = false;
-    applyFilters();
-  });
-  badgeContainer.appendChild(badge);
-}
-```
-
 Sistem filter KuliNastra memberikan pengalaman pencarian yang komprehensif dan user-friendly, memungkinkan pelanggan menemukan produk yang tepat sesuai dengan kebutuhan dan preferensi mereka.
