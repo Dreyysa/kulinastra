@@ -1,33 +1,3 @@
-#Struktur File
-
-KULINASTRA/
-├── data.json
-├── index.html
-├── view/
-│   ├── about.html
-│   ├── contact.html
-│   └── product.html
-│   └── product-detail.html
-│   └── testimoni.html
-├── public/
-│   ├── css/
-│   │   └── about.css
-│   │   └── contact.css
-│   │   └── home.css
-│   │   └── product-detail.css
-│   │   └── product.css
-│   │   └── testimoni.css
-│   ├── js/
-│   │   └── filter.js
-│   │   └── hamburger-menu.js
-│   │   └── products.js
-│   │   └── testimoni.js
-│   └── assets/
-│       └── images/
-│           └── icons/       
-│           └── logo/       
-│           └── products/       
-
 # Fitur Filter
 
 Website KuliNastra dilengkapi dengan sistem filter yang canggih untuk membantu pengguna menemukan produk yang sesuai dengan preferensi mereka. Fitur filter ini terintegrasi di halaman **Produk** (`view/product.html`) dan menggunakan JavaScript untuk memberikan pengalaman pencarian yang dinamis dan responsif.
