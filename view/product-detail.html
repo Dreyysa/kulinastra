@@ -1,149 +1,202 @@
 <!DOCTYPE html>
 <html lang="id">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lumpia Ayam - KuliNastra</title>
-    <link rel="stylesheet" href="../public/css/product-detail.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+    <link rel="stylesheet" href="../public/css/product-detail.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
 
-<body>
+  <body>
+    <!-- NAVBAR -->
+    <header>
+      <div class="menu-icon" id="menu-icon">☰</div>
+      <div class="logo">KuliNastra</div>
+      <img src="../public/assets/images/logo/logo.png" alt="Logo KN" />
+    </header>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="side-menu">
+      <span class="close-btn" id="close-btn">✕</span>
+      <a href="../index.html">Beranda</a>
+      <a href="about.html">Tentang Kami</a>
+      <a href="product.html">Produk</a>
+      <a href="testimoni.html">Testimoni</a>
+      <a href="contact.html">Kontak</a>
+    </div>
+
     <main class="container" id="product-detail">
-        <section class="product-section">
-            <div class="product-image">
-                <img src="" alt="" id="product-image">
+      <section class="product-section">
+        <div class="product-image">
+          <img src="" alt="" id="product-image" />
+        </div>
+
+        <div class="product-info">
+          <h1 id="product-title">Loading...</h1>
+          <div class="price" id="product-price">Rp. 0</div>
+
+          <div class="product-details">
+            <div class="detail-row">
+              <span class="label">Stok</span>
+              <span class="value" id="product-stock">Loading...</span>
             </div>
-
-            <div class="product-info">
-                <h1 id="product-title">Loading...</h1>
-                <div class="price" id="product-price">Rp. 0</div>
-
-                <div class="product-details">
-                    <div class="detail-row">
-                        <span class="label">Stok</span>
-                        <span class="value" id="product-stock">Loading...</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="label">Kategori</span>
-                        <span class="value" id="product-categories">Loading...</span>
-                    </div>
-                </div>
-
-                <button class="whatsapp-btn">
-                    Pesan via Whatsapp <i class="fa-brands fa-whatsapp"></i>
-                </button>
+            <div class="detail-row">
+              <span class="label">Kategori</span>
+              <span class="value" id="product-categories">Loading...</span>
             </div>
-        </section>
+          </div>
 
-        <nav class="tabs">
-            <button class="tab active" onclick="showTab('description')">Deskripsi</button>
-            <button class="tab" onclick="showTab('comment')">Comment</button>
-        </nav>
+          <button class="whatsapp-btn">
+            Pesan via Whatsapp <i class="fa-brands fa-whatsapp"></i>
+          </button>
+        </div>
+      </section>
 
-        <section class="description tab-content active" id="description">
-            <p id="product-description">Loading...</p>
-        </section>
+      <nav class="tabs">
+        <button class="tab active" onclick="showTab('description')">
+          Deskripsi
+        </button>
+        <button class="tab" onclick="showTab('comment')">Comment</button>
+      </nav>
 
-        <section class="comment-section tab-content" id="comment">
-            <div class="rating-section">
-                <h3>Rating Produk</h3>
-                <div class="overall-rating">
-                    <div class="stars-display" id="overall-stars">⭐⭐⭐⭐⭐</div>
-                    <div class="rating-text" id="rating-text">Berdasarkan komentar pengguna</div>
-                </div>
+      <section class="description tab-content active" id="description">
+        <p id="product-description">Loading...</p>
+      </section>
+
+      <section class="comment-section tab-content" id="comment">
+        <div class="rating-section">
+          <h3>Rating Produk</h3>
+          <div class="overall-rating">
+            <div class="stars-display" id="overall-stars">⭐⭐⭐⭐⭐</div>
+            <div class="rating-text" id="rating-text">
+              Berdasarkan komentar pengguna
             </div>
+          </div>
+        </div>
 
-            <div class="comment-form">
-                <div class="form-group">
-                    <label for="username">Nama:</label>
-                    <input type="text" id="username" placeholder="Nama (opsional)" maxlength="50">
-                </div>
-                <div class="form-group">
-                    <label for="user-rating">Rating:</label>
-                    <div class="rating-input">
-                        <span class="star" data-rating="1">⭐</span>
-                        <span class="star" data-rating="2">⭐</span>
-                        <span class="star" data-rating="3">⭐</span>
-                        <span class="star" data-rating="4">⭐</span>
-                        <span class="star" data-rating="5">⭐</span>
-                    </div>
-                    <div class="rating-label" id="rating-label">Pilih rating</div>
-                </div>
-                <div class="form-group">
-                    <textarea id="comment-text" placeholder="Tambahkan komentar" rows="4" maxlength="500"></textarea>
-                    <div class="char-count" id="char-count">0/500 karakter</div>
-                </div>
-                <button class="submit-btn" onclick="addComment()">Simpan</button>
+        <div class="comment-form">
+          <div class="form-group">
+            <label for="username">Nama:</label>
+            <input
+              type="text"
+              id="username"
+              placeholder="Nama (opsional)"
+              maxlength="50"
+            />
+          </div>
+          <div class="form-group">
+            <label for="user-rating">Rating:</label>
+            <div class="rating-input">
+              <span class="star" data-rating="1">⭐</span>
+              <span class="star" data-rating="2">⭐</span>
+              <span class="star" data-rating="3">⭐</span>
+              <span class="star" data-rating="4">⭐</span>
+              <span class="star" data-rating="5">⭐</span>
             </div>
+            <div class="rating-label" id="rating-label">Pilih rating</div>
+          </div>
+          <div class="form-group">
+            <textarea
+              id="comment-text"
+              placeholder="Tambahkan komentar"
+              rows="4"
+              maxlength="500"
+            ></textarea>
+            <div class="char-count" id="char-count">0/500 karakter</div>
+          </div>
+          <button class="submit-btn" onclick="addComment()">Simpan</button>
+        </div>
 
-            <div class="comments-list" id="comments-list">
-                <!-- Comments will be loaded here -->
+        <div class="comments-list" id="comments-list">
+          <!-- Comments will be loaded here -->
+        </div>
+
+        <button
+          class="load-more-btn"
+          id="load-more-btn"
+          onclick="loadMoreComments()"
+          style="display: none"
+        >
+          Lihat Semua
+        </button>
+      </section>
+
+      <section class="related-products">
+        <h2>Produk Terkait</h2>
+        <div class="products-grid">
+          <div class="product-card">
+            <img
+              src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABkAGQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9k="
+              alt="Arem-arem"
+            />
+            <div class="product-info-card">
+              <h3>Arem-arem</h3>
+              <div class="product-price">Rp. 3,000</div>
+              <div class="rating">
+                <span class="stars">⭐⭐⭐⭐⭐</span>
+              </div>
             </div>
+          </div>
 
-            <button class="load-more-btn" id="load-more-btn" onclick="loadMoreComments()" style="display: none;">Lihat
-                Semua</button>
-        </section>
-
-        <section class="related-products">
-            <h2>Produk Terkait</h2>
-            <div class="products-grid">
-                <div class="product-card">
-                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABkAGQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9k="
-                        alt="Arem-arem">
-                    <div class="product-info-card">
-                        <h3>Arem-arem</h3>
-                        <div class="product-price">Rp. 3,000</div>
-                        <div class="rating">
-                            <span class="stars">⭐⭐⭐⭐⭐</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABkAGQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9k="
-                        alt="Pastel">
-                    <div class="product-info-card">
-                        <h3>Pastel</h3>
-                        <div class="product-price">Rp. 3,000</div>
-                        <div class="rating">
-                            <span class="stars">⭐⭐⭐⭐⭐</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABkAGQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9k="
-                        alt="Risoles">
-                    <div class="product-info-card">
-                        <h3>Risoles</h3>
-                        <div class="product-price">Rp. 3,000</div>
-                        <div class="rating">
-                            <span class="stars">⭐⭐⭐⭐⭐</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABkAGQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9k="
-                        alt="Lemper">
-                    <div class="product-info-card">
-                        <h3>Lemper</h3>
-                        <div class="product-price">Rp. 5,000</div>
-                        <div class="rating">
-                            <span class="stars">⭐⭐⭐⭐⭐</span>
-                        </div>
-                    </div>
-                </div>
+          <div class="product-card">
+            <img
+              src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABkAGQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9k="
+              alt="Pastel"
+            />
+            <div class="product-info-card">
+              <h3>Pastel</h3>
+              <div class="product-price">Rp. 3,000</div>
+              <div class="rating">
+                <span class="stars">⭐⭐⭐⭐⭐</span>
+              </div>
             </div>
-        </section>
+          </div>
+
+          <div class="product-card">
+            <img
+              src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABkAGQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9k="
+              alt="Risoles"
+            />
+            <div class="product-info-card">
+              <h3>Risoles</h3>
+              <div class="product-price">Rp. 3,000</div>
+              <div class="rating">
+                <span class="stars">⭐⭐⭐⭐⭐</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img
+              src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABkAGQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9k="
+              alt="Lemper"
+            />
+            <div class="product-info-card">
+              <h3>Lemper</h3>
+              <div class="product-price">Rp. 5,000</div>
+              <div class="rating">
+                <span class="stars">⭐⭐⭐⭐⭐</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <!-- footer -->
+    <footer>
+      UMKM KuliNastra. Jl. Melati Indah No. 23, Kota Nusantara, Jawa Tengah
+    </footer>
 
     <script src="../public/js/script.js"></script>
     <script src="../public/js/products.js"></script>
-</body>
-
+    <script src="../public/js/hamburger-menu.js"></script>
+  </body>
 </html>

@@ -1,77 +1,122 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KuliNastra - Kontak</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../public/css/contact.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KuliNastra - Kontak</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="../public/css/contact.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <header>
+      <div class="menu-icon" id="menu-icon">☰</div>
+      <div class="logo">KuliNastra</div>
+      <img src="../public/assets/images/logo/logo.png" alt="Logo KN" />
+    </header>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">KuliNastra</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <!-- Side Menu -->
+    <div class="side-menu" id="side-menu">
+      <span class="close-btn" id="close-btn">✕</span>
+      <a href="../index.html">Beranda</a>
+      <a href="about.html">Tentang Kami</a>
+      <a href="product.html">Produk</a>
+      <a href="testimoni.html">Testimoni</a>
+      <a href="#contact">Kontak</a>
     </div>
-  </nav>
 
-  <!-- Kontak -->
-  <div class="container my-5">
-    <div class="row">
-      <!-- Informasi Kontak -->
-      <div class="col-md-5 mb-4">
-        <h5 class="fw-bold">JAM OPERASI</h5>
-        <p><strong>SENIN - MINGGU</strong><br><span class="text-warning">07.00 - 15.00</span></p>
+    <!-- Kontak -->
+    <div class="container my-5">
+      <div class="row">
+        <!-- Informasi Kontak -->
+        <div class="col-md-5 mb-4">
+          <h5 class="fw-bold">JAM OPERASI</h5>
+          <p>
+            <strong>SENIN - MINGGU</strong><br /><span class="text-warning"
+              >07.00 - 15.00</span
+            >
+          </p>
 
-        <h5 class="fw-bold mt-4">KONTAK LANGSUNG</h5>
-        <p>Email<br><a href="mailto:kulinasta@gmail.com" class="contact-link">kulinasta@gmail.com</a></p>
-        <p>Telepon<br><a href="tel:+6281234567890" class="contact-link">+62 812-3456-7890</a></p>
-        <p>Alamat<br>
-          <span class="contact-link">
-            Jl. Melati Indah No. 23, RT 05 / RW 04,<br>
-            Kelurahan Sumber Jaya, Kecamatan Sukamaju,<br>
-            Kota Nusantara, Jawa Tengah, Indonesia 54321
-          </span>
-        </p>
-      </div>
+          <h5 class="fw-bold mt-4">KONTAK LANGSUNG</h5>
+          <p>
+            Email<br /><a href="mailto:kulinasta@gmail.com" class="contact-link"
+              >kulinasta@gmail.com</a
+            >
+          </p>
+          <p>
+            Telepon<br /><a href="tel:+6281234567890" class="contact-link"
+              >+62 812-3456-7890</a
+            >
+          </p>
+          <p>
+            Alamat<br />
+            <span class="contact-link">
+              Jl. Melati Indah No. 23, RT 05 / RW 04,<br />
+              Kelurahan Sumber Jaya, Kecamatan Sukamaju,<br />
+              Kota Nusantara, Jawa Tengah, Indonesia 54321
+            </span>
+          </p>
+        </div>
 
-      <!-- Formulir Kontak -->
-      <div class="col-md-7">
-        <h5 class="fw-bold">FORMULIR KONTAK</h5>
-        <form class="contact-form p-3">
-          <div class="mb-3">
-            <label for="nama" class="form-label">Nama</label>
-            <input type="text" class="form-control" id="nama" placeholder="Nama Anda">
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Email Anda">
-          </div>
-          <div class="mb-3">
-            <label for="pesan" class="form-label">Isi Pesan</label>
-            <textarea class="form-control" id="pesan" rows="4" placeholder="Tulis pesan Anda..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-success">Kirim Pesan</button>
-        </form>
+        <!-- Formulir Kontak -->
+        <div class="col-md-7">
+          <h5 class="fw-bold">FORMULIR KONTAK</h5>
+          <form class="contact-form p-3">
+            <div class="mb-3">
+              <label for="nama" class="form-label">Nama</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nama"
+                placeholder="Nama Anda"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Email Anda"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="pesan" class="form-label">Isi Pesan</label>
+              <textarea
+                class="form-control"
+                id="pesan"
+                rows="4"
+                placeholder="Tulis pesan Anda..."
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Kirim Pesan</button>
+          </form>
 
-        <!-- Tombol WhatsApp -->
-        <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-whatsapp mt-3">
-          <i class="bi bi-whatsapp"></i> Hubungi Kami
-        </a>
+          <!-- Tombol WhatsApp -->
+          <a
+            href="https://wa.me/6281234567890"
+            target="_blank"
+            class="btn btn-whatsapp mt-3"
+          >
+            <i class="bi bi-whatsapp"></i> Hubungi Kami
+          </a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>UMKM KuliNastra. Jl. Melati Indah No. 23, Kota Nusantara, Jawa Tengah</p>
-  </footer>
+    <!-- footer -->
+    <footer>
+      UMKM KuliNastra. Jl. Melati Indah No. 23, Kota Nusantara, Jawa Tengah
+    </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../public/js/hamburger-menu.js"></script>
+  </body>
 </html>

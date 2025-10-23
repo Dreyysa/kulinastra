@@ -1,90 +1,65 @@
 <!DOCTYPE html>
 <html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KuliNastra - Produk Kami</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="../public/css/product.css" rel="stylesheet" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KuliNastra - Produk Kami</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../public/css/product.css" rel="stylesheet">
-</head>
+  <body>
+    <!-- NAVBAR -->
+    <header>
+      <div class="menu-icon" id="menu-icon">☰</div>
+      <div class="logo">KuliNastra</div>
+      <img src="../public/assets/images/logo/logo.png" alt="Logo KN" />
+    </header>
 
-<body>
+            <hr />
+            <h6>Harga</h6>
+            <input
+              type="number"
+              class="form-control mb-2"
+              id="min-price"
+              placeholder="Harga Minimum"
+            />
+            <input
+              type="number"
+              class="form-control mb-2"
+              id="max-price"
+              placeholder="Harga Maksimum"
+            />
 
-  <!-- Navbar -->
-  <header>
-    <div class="menu-icon" id="menu-icon">☰</div>
-    <div class="logo">KuliNastra</div>
-    <img src="../public/assets/images/logo/logo.png" alt="Logo KN" />
-  </header>
-
-  <!-- Side Menu -->
-  <div class="side-menu" id="side-menu">
-    <span class="close-btn" id="close-btn">✕</span>
-    <a href="home.html">Beranda</a>
-    <a href="about.html">Tentang Kami</a>
-    <a href="product.html">Produk</a>
-    <a href="testimoni.html">Testimoni</a>
-    <a href="contact.html">Kontak</a>
-  </div>
-
-  <!-- Product Page Title -->
-  <div class="product-page-title">
-    <h2>Produk Kami</h2>
-  </div>
-
-  <!-- Produk Kami -->
-  <div class="container my-5">
-    <div class="row">
-      <!-- Sidebar Filter -->
-      <div class="col-md-3 mb-4">
-        <div class="filter-box">
-          <h5>Filters</h5>
-          <hr>
-          <h6>Jenis Makanan</h6>
-          <div class="form-check"><input class="form-check-input filter-category" type="checkbox" id="manis" value="manis"><label
-              class="form-check-label" for="manis">Manis</label></div>
-          <div class="form-check"><input class="form-check-input filter-category" type="checkbox" id="gurih" value="gurih"><label
-              class="form-check-label" for="gurih">Gurih</label></div>
-          <div class="form-check"><input class="form-check-input filter-category" type="checkbox" id="nabati" value="nabati"><label
-              class="form-check-label" for="nabati">Nabati</label></div>
-          <div class="form-check"><input class="form-check-input filter-category" type="checkbox" id="hewani" value="hewani"><label
-              class="form-check-label" for="hewani">Hewani</label></div>
-          <div class="form-check"><input class="form-check-input filter-category" type="checkbox" id="jajan" value="jajan"><label
-              class="form-check-label" for="jajan">Jajan</label></div>
-          <div class="form-check"><input class="form-check-input filter-category" type="checkbox" id="makanan-berat" value="makanan-berat"><label
-              class="form-check-label" for="makanan-berat">Makanan Berat</label></div>
-
-          <hr>
-          <h6>Harga</h6>
-          <input type="number" class="form-control mb-2" id="min-price" placeholder="Harga Minimum">
-          <input type="number" class="form-control mb-2" id="max-price" placeholder="Harga Maksimum">
-
-          <hr>
-          <h6>Rating</h6>
-          <div class="form-check"><input class="form-check-input" type="checkbox" id="rating4"><label
-              class="form-check-label" for="rating4">⭐ 4 ke atas</label></div>
+            <hr />
+            <h6>Rating</h6>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="rating4"
+              /><label class="form-check-label" for="rating4"
+                >⭐ 4 ke atas</label
+              >
+            </div>
+          </div>
         </div>
-      </div>
 
-      <!-- Produk -->
-      <div class="col-md-9">
-        <div class="row g-4" id="products-container">
-          <!-- Products will be loaded dynamically from data.json -->
+        <!-- Produk -->
+        <div class="col-md-9">
+          <div class="row g-4" id="products-container">
+            <!-- Products will be loaded dynamically from data.json -->
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>UMKM KuliNastra. Jl. Melati Indah No. 23, Kota Nusantara, Jawa Tengah</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../public/js/hamburger-menu.js"></script>
-  <script src="../public/js/products.js"></script>
-  <script src="../public/js/filter.js"></script>
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../public/js/products.js"></script>
+    <script src="../public/js/filter.js"></script>
+    <script src="../public/js/hamburger-menu.js"></script>
+  </body>
 </html>
