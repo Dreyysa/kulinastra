@@ -1,37 +1,86 @@
-body {
-  background-color: #fefbe7;
-}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KuliNastra - Kontak</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="../public/css/contact.css" rel="stylesheet">
+  <link href="../public/css/about.css" rel="stylesheet">
+</head>
+<body>
 
-.navbar {
-  background-color: #2e7d32;
-}
+    <!-- NAVBAR -->
+    <header>
+      <div class="menu-icon" id="menu-icon">☰</div>
+      <div class="logo">KuliNastra</div>
+      <img src="../public/assets/images/logo/logo.png" alt="Logo KN" />
+    </header>
 
-.navbar-brand {
-  color: #fff !important;
-  font-weight: bold;
-}
+    <!-- Side Menu -->
+    <div class="side-menu" id="side-menu">
+      <span class="close-btn" id="close-btn">✕</span>
+      <a href="../index.html">Beranda</a>
+      <a href="about.html">Tentang Kami</a>
+      <a href="product.html">Produk</a>
+      <a href="testimoni.html">Testimoni</a>
+      <a href="#">Kontak</a>
+    </div>
 
-.filter-box {
-  background: #fff;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
+  <!-- Kontak -->
+  <div class="container my-5">
+    <div class="row">
+      <!-- Info Kontak -->
+      <div class="col-md-5 mb-4">
+        <h5 class="fw-bold">JAM OPERASI</h5>
+        <p><strong>SENIN - MINGGU</strong><br><span class="text-warning">07.00 - 15.00</span></p>
 
-.card img {
-  height: 160px;
-  object-fit: cover;
-}
+        <h5 class="fw-bold mt-4">KONTAK LANGSUNG</h5>
+        <p>Email<br><a href="mailto:kulinasta@gmail.com" class="contact-link">kulinasta@gmail.com</a></p>
+        <p>Telepon<br><a href="tel:+6281234567890" class="contact-link">+62 812-3456-7890</a></p>
+        <p>Alamat<br>
+          <span class="contact-link">
+            Jl. Melati Indah No. 23, RT 05 / RW 04,<br>
+            Kelurahan Sumber Jaya, Kecamatan Sukamaju,<br>
+            Kota Nusantara, Jawa Tengah, Indonesia 54321
+          </span>
+        </p>
+      </div>
 
-.rating {
-  color: #f4b400;
-  margin: 0;
-}
+      <!-- Formulir Kontak -->
+      <div class="col-md-7">
+        <h5 class="fw-bold">FORMULIR KONTAK</h5>
+        <form class="contact-form p-3">
+          <div class="mb-3">
+            <label for="nama" class="form-label">Nama</label>
+            <input type="text" class="form-control" id="nama" placeholder="Nama Anda">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Email Anda">
+          </div>
+          <div class="mb-3">
+            <label for="pesan" class="form-label">Isi Pesan</label>
+            <textarea class="form-control" id="pesan" rows="4" placeholder="Tulis pesan Anda..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-success">Kirim Pesan</button>
+        </form>
 
-footer {
-  background-color: #2e7d32;
-  color: white;
-  padding: 20px;
-  margin-top: 40px;
-  text-align: center;
-}
+        <!-- Tombol WhatsApp -->
+        <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-whatsapp mt-3">
+          <i class="bi bi-whatsapp"></i> Hubungi Kami
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>UMKM KuliNastra. Jl. Melati Indah No. 23, Kota Nusantara, Jawa Tengah</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../public/js/hamburger-menu.js"></script>
+</body>
+</html>
