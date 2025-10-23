@@ -18,7 +18,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #347b1b;
+  background-color: #347b1b; /* hijau */
   color: #fff;
   padding: 15px 20px;
   position: sticky;
@@ -103,6 +103,10 @@ header img {
   cursor: pointer;
   transition: transform 0.2s ease;
 }
+
+/* .close-btn:hover {
+  transform: rotate(90deg);
+} */
 
 /* Hero Section */
 .hero {
@@ -202,14 +206,15 @@ header img {
   color: white;
   border: none;
   padding: 10px 20px;
-  border-radius: 20px;
+  border-radius: 17px;
   cursor: pointer;
   font-size: 20px;
   transition: 0.3s;
 }
 
 .learn-more-btn:hover {
-  background: #1b5e20;
+  background: #488b4c;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.104);
 }
 
 .learn-more-btn a {
@@ -222,7 +227,7 @@ header img {
 .products-section {
   background: url("../assets/images/logo/wave.png") no-repeat center center;
   background-size: cover; /* biar nutup full */
-  padding: 200px 200px;
+  padding: 200px 20px;
 }
 
 .products-container {
@@ -271,6 +276,11 @@ header img {
   border: none;
 }
 
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
 .product-image {
   width: 100%;
   height: 200px;
@@ -298,7 +308,6 @@ header img {
 
 .btn-view {
   display: flex;
-  /* justify-content: flex-end; dorong tombol ke kanan */
   margin-left: 1030px;
   margin-top: 20px;
 }

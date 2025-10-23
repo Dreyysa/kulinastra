@@ -5,13 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lumpia Ayam - KuliNastra</title>
-    <link rel="stylesheet" href="../public/css/product-detail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../public/css/product-detail.css">
+    <link href="../public/css/about.css" rel="stylesheet">
 </head>
 
 <body>
+
+    <!-- NAVBAR -->
+    <header>
+      <div class="menu-icon" id="menu-icon">☰</div>
+      <div class="logo">KuliNastra</div>
+      <img src="../public/assets/images/logo/logo.png" alt="Logo KN" />
+    </header>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="side-menu">
+      <span class="close-btn" id="close-btn">✕</span>
+      <li><a href="../index.html">Beranda</a></li>
+      <li><a href="about.html">Tentang Kami</a></li>
+      <li><a href="product.html">Produk</a></li>
+      <li><a href="testimoni.html">Testimoni</a></li>
+      <li><a href="contact.html">Kontak</a></li>
+    </div>
+
     <main class="container" id="product-detail">
         <section class="product-section">
             <div class="product-image">
@@ -144,6 +163,7 @@
 
     <script src="../public/js/script.js"></script>
     <script src="../public/js/products.js"></script>
+    <script src="../public/js/hamburger-menu.js"></script>
 </body>
 
 </html>
