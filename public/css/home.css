@@ -11,6 +11,7 @@ body {
   background-color: #fdfcf6;
   color: #333;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 /* Navbar */
@@ -18,7 +19,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #347b1b; /* hijau */
+  background-color: #347b1b;
   color: #fff;
   padding: 15px 20px;
   position: sticky;
@@ -45,14 +46,14 @@ header img {
   border: 2px solid #ccc;
 }
 
-/* ==== SIDEBAR MENU (STYLE MIRIP GAMBAR) ==== */
+/* ==== SIDEBAR MENU ==== */
 .side-menu {
   position: fixed;
   top: 0;
   left: -260px;
   width: 260px;
   height: 330px;
-  background-color: #347b1b; /* hijau tua seperti di gambar */
+  background-color: #347b1b;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -76,11 +77,9 @@ header img {
   font-weight: 500;
   margin: 13px 0;
   display: block;
-  transition: all 4s ease-in-out; /* smoother & faster transition */
-  list-style: none;
+  transition: all 0.3s ease-in-out;
 }
 
-/* Hover effect */
 .side-menu a:hover {
   text-decoration: underline;
   text-underline-offset: 5px;
@@ -92,7 +91,6 @@ header img {
   margin: 0;
 }
 
-/* Tombol close (X) */
 .close-btn {
   position: absolute;
   top: 28px;
@@ -104,10 +102,6 @@ header img {
   transition: transform 0.2s ease;
 }
 
-/* .close-btn:hover {
-  transform: rotate(90deg);
-} */
-
 /* Hero Section */
 .hero {
   position: relative;
@@ -116,8 +110,9 @@ header img {
   text-align: left;
   padding: 100px 20px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
 }
 
 .hero::before {
@@ -127,7 +122,7 @@ header img {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* overlay */
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .hero-content {
@@ -138,15 +133,13 @@ header img {
 
 .hero h1 {
   font-size: 40px;
-  font-weight: 100;
+  font-weight: 600;
   margin-bottom: 15px;
-  margin-left: 20px;
 }
 
 .hero p {
   font-size: 16px;
   color: #ddd;
-  margin-left: 20px;
 }
 
 .hero img {
@@ -154,126 +147,127 @@ header img {
   z-index: 2;
   width: 150px;
   opacity: 0.9;
-  margin-right: 40px;
+  align-self: center;
 }
 
-/* About Section */
+/* === ABOUT SECTION === */
 .about-section {
   padding: 60px 20px;
   background: #fffbea;
 }
 
 .about-container {
-  width: 90%; /* lebar kontainer hampir full layar */
-  max-width: 1370px; /* biar nggak terlalu lebar di layar gede */
-  margin-left: 70px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .about-container h2 {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: bold;
   margin-bottom: 20px;
-  display: inline-block;
+  text-align: left;
 }
 
 .about-section h2::after {
   content: "";
   display: block;
-  width: 119px; /* panjang garis */
-  height: 4px; /* tebal garis */
-  background-color: #347928; /* warna hijau */
-  border-radius: 10px; /* biar ujungnya bulat */
-  margin: 0px auto 0; /* tengah & kasih jarak */
+  width: 90px;
+  height: 4px;
+  background-color: #347928;
+  border-radius: 10px;
+  margin: 5px 0 0 0;
 }
 
+/* Kotak isi teks hijau */
 .about-content {
   background: #347528;
   color: #fff;
-  padding: 25px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-  font-size: 27px;
+  padding: 25px 35px;
+  border-radius: 15px;
+  margin-top: 25px;
+  font-size: 18px;
+  line-height: 1.7;
 }
 
+/* Tombol wrapper — kanan bawah di desktop */
 .btn-wrapper {
   display: flex;
-  justify-content: flex-end; /* dorong tombol ke kanan */
-  margin-top: 20px;
+  justify-content: flex-end;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 25px;
 }
 
+/* Tombol “Pelajari Selengkapnya” dan lainnya */
 .learn-more-btn {
   background: #47a24a;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 17px;
+  padding: 10px 25px;
+  border-radius: 25px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: 500;
   transition: 0.3s;
 }
 
 .learn-more-btn:hover {
-  background: #488b4c;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.104);
+  background: #3a8d3f;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .learn-more-btn a {
-  list-style: none;
-  text-decoration: none;
   color: white;
+  text-decoration: none;
 }
 
-/* Products Section */
+/* === PRODUCTS SECTION === */
 .products-section {
   background: url("../assets/images/logo/wave.png") no-repeat center center;
-  background-size: cover; /* biar nutup full */
-  padding: 200px 20px;
+  background-size: cover;
+  padding: 120px 20px;
 }
 
 .products-container {
   max-width: 1000px;
   margin: auto;
-  display: block;
-  align-items: center;
+  text-align: center;
 }
 
 .products-container h2 {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 530;
   margin-bottom: 30px;
-  display: block;
-  text-align: center;
 }
 
 .products-section h2::after {
   content: "";
   display: block;
-  width: 155px; /* panjang garis */
-  height: 4px; /* tebal garis */
-  background-color: #347928; /* warna hijau */
-  border-radius: 10px; /* biar ujungnya bulat */
-  margin: -5px auto 0; /* tengah & kasih jarak */
+  width: 155px;
+  height: 4px;
+  background-color: #347928;
+  border-radius: 10px;
+  margin: -5px auto 0;
 }
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  /* justify-items: center; */
-  margin-left: -219px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 25px;
   padding: 20px 0;
 }
 
 .product-card {
-  width: 320px;
+  width: 100%;
+  max-width: 320px;
   height: 250px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin: 10px;
-  border: none;
+  margin: auto;
 }
 
 .product-card:hover {
@@ -288,27 +282,21 @@ header img {
 }
 
 .product-image img {
-  width: 112%;
+  width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  border: none;
-  margin-left: -21px;
 }
 
 .product-name {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
   color: #222;
   padding: 8px 0;
-  background-color: #fff;
-  border-top: none;
   border-top: 1px solid #eee;
 }
 
 .btn-view {
-  display: flex;
-  margin-left: 1030px;
+  text-align: center;
   margin-top: 20px;
 }
 
@@ -319,7 +307,7 @@ header img {
   padding: 10px 25px;
   border-radius: 20px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
   transition: 0.3s;
 }
 
@@ -328,9 +316,8 @@ header img {
 }
 
 .view-all-btn a {
-  list-style: none;
-  text-decoration: none;
   color: white;
+  text-decoration: none;
 }
 
 /* Footer */
@@ -339,26 +326,59 @@ footer {
   color: white;
   text-align: center;
   padding: 15px 10px;
-  font-size: 20px;
+  font-size: 16px;
 }
 
-/* Responsive */
+/* === RESPONSIVE === */
 @media (min-width: 768px) {
-  .hero h1 {
-    font-size: 36px;
+  .hero {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  .hero p {
-    font-size: 18px;
+  .hero h1 {
+    font-size: 44px;
   }
 
   .hero img {
-    width: 180px;
+    width: 200px;
   }
 
-  .about-container h2,
+  .about-content {
+    font-size: 20px;
+  }
+
   .products-container h2 {
-    font-size: 27px;
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-container h2 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .about-section h2::after {
+    margin: 5px auto 0;
+  }
+
+  .about-content {
+    font-size: 16px;
+    padding: 20px;
+    text-align: left;
+  }
+
+  .btn-wrapper {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .learn-more-btn {
+    width: 100%;
+    max-width: 240px;
+    text-align: center;
   }
 }
 
@@ -367,28 +387,20 @@ footer {
     padding: 150px 80px;
   }
 
-  .hero-logo {
-    font-size: 42px;
-  }
-
-  .hero-content {
-    max-width: 60%;
-  }
-
   .hero h1 {
-    font-size: 67px;
+    font-size: 60px;
   }
 
   .hero p {
-    font-size: 32px;
+    font-size: 22px;
   }
 
   .about-container h2 {
-    font-size: 32px;
+    font-size: 36px;
   }
 
   .products-container h2 {
-    font-size: 52px;
+    font-size: 40px;
   }
 
   .products-grid {

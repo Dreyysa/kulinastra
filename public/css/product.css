@@ -6,17 +6,20 @@
   font-family: "Poppins", sans-serif;
 }
 
-html, body {
-  height: 100%;
-}
-
+/* Struktur halaman penuh tinggi layar */
+html,
 body {
-  background-color: #fefbe7;
-  color: #333;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+}
+
+/* Body utama */
+body {
+  background-color: #FFFBE6;
+  color: #333;
   line-height: 1.6;
+  flex: 1;
 }
 
 /* Navbar */
@@ -59,6 +62,7 @@ header img {
   top: 0;
   left: -260px;
   width: 260px;
+  height: auto;
   min-height: 350px;
   background-color: #4a7c3a;
   color: #fff;
@@ -66,8 +70,11 @@ header img {
   flex-direction: column;
   justify-content: flex-start;
   padding: 30px 30px;
+  box-sizing: border-box;
   transition: left 0.35s ease-in-out;
   z-index: 9999;
+  font-family: "Poppins", Arial, sans-serif;
+  list-style: none;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -83,6 +90,7 @@ header img {
   margin: 13px 0;
   display: block;
   transition: all 0.2s ease-in-out;
+  list-style: none;
 }
 
 .side-menu a:hover {
@@ -98,11 +106,12 @@ header img {
   font-weight: 600;
   color: #fff;
   cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 /* Product Page Title */
 .product-page-title {
-  background-color: #fefbe7;
+  background-color: transparent;
   padding: 40px 0 30px 0;
   text-align: center;
 }
@@ -113,7 +122,7 @@ header img {
   color: #2d2d2d;
   margin: 0;
   padding-bottom: 10px;
-  border-bottom: 3px solid #347928;
+  border-bottom: 3px solid #333;
   display: inline-block;
 }
 
@@ -142,32 +151,65 @@ header img {
 }
 
 /* Product Cards */
-.product-card {
+.card.product-card {
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e0e0e0;
   border-radius: 12px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card.product-card .card-img-top {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card.product-card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.card.product-card .card-body {
+  padding: 16px;
+}
+
+.card.product-card .card-title {
+  color: #2e7d32;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 8px;
+  min-height: 48px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.product-card:hover .card-img-top {
-  transform: scale(1.01);
-}
-
-.product-card .card-title {
+.card.product-card .card-text {
+  font-size: 18px;
+  font-weight: 700;
   color: #2e7d32;
-  font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-.product-card .rating {
-  margin-bottom: 5px;
+.card.product-card .rating {
+  margin-bottom: 8px;
   font-size: 14px;
+  color: #ffc107;
 }
 
-.product-card .text-muted {
+.card.product-card .text-muted {
   font-size: 12px;
   font-style: italic;
+  color: #666;
 }
 
 /* Loading Animation */
@@ -189,94 +231,67 @@ header img {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-/* === Breadcrumb Filter Badges === */
+/* Filter Badge Container */
 #filter-badge-container {
-  display: flex;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 10px 0;
+  display: none;
   align-items: center;
-  gap: 8px;
-  color: #111;
-  font-size: 15px;
-  font-weight: 500;
-  margin-top: 10px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
-.filter-breadcrumb {
+/* Filter Badge Styles */
+.filter-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: #111;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.filter-breadcrumb:hover {
-  color: #2e7d32;
-}
-
-.filter-breadcrumb i {
-  font-size: 16px;
-}
-
-.filter-label {
-  font-weight: 700;
-}
-
-.filter-arrow {
-  font-size: 16px;
-  margin: 0 3px;
-  color: #666;
-}
-
-.filter-breadcrumb-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background-color: #f2f4f6;
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 14px;
-  color: #222;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.filter-breadcrumb-item:hover {
-  background-color: #e0e0e0;
-}
-
-.filter-breadcrumb-item .close-icon {
-  font-size: 14px;
-  font-weight: bold;
-  margin-left: 4px;
-  color: #444;
-  transition: color 0.2s;
-}
-
-.filter-breadcrumb-item:hover .close-icon {
-  color: #000;
-}
-
-/* Footer (Sticky & Rapi) */
-footer {
-  background-color: #2e7d32;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  margin-top: auto;
-  width: 100%;
-  font-weight: 500;
+  padding: 10px 20px;
+  background-color: #e8f5e9;
+  color: #2d6b2d;
   font-size: 15px;
-  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.15);
+  font-weight: 400;
+  border-radius: 25px;
+  border: 1.5px solid #7cb777;
+  cursor: pointer;
+  transition: all 0.2s;
+  gap: 10px;
 }
 
-footer p {
-  margin: 0;
-  line-height: 1.4;
+.filter-badge:hover {
+  background-color: #d0ead0;
+  border-color: #6ba866;
+}
+
+.filter-badge span:last-child {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Filter Prefix Badge (Filters text) */
+#filter-prefix-badge {
+  background-color: transparent;
+  color: #2d2d2d;
+  border: none;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 8px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  cursor: default;
+}
+
+#filter-prefix-badge:hover {
+  background-color: transparent;
 }
 
 /* Responsive Design */
@@ -301,9 +316,54 @@ footer p {
     width: 40px;
     height: 40px;
   }
+}
 
-  footer {
-    font-size: 14px;
-    padding: 16px;
-  }
+/* Contact Link */
+.contact-link {
+  color: #d4a017;
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+}
+
+/* Contact Form */
+.contact-form {
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form label {
+  color: #d4a017;
+  font-weight: 500;
+}
+
+/* WhatsApp Button */
+.btn-whatsapp {
+  background-color: #25d366;
+  color: white;
+  font-weight: bold;
+  border-radius: 25px;
+  padding: 8px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1ebe57;
+  color: white;
+}
+
+/* === Footer Selalu di Bawah === */
+footer {
+  background-color: #2e7d32;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 15px;
+  margin-top: auto;
+  width: 100%;
 }
