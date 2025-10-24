@@ -122,7 +122,7 @@ header img {
   color: #2d2d2d;
   margin: 0;
   padding-bottom: 10px;
-  border-bottom: 3px solid #347b1b;
+  border-bottom: 3px solid #333;
   display: inline-block;
 }
 
@@ -182,7 +182,7 @@ header img {
 }
 
 .card.product-card .card-title {
-  color: #2e7d32;
+  color: black;
   font-weight: 600;
   font-size: 16px;
   margin-bottom: 8px;
@@ -196,7 +196,7 @@ header img {
 .card.product-card .card-text {
   font-size: 18px;
   font-weight: 700;
-  color: #2e7d32;
+  color: black;
   margin-bottom: 8px;
 }
 
