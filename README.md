@@ -1,147 +1,115 @@
-# KuliNastra - Sistem Halaman Produk
+# Fitur Filter
 
-Sistem halaman produk untuk UMKM KuliNastra yang dibangun menggunakan HTML, CSS, dan JavaScript murni tanpa framework.
+Website KuliNastra dilengkapi dengan sistem filter yang canggih untuk membantu pengguna menemukan produk yang sesuai dengan preferensi mereka. Fitur filter ini terintegrasi di halaman **Produk** (`view/product.html`) dan menggunakan JavaScript untuk memberikan pengalaman pencarian yang dinamis dan responsif.
 
-## Fitur
+## 🎯 **Jenis Filter yang Tersedia**
 
-- **Halaman Produk Utama**: Menampilkan semua produk dari file `data.json`
-- **Halaman Detail Produk**: Menampilkan detail produk berdasarkan ID dari URL parameter
-- **Navigasi Dinamis**: Klik produk untuk melihat detail dengan URL `product-detail.html?id=nama-produk`
-- **Responsive Design**: Tampilan yang responsif untuk berbagai ukuran layar
-- **Loading States**: Animasi loading saat data sedang dimuat
-- **Styling Modern**: Desain yang menarik dengan efek hover dan transisi
+### 1. **Filter Kategori Makanan**
+- **Manis** - Produk dengan rasa manis
+- **Gurih** - Produk dengan rasa gurih/savory
+- **Nabati** - Produk berbahan dasar tumbuhan
+- **Hewani** - Produk berbahan dasar hewani
+- **Jajan** - Produk kategori jajanan/camilan
+- **Makanan Berat** - Produk kategori makanan utama
 
-## Struktur File
+### 2. **Filter Harga**
+- **Harga Minimum** - Input untuk menentukan harga terendah
+- **Harga Maksimum** - Input untuk menentukan harga tertinggi
+- **Range Harga** - Mendukung pencarian dalam rentang harga tertentu
 
-```
-KULINASTRA/
-├── data.json                    # Data produk dalam format JSON
-├── index.html                   # Halaman utama/demo
-├── view/
-│   ├──  product.html             # Halaman daftar produk
-│   └── product-detail.html      # Halaman detail produk
-├── public/
-│   ├── css/
-│   │   └── product.css          # Styling untuk halaman produk
-│   ├── js/
-│   │   └── products.js          # JavaScript untuk logika produk
-│   └── assets/
-│       └── images/
-│           └── products/        # Gambar produk
-└── README.md                   # Dokumentasi ini
-```
+### 3. **Filter Rating**
+- **Rating 4+** - Menampilkan produk dengan rating 4 bintang ke atas
+- **Sistem Bintang** - Visualisasi rating menggunakan emoji bintang (⭐)
 
-## Cara Menggunakan
+## 🔧 **Cara Kerja Sistem Filter**
 
-### 1. Menjalankan Website
+### **File-file yang Terlibat:**
+- `public/js/filter.js` - Logika utama sistem filter
+- `public/js/products.js` - Loading data produk dari `data.json`
+- `view/product.html` - Interface filter dan tampilan produk
+- `public/css/product.css` - Styling untuk tampilan filter
 
-1. Buka file `index.html` di browser untuk melihat halaman utama
-2. Klik tombol "Lihat Produk Kami" untuk masuk ke halaman produk
-3. Atau langsung buka `view/product.html` untuk melihat daftar produk
+### **Alur Kerja Filter:**
 
-### 2. Navigasi Produk
+1. **Inisialisasi** (`initializeFilters()`)
+   - Event listener untuk checkbox kategori
+   - Event listener untuk input harga
+   - Event listener untuk checkbox rating
 
-- **Halaman Produk**: Buka `view/product.html` untuk melihat semua produk
-- **Detail Produk**: Klik pada kartu produk untuk melihat detail
-- **URL Detail**: Format URL detail produk: `product-detail.html?id=klepon`
+2. **Penerapan Filter** (`applyFilters()`)
+   - Mengumpulkan semua kriteria filter yang dipilih
+   - Memfilter array produk berdasarkan kriteria
+   - Menampilkan hasil yang sesuai
 
-### 3. Menambah/Mengubah Produk
+3. **Tampilan Hasil** (`displayFilteredProducts()`)
+   - Render produk yang sudah difilter
+   - Menampilkan pesan jika tidak ada hasil
 
-Edit file `data.json` untuk menambah atau mengubah data produk:
+4. **Badge Filter** (`updateFilterBadges()`)
+   - Menampilkan filter aktif dalam bentuk badge
+   - Memungkinkan penghapusan filter individual
+   - Breadcrumb navigation untuk filter
 
-```json
-{
-  "products": [
-    {
-      "id": "nama-produk",
-      "name": "Nama Produk",
-      "price": 10000,
-      "image": "path/to/image.jpg",
-      "description": "Deskripsi produk...",
-      "categories": ["kategori1", "kategori2"],
-      "rating": 5,
-      "stock": "Tersedia",
-      "comments": [
-        {
-          "id": 1,
-          "username": "Nama User",
-          "rating": 5,
-          "text": "Komentar user...",
-          "date": "2024-01-15"
-        }
-      ]
-    }
-  ]
-}
-```
+## 🎨 **Fitur UI/UX Filter**
 
-### 4. Menambah Gambar Produk
+### **Sidebar Filter**
+- **Toggle Sidebar** - Bisa dibuka/ditutup untuk menghemat ruang
+- **Auto-close** - Sidebar otomatis tertutup setelah memilih filter
+- **Responsive Design** - Menyesuaikan dengan ukuran layar
 
-1. Simpan gambar produk di folder `public/assets/images/products/`
-2. Update path gambar di `data.json`
+### **Filter Badges**
+- **Visual Feedback** - Menampilkan filter aktif dalam bentuk badge
+- **Individual Removal** - Setiap badge bisa dihapus dengan tombol ✕
+- **Breadcrumb Style** - Navigasi filter dengan ikon dan panah
 
-## Struktur Data JSON
+### **Real-time Filtering**
+- **Instant Results** - Hasil filter langsung muncul saat input berubah
+- **No Page Reload** - Semua filter bekerja tanpa reload halaman
+- **Smooth Animation** - Transisi yang halus saat filter diterapkan
 
-Setiap produk memiliki struktur berikut:
+## 📱 **Responsivitas Filter**
 
-- `id`: ID unik produk (untuk URL parameter)
-- `name`: Nama produk
-- `price`: Harga produk (dalam Rupiah)
-- `image`: Path ke gambar produk
-- `description`: Deskripsi lengkap produk
-- `categories`: Array kategori produk
-- `rating`: Rating produk (1-5)
-- `stock`: Status stok produk
-- `comments`: Array komentar dari user
+### **Desktop (≥768px)**
+- Sidebar filter tetap terlihat di sisi kiri
+- Grid produk 3 kolom
+- Badge filter horizontal
 
-## Kategori Produk
+### **Mobile (<768px)**
+- Sidebar filter bisa disembunyikan
+- Grid produk 2 kolom atau 1 kolom
+- Badge filter responsif
 
-Sistem mendukung kategori berikut:
+## 🔍 **Contoh Penggunaan Filter**
 
-- `manis`: Makanan manis
-- `gurih`: Makanan gurih
-- `nabati`: Bahan nabati
-- `hewani`: Bahan hewani
-- `jajan`: Jajanan tradisional
-- `makanan-berat`: Makanan berat
+### **Skenario 1: Mencari Jajanan Manis**
+1. Pilih checkbox "Manis"
+2. Pilih checkbox "Jajan"
+3. Hasil: Produk seperti Klepon, Onde-onde, Apem
 
-## Teknologi yang Digunakan
+### **Skenario 2: Mencari Produk Murah**
+1. Set harga maksimum Rp 10.000
+2. Pilih checkbox "Rating 4+"
+3. Hasil: Produk berkualitas dengan harga terjangkau
 
-- **HTML5**: Struktur halaman web
-- **CSS3**: Styling dan animasi
-- **JavaScript (ES6+)**: Logika aplikasi
-- **Bootstrap 5**: Framework CSS untuk responsive design
-- **Fetch API**: Mengambil data dari JSON file
+### **Skenario 3: Mencari Makanan Nabati**
+1. Pilih checkbox "Nabati"
+2. Set harga minimum Rp 5.000
+3. Hasil: Produk berbahan tumbuhan dengan harga sesuai
 
-## Browser Support
+## 🛠 **Teknologi yang Digunakan**
 
-Sistem ini kompatibel dengan browser modern yang mendukung:
+- **Vanilla JavaScript** - Tanpa framework, performa optimal
+- **Bootstrap 5** - Styling dan komponen UI
+- **CSS Grid/Flexbox** - Layout responsif
+- **JSON Data** - Data produk dari `data.json`
+- **Event Delegation** - Efisien handling event
 
-- ES6+ JavaScript
-- Fetch API
-- CSS Grid dan Flexbox
-- CSS Transitions dan Animations
+## 🎯 **Keunggulan Sistem Filter**
 
-## Pengembangan Lebih Lanjut
+1. **Multi-criteria Filtering** - Bisa menggabungkan beberapa filter sekaligus
+2. **User-friendly** - Interface yang intuitif dan mudah digunakan
+3. **Performance** - Filter bekerja dengan cepat tanpa lag
+4. **Accessibility** - Mendukung keyboard navigation dan screen reader
+5. **Extensible** - Mudah ditambahkan filter baru di masa depan
 
-Untuk pengembangan lebih lanjut, Anda dapat:
-
-1. **Menambah Fitur Filter**: Implementasi filter berdasarkan kategori dan harga
-2. **Sistem Komentar**: Backend untuk menyimpan komentar user
-3. **Sistem Rating**: Backend untuk menyimpan rating dari user
-4. **Keranjang Belanja**: Fitur untuk menambah produk ke keranjang
-5. **Integrasi WhatsApp**: Link langsung ke WhatsApp untuk pemesanan
-6. **SEO Optimization**: Meta tags dan structured data
-
-## Demo
-
-Buka `index.html` untuk melihat demo sistem atau langsung akses:
-
-- Halaman Produk: `view/product.html`
-- Detail Klepon: `view/product-detail.html?id=klepon`
-- Detail Lemper: `view/product-detail.html?id=lemper`
-
-## Kontak
-
-UMKM KuliNastra
-Jl. Melati Indah No. 23, Kota Nusantara, Jawa Tengah
+Sistem filter KuliNastra memberikan pengalaman pencarian yang komprehensif dan user-friendly, memungkinkan pelanggan menemukan produk yang tepat sesuai dengan kebutuhan dan preferensi mereka.
