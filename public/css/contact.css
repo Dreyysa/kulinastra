@@ -1,5 +1,16 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Body */
 body {
-  background-color: #fefbe7;
+  background-color: #FFFBE6;
+  color: #333;
+  line-height: 1.6;
 }
 
 .filter-box {
@@ -21,9 +32,10 @@ body {
 
 /* Footer */
 footer {
-  background: #2e7d32;
+  background: #347b1b;
   color: white;
   text-align: center;
-  padding: 15px 10px;
-  font-size: 20px;
+  padding: 20px 15px;
+  font-size: 14px;
+  line-height: 1.6;
 }
