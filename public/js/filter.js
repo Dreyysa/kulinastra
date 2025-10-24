@@ -111,13 +111,11 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
   badgeContainer.style.display = 'flex';
   badgeContainer.innerHTML = '';
 
-  // === Prefix: icon dan teks Filters ===
-  const prefix = document.createElement('div');
-  prefix.className = 'filter-breadcrumb';
-  prefix.innerHTML = `
-    <i class="bi bi-funnel-fill"></i>
-    <span class="filter-label">Filters</span>
-  `;
+  // === Prefix: Filters text ===
+  const prefix = document.createElement('span');
+  prefix.className = 'filter-label';
+  prefix.textContent = 'Filters';
+  prefix.style.cursor = 'pointer';
   prefix.addEventListener('click', toggleFilterSidebar);
   badgeContainer.appendChild(prefix);
 
@@ -181,7 +179,7 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
   }
 }
 
-// === Tampilkan produk ===
+// === Tampilkan produk dengan onclick handler ===
 function displayFilteredProducts(products) {
   const container = document.getElementById('products-container');
   if (!container) return;
@@ -197,13 +195,26 @@ function displayFilteredProducts(products) {
     const col = document.createElement('div');
     col.className = 'col-md-4 col-sm-6 mb-4';
     const stars = '⭐'.repeat(p.rating);
+    const categories = p.categories.map(cat => {
+      const categoryNames = {
+        'manis': 'Manis',
+        'gurih': 'Gurih',
+        'nabati': 'Nabati',
+        'hewani': 'Hewani',
+        'jajan': 'Jajan',
+        'makanan-berat': 'Makanan Berat'
+      };
+      return categoryNames[cat] || cat;
+    }).join(', ');
+    
     col.innerHTML = `
-      <div class="card shadow-sm product-card">
+      <div class="card shadow-sm product-card" onclick="goToProductDetail('${p.id}')">
         <img src="${p.image}" class="card-img-top" alt="${p.name}">
         <div class="card-body">
           <h6 class="card-title">${p.name}</h6>
           <p class="card-text text-success">Rp. ${p.price.toLocaleString('id-ID')}</p>
           <p class="rating">${stars}</p>
+          <small class="text-muted">${categories}</small>
         </div>
       </div>
     `;
@@ -211,13 +222,26 @@ function displayFilteredProducts(products) {
   });
 }
 
-// === Load produk (contoh placeholder) ===
+// === Navigate to product detail ===
+function goToProductDetail(productId) {
+  window.location.href = `product-detail.html?id=${productId}`;
+}
+
+// === Load produk dan set ke allProducts ===
 async function loadAndStoreProducts() {
   if (typeof loadProductsData === 'function') {
     allProducts = await loadProductsData();
+    // Tampilkan semua produk saat pertama kali load
+    displayFilteredProducts(allProducts);
   }
   initializeFilters();
 }
+
+// Expose function untuk diakses dari products.js
+window.setAllProducts = function(products) {
+  allProducts = products;
+  displayFilteredProducts(products);
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   loadAndStoreProducts();
