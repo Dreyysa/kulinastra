@@ -187,6 +187,15 @@ footer {
   border-radius: 8px;
 }
 
+/* Footer */
+footer {
+  background: #2e7d32;
+  color: white;
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 20px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .container {
