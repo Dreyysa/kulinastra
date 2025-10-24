@@ -71,11 +71,12 @@ body {
 }
 
 .about-container {
-  width: 90%; /* lebar kontainer hampir full layar */
-  max-width: 1200px; /* biar nggak terlalu lebar di layar gede */
-  margin-left: 143px;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
   text-align: center;
 }
+
 
 .about-container h2 {
   font-size: 32px;
