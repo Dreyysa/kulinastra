@@ -11,6 +11,14 @@ body {
   background-color: #fffbe6;
   color: #333;
   line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content wrapper */
+.container {
+  flex: 1;
 }
 
 /* Product Page Title */
@@ -138,12 +146,6 @@ body {
   100% {
     transform: rotate(360deg);
   }
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 /* Filter Badge Container */
@@ -201,21 +203,6 @@ body {
   background-color: transparent;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .filter-box {
-    margin-bottom: 20px;
-  }
-
-  .product-card {
-    margin-bottom: 20px;
-  }
-
-  .product-page-title h2 {
-    font-size: 22px;
-  }
-}
-
 /* Contact Link */
 .contact-link {
   color: #d4a017;
@@ -263,5 +250,41 @@ footer {
   padding: 20px 15px;
   font-size: 14px;
   line-height: 1.6;
+  margin-top: auto;
   width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .filter-box {
+    margin-bottom: 20px;
+  }
+
+  .product-card {
+    margin-bottom: 20px;
+  }
+
+  .product-page-title h2 {
+    font-size: 22px;
+  }
+  
+  footer {
+    font-size: 12px;
+    padding: 15px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-page-title {
+    padding: 30px 0 20px 0;
+  }
+  
+  .product-page-title h2 {
+    font-size: 20px;
+  }
+  
+  footer {
+    font-size: 11px;
+    padding: 12px 8px;
+  }
 }
