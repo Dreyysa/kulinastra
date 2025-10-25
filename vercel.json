@@ -9,7 +9,7 @@
     { "src": "/css/(.*)", "dest": "/public/css/$1" },
     { "src": "/js/(.*)", "dest": "/public/js/$1" },
     { "src": "/assets/(.*)", "dest": "/public/assets/$1" },
-    { "src": "/data.json", "dest": "/data.json" },
+    { "src": "app/data.json", "dest": "app/data.json" },
     { "src": "/(.*)", "dest": "/$1" }
   ]
 }
