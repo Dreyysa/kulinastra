@@ -13,7 +13,7 @@ async function loadProductsData() {
     }
 
     // Try multiple possible paths for the JSON file
-    const possiblePaths = ["data.json", "../data.json", "./data.json"];
+    const possiblePaths = ["/data.json", "data.json", "../data.json", "./data.json"];
 
     let response;
     let lastError;
@@ -22,9 +22,12 @@ async function loadProductsData() {
       try {
         console.log(`Trying to fetch from: ${path}`);
         response = await fetch(path);
+        console.log(`Response status for ${path}:`, response.status);
         if (response.ok) {
           console.log(`Successfully fetched from: ${path}`);
           break;
+        } else {
+          console.log(`Failed to fetch from ${path}: HTTP ${response.status}`);
         }
       } catch (error) {
         console.log(`Failed to fetch from ${path}:`, error.message);
