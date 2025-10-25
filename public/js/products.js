@@ -5,7 +5,7 @@ let productsData = [];
 async function loadProductsData() {
   try {
     // Try multiple possible paths for the JSON file
-    const possiblePaths = ["/data.json", "data.json", "../data.json", "./data.json"];
+    const possiblePaths = ["app/data.json", "../app/data.json", "./app/data.json"];
 
     let response;
     let lastError;
