@@ -1,19 +1,11 @@
-// Global variable to store products data
+// Global variable untuk menyimpan data
 let productsData = [];
 
-// Load products data from JSON file
+// Load data product dari JSON
 async function loadProductsData() {
   try {
-    // Check if we're running on file:// protocol
-    const isFileProtocol = window.location.protocol === 'file:';
-    
-    if (isFileProtocol) {
-      console.log("Running on file:// protocol, using fallback data");
-      return getFallbackData();
-    }
-
     // Try multiple possible paths for the JSON file
-    const possiblePaths = ["data.json", "../data.json", "./data.json"];
+    const possiblePaths = ["/data.json", "data.json", "../data.json", "./data.json"];
 
     let response;
     let lastError;
@@ -22,9 +14,12 @@ async function loadProductsData() {
       try {
         console.log(`Trying to fetch from: ${path}`);
         response = await fetch(path);
+        console.log(`Response status for ${path}:`, response.status);
         if (response.ok) {
           console.log(`Successfully fetched from: ${path}`);
           break;
+        } else {
+          console.log(`Failed to fetch from ${path}: HTTP ${response.status}`);
         }
       } catch (error) {
         console.log(`Failed to fetch from ${path}:`, error.message);
@@ -49,191 +44,11 @@ async function loadProductsData() {
     return productsData;
   } catch (error) {
     console.error("Error loading products data:", error);
-    console.log("Falling back to static data");
-    return getFallbackData();
+    console.log("No fallback data available");
+    return [];
   }
 }
 
-// Fallback data for file:// protocol
-function getFallbackData() {
-  return [
-    {
-      "id": "Gethuk",
-      "name": "Gethuk",
-      "price": 10000,
-      "image": "../public/assets/images/products/gethukLindri.png",
-      "description": "Klepon khas KuliNastra adalah jajanan tradisional Jawa yang terbuat dari tepung beras ketan dengan isian gula merah yang meleleh. Dibalut dengan parutan kelapa yang segar, memberikan cita rasa manis yang khas dengan tekstur yang kenyal dan lembut. Sempurna sebagai camilan sore atau teman minum teh.",
-      "categories": ["manis", "nabati", "jajan"],
-      "rating": 5,
-      "stock": "Tersedia",
-      "comments": [
-        {
-          "id": 1,
-          "username": "Sari",
-          "rating": 5,
-          "text": "Kleponnya enak banget! Teksturnya pas, manisnya tidak berlebihan. Kelapa parutnya juga segar.",
-          "date": "2024-01-15"
-        },
-        {
-          "id": 2,
-          "username": "Budi",
-          "rating": 5,
-          "text": "Rasanya autentik seperti buatan nenek dulu. Recommended banget!",
-          "date": "2024-01-10"
-        }
-      ]
-    },
-    {
-      "id": "lemper",
-      "name": "Lemper",
-      "price": 5000,
-      "image": "../public/assets/images/products/lemper.png",
-      "description": "Lemper KuliNastra dibuat dengan nasi ketan yang pulen dan dibungkus daun pisang, berisi abon sapi yang gurih dan lezat. Teksturnya lembut dengan cita rasa yang seimbang antara manis dari ketan dan gurih dari abon. Cocok sebagai bekal atau camilan yang mengenyangkan.",
-      "categories": ["gurih", "hewani", "jajan"],
-      "rating": 5,
-      "stock": "Tersedia",
-      "comments": [
-        {
-          "id": 1,
-          "username": "Rina",
-          "rating": 5,
-          "text": "Abonnya banyak dan enak! Lempernya juga pulen banget.",
-          "date": "2024-01-12"
-        },
-        {
-          "id": 2,
-          "username": "Ahmad",
-          "rating": 4,
-          "text": "Rasanya enak, cuma agak kering sedikit. Tapi overall oke.",
-          "date": "2024-01-08"
-        }
-      ]
-    },
-    {
-      "id": "kue-talam",
-      "name": "Kue Talam",
-      "price": 3000,
-      "image": "../public/assets/images/products/kueTalam.png",
-      "description": "Kue talam KuliNastra adalah kue tradisional yang terbuat dari tepung beras dengan dua lapisan - lapisan bawah berwarna putih dan lapisan atas berwarna hijau dari daun pandan. Teksturnya lembut dan kenyal dengan rasa manis yang pas. Sempurna sebagai hidangan penutup.",
-      "categories": ["manis", "nabati", "jajan"],
-      "rating": 4,
-      "stock": "Tersedia",
-      "comments": [
-        {
-          "id": 1,
-          "username": "Maya",
-          "rating": 4,
-          "text": "Teksturnya lembut banget, rasanya enak. Cocok buat yang suka kue tradisional.",
-          "date": "2024-01-14"
-        }
-      ]
-    },
-    {
-      "id": "onde-onde",
-      "name": "Onde-onde",
-      "price": 8000,
-      "image": "../public/assets/images/products/onde-onde.png",
-      "description": "Onde-onde KuliNastra adalah jajanan tradisional yang terbuat dari tepung ketan dengan isian kacang hijau yang manis, kemudian dibalut dengan wijen dan digoreng hingga keemasan. Teksturnya renyah di luar dan lembut di dalam dengan rasa yang menggugah selera.",
-      "categories": ["manis", "nabati", "jajan"],
-      "rating": 5,
-      "stock": "Tersedia",
-      "comments": [
-        {
-          "id": 1,
-          "username": "Dewi",
-          "rating": 5,
-          "text": "Wijennya banyak banget dan renyah! Isian kacang hijaunya juga enak.",
-          "date": "2024-01-11"
-        },
-        {
-          "id": 2,
-          "username": "Hendra",
-          "rating": 5,
-          "text": "Enak banget! Teksturnya perfect - renyah di luar, lembut di dalam.",
-          "date": "2024-01-09"
-        }
-      ]
-    },
-    {
-      "id": "lumpia",
-      "name": "Lumpia Ayam",
-      "price": 20000,
-      "image": "../public/assets/images/products/lumpia.jpg",
-      "description": "Lumpia ayam khas KuliNastra dibuat dari kulit lumpia yang tipis dan renyah, berisi isian ayam cincang yang dibumbui dengan rempah pilihan. Teksturnya gurih, dengan cita rasa yang seimbang antara renyah di luar dan lembut di dalam. Cocok disajikan sebagai camilan sore, hidangan pendamping, atau teman minum teh bersama keluarga.",
-      "categories": ["gurih", "hewani", "jajan"],
-      "rating": 5,
-      "stock": "Tersedia",
-      "comments": [
-        {
-          "id": 1,
-          "username": "Anton",
-          "rating": 5,
-          "text": "enak banget",
-          "date": "2024-01-13"
-        },
-        {
-          "id": 2,
-          "username": "Lisa",
-          "rating": 5,
-          "text": "Isian ayamnya banyak dan bumbunya pas. Lumpianya juga renyah.",
-          "date": "2024-01-07"
-        }
-      ]
-    },
-    {
-      "id": "apem",
-      "name": "Apem",
-      "price": 3000,
-      "image": "../public/assets/images/products/apem.png",
-      "description": "Apem tradisional khas KuliNastra dibuat dari adonan tepung beras yang difermentasi, menghasilkan tekstur lembut dan aroma harum khas kelapa. Rasanya manis legit dengan sentuhan gurih dari santan, menghadirkan cita rasa klasik yang autentik. Kue ini cocok disajikan sebagai camilan sore, hidangan penutup, atau teman minum teh dan kopi bersama keluarga.",
-      "categories": ["manis", "nabati", "jajan"],
-      "rating": 5,
-      "stock": "Tersedia",
-      "comments": [
-        {
-          "id": 1,
-          "username": "Sukma",
-          "rating": 5,
-          "text": "gila enak banget",
-          "date": "2024-01-13"
-        },
-        {
-          "id": 2,
-          "username": "Dika",
-          "rating": 5,
-          "text": "apemnya enak.",
-          "date": "2024-01-07"
-        }
-      ]
-    },
-    {
-      "id": "arem-arem",
-      "name": "Arem-arem",
-      "price": 3000,
-      "image": "../public/assets/images/products/arem.png",
-      "description": "Arem-arem tradisional khas KuliNastra dibuat dari nasi pulen yang dibungkus daun pisang, berisi tumisan lauk seperti ayam, tempe, atau sayuran berbumbu gurih. Proses pengukusan membuatnya memiliki aroma harum daun pisang dan rasa yang lezat serta mengenyangkan. Hidangan ini cocok disajikan sebagai bekal perjalanan, menu sarapan, atau camilan tradisional yang hangat dan mengenyangkan.",
-      "categories": ["gurih", "hewani", "jajan"],
-      "rating": 4,
-      "stock": "Tersedia",
-      "comments": [
-        {
-          "id": 1,
-          "username": "Mulyono",
-          "rating": 5,
-          "text": "Sangat Recommended",
-          "date": "2024-01-13"
-        },
-        {
-          "id": 2,
-          "username": "Teddy",
-          "rating": 3,
-          "text": "arem-aremnya datang tidak sesuai ekspetasi.",
-          "date": "2024-01-07"
-        }
-      ]
-    }
-  ];
-}
 
 // Display all products on product.html page
 async function displayProducts() {
