@@ -95,7 +95,7 @@ function applyFilters() {
   updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus);
 }
 
-// === Update tampilan badge breadcrumb ===
+// === Update tampilan badge ===
 function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus) {
   const badgeContainer = document.getElementById('filter-badge-container');
   if (!badgeContainer) return;
@@ -111,11 +111,16 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
   badgeContainer.style.display = 'flex';
   badgeContainer.innerHTML = '';
 
-  // === Prefix: Filters text ===
+  // === Prefix: Filters text dengan ikon ===
   const prefix = document.createElement('span');
   prefix.className = 'filter-label';
-  prefix.textContent = 'Filters';
   prefix.style.cursor = 'pointer';
+  prefix.innerHTML = `
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="black" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px; vertical-align: middle;">
+      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+    </svg>
+    Filters
+  `;
   prefix.addEventListener('click', toggleFilterSidebar);
   badgeContainer.appendChild(prefix);
 
@@ -125,15 +130,15 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
   badgeContainer.appendChild(arrow);
 
   const categoryNames = {
-    'manis': 'Manis',
-    'gurih': 'Gurih',
-    'nabati': 'Nabati',
-    'hewani': 'Hewani',
-    'jajan': 'Jajan',
+    manis: 'Manis',
+    gurih: 'Gurih',
+    nabati: 'Nabati',
+    hewani: 'Hewani',
+    jajan: 'Jajan',
     'makanan-berat': 'Makanan Berat'
   };
 
-  // === Badge bisa dihapus (close)
+  // === Badge yang bisa dihapus
   const createClosableBadge = (text, onRemove) => {
     const item = document.createElement('span');
     item.className = 'filter-breadcrumb-item';
@@ -179,15 +184,14 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
   }
 }
 
-// === Tampilkan produk dengan onclick handler ===
+// === Tampilkan produk ===
 function displayFilteredProducts(products) {
   const container = document.getElementById('products-container');
   if (!container) return;
   container.innerHTML = '';
 
   if (products.length === 0) {
-    container.innerHTML =
-      '<div class="col-12 text-center text-muted">Tidak ada produk yang sesuai.</div>';
+    container.innerHTML = '<div class="col-12 text-center text-muted">Tidak ada produk yang sesuai.</div>';
     return;
   }
 
@@ -195,18 +199,7 @@ function displayFilteredProducts(products) {
     const col = document.createElement('div');
     col.className = 'col-md-4 col-sm-6 mb-4';
     const stars = '⭐'.repeat(p.rating);
-    const categories = p.categories.map(cat => {
-      const categoryNames = {
-        'manis': 'Manis',
-        'gurih': 'Gurih',
-        'nabati': 'Nabati',
-        'hewani': 'Hewani',
-        'jajan': 'Jajan',
-        'makanan-berat': 'Makanan Berat'
-      };
-      return categoryNames[cat] || cat;
-    }).join(', ');
-    
+    const categories = p.categories.join(', ');
     col.innerHTML = `
       <div class="card shadow-sm product-card" onclick="goToProductDetail('${p.id}')">
         <img src="${p.image}" class="card-img-top" alt="${p.name}">
@@ -222,22 +215,21 @@ function displayFilteredProducts(products) {
   });
 }
 
-// === Navigate to product detail ===
+// === Navigasi ke detail produk ===
 function goToProductDetail(productId) {
   window.location.href = `product-detail.html?id=${productId}`;
 }
 
-// === Load produk dan set ke allProducts ===
+// === Load produk dan set allProducts ===
 async function loadAndStoreProducts() {
   if (typeof loadProductsData === 'function') {
     allProducts = await loadProductsData();
-    // Tampilkan semua produk saat pertama kali load
     displayFilteredProducts(allProducts);
   }
   initializeFilters();
 }
 
-// Expose function untuk diakses dari products.js
+// Ekspor ke global
 window.setAllProducts = function(products) {
   allProducts = products;
   displayFilteredProducts(products);
