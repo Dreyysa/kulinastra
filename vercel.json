@@ -3,7 +3,7 @@
     { "src": "index.html", "use": "@vercel/static" },
     { "src": "public/**", "use": "@vercel/static" },
     { "src": "view/**", "use": "@vercel/static" },
-    { "src": "data.json", "use": "@vercel/static" }
+    { "src": "app/data.json", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/css/(.*)", "dest": "/public/css/$1" },
