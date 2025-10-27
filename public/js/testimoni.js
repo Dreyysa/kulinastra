@@ -1,19 +1,11 @@
-// Global variable to store products data
+// Global variable untuk menyimpan data
 let productsData = [];
 
-// Load products data from JSON file
+// Load data product dari JSON
 async function loadProductsData() {
   try {
-    // Check if we're running on file:// protocol
-    const isFileProtocol = window.location.protocol === 'file:';
-    
-    if (isFileProtocol) {
-      console.log("Running on file:// protocol, using fallback data");
-      return getFallbackData();
-    }
-
     // Try multiple possible paths for the JSON file
-    const possiblePaths = ["/data.json", "data.json", "../data.json", "./data.json"];
+    const possiblePaths = ["app/data.json", "../app/data.json", "./app/data.json"];
 
     let response;
     let lastError;
