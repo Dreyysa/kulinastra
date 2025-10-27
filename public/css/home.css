@@ -16,7 +16,7 @@ body {
 /* Hero Section */
 .hero {
   position: relative;
-  background: url("../assets/images/products/bg.png") center/cover no-repeat;
+  background: url("../assets/images/backgrounds/bg.png") center/cover no-repeat;
   color: white;
   text-align: left;
   padding: 60px 20px;
@@ -139,7 +139,7 @@ body {
 
 /* Products Section */
 .products-section {
-  background: url("../assets/images/logo/wave.png") no-repeat center center;
+  background: url("../assets/images/backgrounds/wave.png") no-repeat center center;
   background-size: cover;
   padding: 60px 20px;
 }
