@@ -19,7 +19,7 @@ body {
    ======================================== */
 .hero {
   position: relative;
-  background: url("../../public/assets/images/products/bg.png") center/cover no-repeat;
+  background: url("../../public/assets/images/backgrounds/bg.png") center/cover no-repeat;
   color: white;
   text-align: center;
   padding: 120px 20px;
