@@ -72,7 +72,7 @@ function toggleFilterSidebar() {
   }
 }
 
-// === Terapkan filter ===
+// Terapkan filter
 function applyFilters() {
   const selectedCategories = [];
   document.querySelectorAll('.filter-category:checked').forEach(cb => {
