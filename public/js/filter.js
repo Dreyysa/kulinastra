@@ -87,6 +87,7 @@ function updateFilterBadges(
   const badgeContainer = document.getElementById("filter-badge-container");
   if (!badgeContainer) return;
 
+  // Jika tidak memilih filter apapun, sembunyikan badge
   const hasActive =
     selectedCategories.length > 0 ||
     minPrice > 0 ||
@@ -103,7 +104,6 @@ function updateFilterBadges(
   // Filter text dengan icon
   const prefix = document.createElement("span");
   prefix.className = "filter-label";
-  // prefix.style.cursor = "pointer";
   prefix.innerHTML = `
     <img src="../public/assets/images/icons/filter-icon.svg" alt="Filter Icon" style="width:20px; height:20px; margin-bottom:4px;">
     </img>
@@ -172,7 +172,7 @@ function updateFilterBadges(
   }
 }
 
-// === Tampilkan produk ===
+// Tampilkan produk
 function displayFilteredProducts(products) {
   const container = document.getElementById("products-container");
   if (!container) return;
@@ -213,7 +213,7 @@ function goToProductDetail(productId) {
   window.location.href = `product-detail.html?id=${productId}`;
 }
 
-//Load produk dan set allProducts
+// Load produk dan set allProducts
 async function loadAndStoreProducts() {
   if (typeof loadProductsData === "function") {
     allProducts = await loadProductsData();
