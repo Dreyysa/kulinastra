@@ -57,7 +57,12 @@ async function displayProducts() {
   });
 }
 
-// Get product by ID from URL parameter
+// Pindah ke halaman detail produk di section Produk Terkait
+function goToProductDetail(productId) {
+  window.location.href = `product-detail.html?id=${productId}`;
+}
+
+// Get product by ID from URL
 function getProductIdFromUrl() {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get("id");
@@ -67,7 +72,7 @@ function getProductIdFromUrl() {
 async function displayProductDetail() {
   const productId = getProductIdFromUrl();
 
-  if (!productId) {
+  if (!productId) { // Invalid ID
     document.getElementById("product-detail").innerHTML =
       '<div class="text-center"><h2>Produk tidak ditemukan</h2><p>ID produk tidak valid.</p></div>';
     return;
@@ -77,11 +82,8 @@ async function displayProductDetail() {
   const productTitleElement = document.getElementById("product-title");
   const productPriceElement = document.getElementById("product-price");
   const productStockElement = document.getElementById("product-stock");
-  const productCategoriesElement =
-    document.getElementById("product-categories");
-  const productDescriptionElement = document.getElementById(
-    "product-description"
-  );
+  const productCategoriesElement = document.getElementById("product-categories");
+  const productDescriptionElement = document.getElementById("product-description");
 
   if (productTitleElement) productTitleElement.textContent = "Loading...";
   if (productPriceElement) productPriceElement.textContent = "Loading...";
@@ -240,15 +242,53 @@ function displayComments(originalComments) {
   }
 }
 
-// Fungsi untuk hide desc dan show desc
+// Display related products (other products excluding current one)
+async function displayRelatedProducts(currentProductId) {
+  const products = await loadProductsData();
+  const relatedProducts = products
+    .filter((p) => p.id !== currentProductId)
+    .slice(0, 4);
+
+  const relatedProductsContainer = document.querySelector(".products-grid");
+  if (!relatedProductsContainer) return;
+
+  relatedProductsContainer.innerHTML = "";
+
+  relatedProducts.forEach((product) => {
+    const productCard = document.createElement("div");
+    productCard.className = "product-card";
+    productCard.onclick = () => goToProductDetail(product.id);
+
+    const stars = "⭐".repeat(product.rating);
+
+    productCard.innerHTML = `
+            <img src="${product.image}" alt="${
+      product.name
+    }" style="width: 100%; height: 150px; object-fit: cover;">
+            <div class="product-info-card">
+                <h3>${product.name}</h3>
+                <div class="product-price">Rp. ${product.price.toLocaleString(
+                  "id-ID"
+                )}</div>
+                <div class="rating">
+                    <span class="stars">${stars}</span>
+                </div>
+            </div>
+        `;
+
+    relatedProductsContainer.appendChild(productCard);
+  });
+}
+
+// Tab functionality
 function showTab(tabName) {
-  // Hide desc
+  // Hide all tab contents
   const tabContents = document.querySelectorAll(".tab-content");
   tabContents.forEach((content) => {
     content.classList.remove("active");
   });
 
-  // Remove active class
+  // Remove active class from all tabs
   const tabs = document.querySelectorAll(".tab");
   tabs.forEach((tab) => {
     tab.classList.remove("active");
