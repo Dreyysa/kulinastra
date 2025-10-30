@@ -11,7 +11,6 @@ body {
   line-height: 1.6;
 }
 
-/* HERO SECTION */
 .hero {
   position: relative;
   background: url("../../public/assets/images/backgrounds/bg.png") center/cover no-repeat;
@@ -136,7 +135,6 @@ body {
   margin: 8px auto 0;
 }
 
-/* Services Grid */
 .services-grid {
   display: flex;
   justify-content: center;
@@ -165,7 +163,6 @@ body {
   color: #000;
 }
 
-/* Contact Info */
 .contact {
   margin-top: 40px;
 }
@@ -204,9 +201,6 @@ body {
   border-radius: 4px;
 }
 
-/* ========================================
-   FOOTER
-   ======================================== */
 footer {
   background: #347b1b;
   color: white;
@@ -216,9 +210,7 @@ footer {
   line-height: 1.6;
 }
 
-/* RESPONSIVE DESIGN */
 
-/* Mobile Small (< 480px) */
 @media (max-width: 480px) {
   .hero {
     padding: 80px 15px;
@@ -283,7 +275,6 @@ footer {
   }
 }
 
-/* Tablet (481px - 768px) */
 @media (min-width: 481px) and (max-width: 768px) {
   .hero {
     padding: 100px 20px;
@@ -311,7 +302,6 @@ footer {
   }
 }
 
-/* Desktop Small (769px - 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
   .hero {
     padding: 120px 40px;
@@ -358,7 +348,6 @@ footer {
   }
 }
 
-/* Desktop Large (> 1024px) */
 @media (min-width: 1025px) {
   .hero {
     padding: 140px 60px;

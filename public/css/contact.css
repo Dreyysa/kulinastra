@@ -6,7 +6,6 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* Body */
 body {
   background-color: #FFFBE6;
   color: #333;
@@ -106,17 +105,15 @@ textarea.form-control {
   min-height: 120px;
 }
 
-/* Button Container */
 .button-container {
   display: flex;
-  justify-content: space-between; /* kiri dan kanan seperti di gambar */
+  justify-content: space-between;
   align-items: center;
   margin-top: 25px;
   flex-wrap: wrap;
   width: 100%;
 }
 
-/* Buttons */
 .btn-submit {
   background: #3d7c2f;
   color: white;
@@ -166,7 +163,6 @@ textarea.form-control {
   font-size: 20px;
 }
 
-/* Footer */
 footer {
   background: #347b1b;
   color: white;
@@ -177,7 +173,6 @@ footer {
   margin-top: 60px;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .contact-row {
     grid-template-columns: 1fr;

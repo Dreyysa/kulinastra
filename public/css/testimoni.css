@@ -1,4 +1,3 @@
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +5,6 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* Body */
 body {
   background-color: #FFFBE6;
   color: #333;
@@ -46,7 +44,6 @@ body {
   border-radius: 2px;
 }
 
-/* Testimonials Grid */
 .testimonials-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -104,19 +101,18 @@ body {
 .user-avatar {
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, #9b8dc7 0%, #7b6baa 100%);
+  background: rgb(186, 186, 186);
   border-radius: 50%;
   position: relative;
   flex-shrink: 0;
 }
 
-.user-avatar::after {
-  content: "👤";
+.user-avatar i {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 24px;
+  font-size: 27px;
   filter: brightness(1.3);
 }
 

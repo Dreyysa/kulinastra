@@ -67,7 +67,7 @@ function createTestimonialCard(comment) {
     <h3>${title}</h3>
     <p>"${comment.text}"</p>
     <div class="user-info">
-      <div class="user-avatar"></div>
+      <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
       <div class="user-details">
         <div class="username">${comment.username}</div>
         <div class="location">${comment.productName}</div>

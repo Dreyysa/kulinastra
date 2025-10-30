@@ -1,9 +1,8 @@
-/* Navbar */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #347b1b; /* hijau */
+  background-color: #347b1b;
   color: #fff;
   padding: 15px 20px;
   position: sticky;
@@ -77,7 +76,6 @@ header img {
   margin: 0;
 }
 
-/* Tombol close (X) */
 .close-btn {
   position: absolute;
   top: 28px;
@@ -89,7 +87,6 @@ header img {
   transition: transform 0.2s ease;
 }
 
-/* Footer */
 footer {
   background: #347b1b;
   color: white;
@@ -99,7 +96,6 @@ footer {
   line-height: 1.6;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .logo {
     font-size: 28px;

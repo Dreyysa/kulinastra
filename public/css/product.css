@@ -1,4 +1,3 @@
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +5,6 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* Body */
 body {
   background-color: #fffbe6;
   color: #333;
@@ -16,12 +14,10 @@ body {
   flex-direction: column;
 }
 
-/* Main content wrapper */
 .container {
   flex: 1;
 }
 
-/* Product Page Title */
 .product-page-title {
   background-color: transparent;
   padding: 40px 0 30px 0;
@@ -147,7 +143,6 @@ body {
   }
 }
 
-/* Filter Badge Container */
 #filter-badge-container {
   margin-bottom: 20px;
   margin-top: 20px;
@@ -158,7 +153,6 @@ body {
   flex-wrap: wrap;
 }
 
-/* Filter Badge Styles */
 .filter-badge {
   display: inline-flex;
   align-items: center;
@@ -184,7 +178,6 @@ body {
   font-weight: 600;
 }
 
-/* Filter Prefix Badge (Filters text) */
 #filter-prefix-badge {
   background-color: transparent;
   color: #2d2d2d;
@@ -202,7 +195,7 @@ body {
   background-color: transparent;
 }
 
-/* Contact Link */
+/* Contact */
 .contact-link {
   color: #d4a017;
   text-decoration: none;
@@ -212,7 +205,6 @@ body {
   text-decoration: underline;
 }
 
-/* Contact Form */
 .contact-form {
   background: #f9f9f9;
   border-radius: 8px;
@@ -224,7 +216,6 @@ body {
   font-weight: 500;
 }
 
-/* WhatsApp Button */
 .btn-whatsapp {
   background-color: #25d366;
   color: white;
@@ -241,7 +232,6 @@ body {
   color: white;
 }
 
-/* === Footer === */
 footer {
   background: #347b1b;
   color: white;
@@ -253,7 +243,6 @@ footer {
   width: 100%;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .filter-box {
     margin-bottom: 20px;
