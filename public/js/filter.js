@@ -6,86 +6,68 @@ function initializeFilters() {
   createFilterBadgeContainer();
 
   // Checkbox kategori
-  const categoryCheckboxes = document.querySelectorAll('.filter-category');
-  categoryCheckboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
+  const categoryCheckboxes = document.querySelectorAll(".filter-category");
+  categoryCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
       applyFilters();
-      if (checkbox.checked) {
-        setTimeout(() => closeFilterSidebar(), 300);
-      }
     });
   });
 
   // Input harga
-  const minPriceInput = document.getElementById('min-price');
-  const maxPriceInput = document.getElementById('max-price');
-  if (minPriceInput) minPriceInput.addEventListener('input', applyFilters);
-  if (maxPriceInput) maxPriceInput.addEventListener('input', applyFilters);
+  const minPriceInput = document.getElementById("min-price");
+  const maxPriceInput = document.getElementById("max-price");
+  if (minPriceInput) minPriceInput.addEventListener("input", applyFilters);
+  if (maxPriceInput) maxPriceInput.addEventListener("input", applyFilters);
 
   // Checkbox rating
-  const ratingCheckbox = document.getElementById('rating4');
+  const ratingCheckbox = document.getElementById("rating4");
   if (ratingCheckbox) {
-    ratingCheckbox.addEventListener('change', () => {
+    ratingCheckbox.addEventListener("change", () => {
       applyFilters();
-      if (ratingCheckbox.checked) {
-        setTimeout(() => closeFilterSidebar(), 300);
-      }
     });
   }
 }
 
 // === Membuat container badge ===
 function createFilterBadgeContainer() {
-  const productsContainer = document.getElementById('products-container');
+  const productsContainer = document.getElementById("products-container");
   if (!productsContainer) return;
 
-  let badgeContainer = document.getElementById('filter-badge-container');
+  let badgeContainer = document.getElementById("filter-badge-container");
   if (!badgeContainer) {
-    badgeContainer = document.createElement('div');
-    badgeContainer.id = 'filter-badge-container';
-    productsContainer.parentElement.insertBefore(badgeContainer, productsContainer);
+    badgeContainer = document.createElement("div");
+    badgeContainer.id = "filter-badge-container";
+    productsContainer.parentElement.insertBefore(
+      badgeContainer,
+      productsContainer
+    );
   }
 }
 
-// === Tutup Sidebar Filter ===
-function closeFilterSidebar() {
-  const filterColumn = document.querySelector('.col-md-3');
-  if (!filterColumn) return;
-  filterColumn.style.display = 'none';
-  isFilterOpen = false;
-}
-
-// === Buka Sidebar Filter ===
+// Show filter
 function openFilterSidebar() {
-  const filterColumn = document.querySelector('.col-md-3');
+  const filterColumn = document.querySelector(".col-md-3");
   if (!filterColumn) return;
-  filterColumn.style.display = 'block';
+  filterColumn.style.display = "block";
   isFilterOpen = true;
 }
 
-// === Toggle Sidebar Filter ===
-function toggleFilterSidebar() {
-  if (isFilterOpen) {
-    closeFilterSidebar();
-  } else {
-    openFilterSidebar();
-  }
-}
-
-// Terapkan filter
+// Apply filter
 function applyFilters() {
   const selectedCategories = [];
-  document.querySelectorAll('.filter-category:checked').forEach(cb => {
+  document.querySelectorAll(".filter-category:checked").forEach((cb) => {
     selectedCategories.push(cb.value);
   });
 
-  const minPrice = parseFloat(document.getElementById('min-price')?.value) || 0;
-  const maxPrice = parseFloat(document.getElementById('max-price')?.value) || Infinity;
-  const rating4Plus = document.getElementById('rating4')?.checked || false;
+  const minPrice = parseFloat(document.getElementById("min-price")?.value) || 0;
+  const maxPrice =
+    parseFloat(document.getElementById("max-price")?.value) || Infinity;
+  const rating4Plus = document.getElementById("rating4")?.checked || false;
 
-  const filteredProducts = allProducts.filter(p => {
+  const filteredProducts = allProducts.filter((p) => {
     const categoryMatch =
-      selectedCategories.length === 0 || selectedCategories.every(cat => p.categories.includes(cat));
+      selectedCategories.length === 0 ||
+      selectedCategories.every((cat) => p.categories.includes(cat));
     const priceMatch = p.price >= minPrice && p.price <= maxPrice;
     const ratingMatch = !rating4Plus || p.rating >= 4;
     return categoryMatch && priceMatch && ratingMatch;
@@ -95,62 +77,66 @@ function applyFilters() {
   updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus);
 }
 
-// === Update tampilan badge ===
-function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus) {
-  const badgeContainer = document.getElementById('filter-badge-container');
+// Update tampilan badge
+function updateFilterBadges(
+  selectedCategories,
+  minPrice,
+  maxPrice,
+  rating4Plus
+) {
+  const badgeContainer = document.getElementById("filter-badge-container");
   if (!badgeContainer) return;
 
   const hasActive =
-    selectedCategories.length > 0 || minPrice > 0 || maxPrice < Infinity || rating4Plus;
+    selectedCategories.length > 0 ||
+    minPrice > 0 ||
+    maxPrice < Infinity ||
+    rating4Plus;
   if (!hasActive) {
-    badgeContainer.style.display = 'none';
-    openFilterSidebar();
+    badgeContainer.style.display = "none";
+    // Tidak membuka filter otomatis, biarkan pengguna yang atur
     return;
   }
 
-  badgeContainer.style.display = 'flex';
-  badgeContainer.innerHTML = '';
+  badgeContainer.style.display = "flex";
+  badgeContainer.innerHTML = "";
 
-  // === Prefix: Filters text dengan ikon ===
-  const prefix = document.createElement('span');
-  prefix.className = 'filter-label';
-  prefix.style.cursor = 'pointer';
+  // Filter text dengan icon
+  const prefix = document.createElement("span");
+  prefix.className = "filter-label";
+  prefix.style.cursor = "pointer";
   prefix.innerHTML = `
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="black" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px; vertical-align: middle;">
-      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-    </svg>
+    <img src="../public/assets/images/icons/filter-icon.svg" alt="Filter Icon" style="width:20px; height:20px; margin-bottom:4px;">
+    </img>
     Filters
   `;
-  prefix.addEventListener('click', toggleFilterSidebar);
+  prefix.addEventListener("click", openFilterSidebar);
   badgeContainer.appendChild(prefix);
 
-  const arrow = document.createElement('span');
-  arrow.className = 'filter-arrow';
-  arrow.textContent = '›';
+  const arrow = document.createElement("span");
+  arrow.className = "filter-arrow";
+  arrow.textContent = "›";
   badgeContainer.appendChild(arrow);
 
   const categoryNames = {
-    manis: 'Manis',
-    gurih: 'Gurih',
-    nabati: 'Nabati',
-    hewani: 'Hewani',
-    jajan: 'Jajan',
-    'makanan-berat': 'Makanan Berat'
+    manis: "Manis",
+    gurih: "Gurih",
+    nabati: "Nabati",
+    hewani: "Hewani",
+    jajan: "Jajan",
+    "makanan-berat": "Makanan Berat",
   };
 
-  // === Badge yang bisa dihapus
-  const createClosableBadge = (text, onRemove) => {
-    const item = document.createElement('span');
-    item.className = 'filter-breadcrumb-item';
-    item.innerHTML = `${text} <span class="close-icon">&times;</span>`;
-    item.querySelector('.close-icon').addEventListener('click', e => {
-      e.stopPropagation();
-      onRemove();
-    });
+  // Tambahkan icon ›
+  const createClosableBadge = (text) => {
+    const item = document.createElement("span");
+    item.className = "filter-breadcrumb-item";
+    item.innerHTML = `${text} <span class="close-icon">›</span>`;
+
     return item;
   };
 
-  selectedCategories.forEach(cat => {
+  selectedCategories.forEach((cat) => {
     const badge = createClosableBadge(categoryNames[cat] || cat, () => {
       const cb = document.getElementById(cat);
       if (cb) cb.checked = false;
@@ -160,23 +146,26 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
   });
 
   if (minPrice > 0 || maxPrice < Infinity) {
-    let priceText = '';
+    let priceText = "";
     if (minPrice > 0 && maxPrice < Infinity)
-      priceText = `Rp ${minPrice.toLocaleString('id-ID')} - Rp ${maxPrice.toLocaleString('id-ID')}`;
-    else if (minPrice > 0) priceText = `Min Rp ${minPrice.toLocaleString('id-ID')}`;
-    else priceText = `Max Rp ${maxPrice.toLocaleString('id-ID')}`;
+      priceText = `Rp ${minPrice.toLocaleString(
+        "id-ID"
+      )} - Rp ${maxPrice.toLocaleString("id-ID")}`;
+    else if (minPrice > 0)
+      priceText = `Min Rp ${minPrice.toLocaleString("id-ID")}`;
+    else priceText = `Max Rp ${maxPrice.toLocaleString("id-ID")}`;
 
     const badge = createClosableBadge(priceText, () => {
-      document.getElementById('min-price').value = '';
-      document.getElementById('max-price').value = '';
+      document.getElementById("min-price").value = "";
+      document.getElementById("max-price").value = "";
       applyFilters();
     });
     badgeContainer.appendChild(badge);
   }
 
   if (rating4Plus) {
-    const badge = createClosableBadge('Rating ⭐ 4+', () => {
-      const r = document.getElementById('rating4');
+    const badge = createClosableBadge("Rating ⭐ 4+", () => {
+      const r = document.getElementById("rating4");
       if (r) r.checked = false;
       applyFilters();
     });
@@ -186,26 +175,31 @@ function updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus)
 
 // === Tampilkan produk ===
 function displayFilteredProducts(products) {
-  const container = document.getElementById('products-container');
+  const container = document.getElementById("products-container");
   if (!container) return;
-  container.innerHTML = '';
+  container.innerHTML = "";
 
   if (products.length === 0) {
-    container.innerHTML = '<div class="col-12 text-center text-muted">Tidak ada produk yang sesuai.</div>';
+    container.innerHTML =
+      '<div class="col-12 text-center text-muted">Tidak ada produk yang sesuai.</div>';
     return;
   }
 
-  products.forEach(p => {
-    const col = document.createElement('div');
-    col.className = 'col-md-4 col-sm-6 mb-4';
-    const stars = '⭐'.repeat(p.rating);
-    const categories = p.categories.join(', ');
+  products.forEach((p) => {
+    const col = document.createElement("div");
+    col.className = "col-md-4 col-sm-6 mb-4";
+    const stars = "⭐".repeat(p.rating);
+    const categories = p.categories.join(", ");
     col.innerHTML = `
-      <div class="card shadow-sm product-card" onclick="goToProductDetail('${p.id}')">
+      <div class="card shadow-sm product-card" onclick="goToProductDetail('${
+        p.id
+      }')">
         <img src="${p.image}" class="card-img-top" alt="${p.name}">
         <div class="card-body">
           <h6 class="card-title">${p.name}</h6>
-          <p class="card-text text-success">Rp. ${p.price.toLocaleString('id-ID')}</p>
+          <p class="card-text text-success">Rp. ${p.price.toLocaleString(
+            "id-ID"
+          )}</p>
           <p class="rating">${stars}</p>
           <small class="text-muted">${categories}</small>
         </div>
@@ -222,7 +216,7 @@ function goToProductDetail(productId) {
 
 // === Load produk dan set allProducts ===
 async function loadAndStoreProducts() {
-  if (typeof loadProductsData === 'function') {
+  if (typeof loadProductsData === "function") {
     allProducts = await loadProductsData();
     displayFilteredProducts(allProducts);
   }
@@ -230,11 +224,11 @@ async function loadAndStoreProducts() {
 }
 
 // Ekspor ke global
-window.setAllProducts = function(products) {
+window.setAllProducts = function (products) {
   allProducts = products;
   displayFilteredProducts(products);
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   loadAndStoreProducts();
 });

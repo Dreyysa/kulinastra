@@ -4,29 +4,11 @@ let productsData = [];
 // Load data product dari JSON
 async function loadProductsData() {
   try {
-    // Try multiple possible paths for the JSON file
-    const possiblePaths = ["app/data.json", "../app/data.json", "./app/data.json"];
-
+    
     let response;
-    let lastError;
+    response = await fetch("../app/data.json");
 
-    for (const path of possiblePaths) {
-      try {
-        console.log(`Trying to fetch from: ${path}`);
-        response = await fetch(path);
-        console.log(`Response status for ${path}:`, response.status);
-        if (response.ok) {
-          console.log(`Successfully fetched from: ${path}`);
-          break;
-        } else {
-          console.log(`Failed to fetch from ${path}: HTTP ${response.status}`);
-        }
-      } catch (error) {
-        console.log(`Failed to fetch from ${path}:`, error.message);
-        lastError = error;
-        continue;
-      }
-    }
+    let lastError;
 
     if (!response || !response.ok) {
       throw lastError || new Error(`HTTP error! status: ${response?.status}`);
@@ -35,12 +17,12 @@ async function loadProductsData() {
     const data = await response.json();
     productsData = data.products;
     console.log("Products loaded:", productsData.length);
-    
-    // Notify filter.js that products are loaded
+
+    // Beritahu filter.js produk telah diload
     if (window.setAllProducts) {
       window.setAllProducts(productsData);
     }
-    
+
     return productsData;
   } catch (error) {
     console.error("Error loading products data:", error);
@@ -49,21 +31,19 @@ async function loadProductsData() {
   }
 }
 
-
-// Display all products on product.html page
+// Display all products
 async function displayProducts() {
   const productsContainer = document.getElementById("products-container");
 
   if (!productsContainer) return;
 
-  // Show loading state
+  // Show loading
   productsContainer.innerHTML =
     '<div class="col-12"><div class="loading">Memuat produk...</div></div>';
 
   const products = await loadProductsData();
 
-  console.log("Loaded products:", products); // Debug log
-
+  console.log("Loaded products:", products); // Debugging
   productsContainer.innerHTML = "";
 
   if (products.length === 0) {
