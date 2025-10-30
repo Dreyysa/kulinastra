@@ -208,11 +208,6 @@ function displayFilteredProducts(products) {
   });
 }
 
-// Navigasi ke detail produk
-function goToProductDetail(productId) {
-  window.location.href = `product-detail.html?id=${productId}`;
-}
-
 // Load produk dan set allProducts
 async function loadAndStoreProducts() {
   if (typeof loadProductsData === "function") {

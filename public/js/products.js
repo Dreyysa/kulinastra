@@ -1,33 +1,45 @@
-// Global variable untuk menyimpan data
+// ========================================
+// GLOBAL VARIABLE - SINGLE SOURCE OF TRUTH
+// ========================================
 let productsData = [];
+let isDataLoaded = false;
 
-// Load data product dari JSON
+// ========================================
+// LOAD DATA (ONCE) - WITH CACHING
+// ========================================
 async function loadProductsData() {
-  try {
-    let response;
-    response = await fetch("../app/data.json");
+  // Cek cache - jika sudah load, langsung return
+  if (isDataLoaded && productsData.length > 0) {
+    console.log("Using cached products data");
+    return productsData;
+  }
 
+  try {
+    const response = await fetch("../app/data.json");
     const data = await response.json();
     productsData = data.products;
+    isDataLoaded = true;
+    
     console.log("Products loaded:", productsData.length);
 
-    // Beritahu filter.js produk telah diload
-    if (window.setAllProducts) {
-      window.setAllProducts(productsData);
+    // Notify filter.js bahwa data sudah ready
+    if (window.onProductsLoaded) {
+      window.onProductsLoaded(productsData);
     }
 
     return productsData;
+
   } catch (error) {
     console.error("Error loading products data:", error);
-    console.log("No fallback data available");
     return [];
   }
 }
 
-// Display all products
+// ========================================
+// DISPLAY PRODUCTS (product.html)
+// ========================================
 async function displayProducts() {
   const productsContainer = document.getElementById("products-container");
-
   if (!productsContainer) return;
 
   // Show loading
@@ -35,8 +47,6 @@ async function displayProducts() {
     '<div class="col-12"><div class="loading">Memuat produk...</div></div>';
 
   const products = await loadProductsData();
-
-  console.log("Loaded products:", products); // Debugging
   productsContainer.innerHTML = "";
 
   if (products.length === 0) {
@@ -45,51 +55,38 @@ async function displayProducts() {
     return;
   }
 
-  products.forEach((product) => {
-    const productCard = createProductCard(product);
-    productsContainer.appendChild(productCard);
-  });
+  // Filter.js akan handle display setelah ini
 }
 
-// Pindah ke halaman detail produk di section Produk Terkait
-function goToProductDetail(productId) {
+// ========================================
+// NAVIGATION - GLOBAL FUNCTION
+// ========================================
+window.goToProductDetail = function(productId) {
   window.location.href = `product-detail.html?id=${productId}`;
-}
+};
 
-// Get product by ID from URL
+// ========================================
+// GET PRODUCT BY ID
+// ========================================
 function getProductIdFromUrl() {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get("id");
 }
 
-// Display product detail on product-detail.html page
+// ========================================
+// DISPLAY PRODUCT DETAIL (product-detail.html)
+// ========================================
 async function displayProductDetail() {
   const productId = getProductIdFromUrl();
 
   if (!productId) {
-    // Invalid ID
     document.getElementById("product-detail").innerHTML =
       '<div class="text-center"><h2>Produk tidak ditemukan</h2><p>ID produk tidak valid.</p></div>';
     return;
   }
 
   // Show loading state
-  const productTitleElement = document.getElementById("product-title");
-  const productPriceElement = document.getElementById("product-price");
-  const productStockElement = document.getElementById("product-stock");
-  const productCategoriesElement =
-    document.getElementById("product-categories");
-  const productDescriptionElement = document.getElementById(
-    "product-description"
-  );
-
-  if (productTitleElement) productTitleElement.textContent = "Loading...";
-  if (productPriceElement) productPriceElement.textContent = "Loading...";
-  if (productStockElement) productStockElement.textContent = "Loading...";
-  if (productCategoriesElement)
-    productCategoriesElement.textContent = "Loading...";
-  if (productDescriptionElement)
-    productDescriptionElement.textContent = "Loading...";
+  showLoadingState();
 
   const products = await loadProductsData();
   const product = products.find((p) => p.id === productId);
@@ -100,51 +97,88 @@ async function displayProductDetail() {
     return;
   }
 
+  // Update all product information
+  updateProductDisplay(product);
+  
+  // Load comments from localStorage
+  loadCommentsFromStorage();
+  
+  // Display comments
+  displayComments(product.comments);
+  
+  // Update rating
+  updateOverallRating();
+  
+  // Initialize features
+  initializeRatingStars();
+  initializeCharCounter();
+  
+  // Display related products
+  displayRelatedProducts(productId);
+}
+
+// ========================================
+// HELPER: Show Loading State
+// ========================================
+function showLoadingState() {
+  const elements = {
+    title: document.getElementById("product-title"),
+    price: document.getElementById("product-price"),
+    stock: document.getElementById("product-stock"),
+    categories: document.getElementById("product-categories"),
+    description: document.getElementById("product-description")
+  };
+
+  Object.values(elements).forEach(el => {
+    if (el) el.textContent = "Loading...";
+  });
+}
+
+// ========================================
+// HELPER: Update Product Display
+// ========================================
+function updateProductDisplay(product) {
   // Update page title
   document.title = `${product.name} - KuliNastra`;
 
-  // Update product image
+  // Update image
   const productImage = document.querySelector(".product-image img");
   if (productImage) {
     productImage.src = product.image;
     productImage.alt = product.name;
   }
 
-  // Update product info
+  // Update title
   const productTitleInfo = document.querySelector(".product-info h1");
   if (productTitleInfo) {
     productTitleInfo.textContent = product.name;
   }
 
+  // Update price
   const productPriceInfo = document.querySelector(".product-info .price");
   if (productPriceInfo) {
-    productPriceInfo.textContent = `Rp. ${product.price.toLocaleString(
-      "id-ID"
-    )}`;
+    productPriceInfo.textContent = `Rp. ${product.price.toLocaleString("id-ID")}`;
   }
 
-  // Update product details
+  // Update stock
   const stockValue = document.querySelector(".detail-row .value");
   if (stockValue) {
     stockValue.textContent = product.stock;
   }
 
-  const categoryValue = document.querySelector(
-    ".detail-row:nth-child(2) .value"
-  );
+  // Update categories
+  const categoryValue = document.querySelector(".detail-row:nth-child(2) .value");
   if (categoryValue) {
+    const categoryNames = {
+      manis: "Manis",
+      gurih: "Gurih",
+      nabati: "Nabati",
+      hewani: "Hewani",
+      jajan: "Jajan",
+      "makanan-berat": "Makanan Berat",
+    };
     categoryValue.textContent = product.categories
-      .map((cat) => {
-        const categoryNames = {
-          manis: "Manis",
-          gurih: "Gurih",
-          nabati: "Nabati",
-          hewani: "Hewani",
-          jajan: "Jajan",
-          "makanan-berat": "Makanan Berat",
-        };
-        return categoryNames[cat] || cat;
-      })
+      .map((cat) => categoryNames[cat] || cat)
       .join(", ");
   }
 
@@ -154,40 +188,21 @@ async function displayProductDetail() {
     productDescriptionInfo.textContent = product.description;
   }
 
-  // Load comments from localStorage
-  loadCommentsFromStorage();
-
-  // Update rating and comments
+  // Update rating stars
   const ratingStars = document.querySelector(".rating-section .stars");
   if (ratingStars) {
     ratingStars.textContent = "⭐".repeat(product.rating);
   }
-
-  // Display comments (combine original + localStorage comments)
-  displayComments(product.comments);
-
-  // Update overall rating based on all comments
-  updateOverallRating();
-
-  // Initialize rating stars functionality
-  initializeRatingStars();
-
-  // Initialize character counter
-  initializeCharCounter();
-
-  // Update related products (show other products)
-  displayRelatedProducts(productId);
 }
 
-// Display comments for a product
+// ========================================
+// DISPLAY COMMENTS
+// ========================================
 function displayComments(originalComments) {
   const commentsList = document.querySelector(".comments-list");
   if (!commentsList) return;
 
-  // Combine original comments with localStorage comments
   const allComments = [...originalComments, ...comments];
-
-  // Sort by date (newest first)
   allComments.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   commentsList.innerHTML = "";
@@ -201,37 +216,34 @@ function displayComments(originalComments) {
   allComments.forEach((comment) => {
     const commentItem = document.createElement("div");
     commentItem.className = "comment-item";
-
     const stars = "⭐".repeat(comment.rating);
-
-    // Check if comment is from localStorage (can be deleted)
     const isFromLocalStorage = comments.some((c) => c.id === comment.id);
     const deleteButton = isFromLocalStorage
       ? `<button class="delete-btn" onclick="deleteComment(${comment.id})" title="Hapus komentar"><i class="fa-solid fa-trash"></i></button>`
       : "";
 
     commentItem.innerHTML = `
-            <div class="comment-header">
-                <div class="stars">${stars}</div>
-                <div class="user-info">
-                    <div class="user-avatar"></div>
-                    <div class="user-details">
-                        <div class="username">${comment.username}</div>
-                        <div class="comment-text">${comment.text}</div>
-                        <div class="comment-date" style="font-size: 0.8em; color: #999; margin-top: 5px;">${comment.date}</div>
-                    </div>
-                </div>
-                <div class="comment-actions">
-                    ${deleteButton}
-                </div>
-            </div>
-        `;
+      <div class="comment-header">
+        <div class="stars">${stars}</div>
+        <div class="user-info">
+          <div class="user-avatar"></div>
+          <div class="user-details">
+            <div class="username">${comment.username}</div>
+            <div class="comment-text">${comment.text}</div>
+            <div class="comment-date" style="font-size: 0.8em; color: #999; margin-top: 5px;">${comment.date}</div>
+          </div>
+        </div>
+        <div class="comment-actions">${deleteButton}</div>
+      </div>
+    `;
 
     commentsList.appendChild(commentItem);
   });
 }
 
-// Display related products (other products excluding current one)
+// ========================================
+// DISPLAY RELATED PRODUCTS
+// ========================================
 async function displayRelatedProducts(currentProductId) {
   const products = await loadProductsData();
   const relatedProducts = products
@@ -246,62 +258,51 @@ async function displayRelatedProducts(currentProductId) {
   relatedProducts.forEach((product) => {
     const productCard = document.createElement("div");
     productCard.className = "product-card";
-    productCard.onclick = () => goToProductDetail(product.id);
+    productCard.onclick = () => window.goToProductDetail(product.id);
 
     const stars = "⭐".repeat(product.rating);
 
     productCard.innerHTML = `
-            <img src="${product.image}" alt="${
-      product.name
-    }" style="width: 100%; height: 150px; object-fit: cover;">
-            <div class="product-info-card">
-                <h3>${product.name}</h3>
-                <div class="product-price">Rp. ${product.price.toLocaleString(
-                  "id-ID"
-                )}</div>
-                <div class="rating">
-                    <span class="stars">${stars}</span>
-                </div>
-            </div>
-        `;
+      <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 150px; object-fit: cover;">
+      <div class="product-info-card">
+        <h3>${product.name}</h3>
+        <div class="product-price">Rp. ${product.price.toLocaleString("id-ID")}</div>
+        <div class="rating">
+          <span class="stars">${stars}</span>
+        </div>
+      </div>
+    `;
 
     relatedProductsContainer.appendChild(productCard);
   });
 }
 
-// Tab functionality
+// ========================================
+// TAB FUNCTIONALITY
+// ========================================
 function showTab(tabName) {
-  // Hide all tab contents
-  const tabContents = document.querySelectorAll(".tab-content");
-  tabContents.forEach((content) => {
+  document.querySelectorAll(".tab-content").forEach((content) => {
     content.classList.remove("active");
   });
 
-  // Remove active class from all tabs
-  const tabs = document.querySelectorAll(".tab");
-  tabs.forEach((tab) => {
+  document.querySelectorAll(".tab").forEach((tab) => {
     tab.classList.remove("active");
   });
 
-  // Show selected tab content
   const selectedTabContent = document.getElementById(tabName);
   if (selectedTabContent) {
     selectedTabContent.classList.add("active");
   }
 
-  // Add active class to clicked tab
   event.target.classList.add("active");
 }
 
-/**
- * Comment section
- */
-
-// Global variables for comment
+// ========================================
+// COMMENT SECTION
+// ========================================
 let selectedRating = 0;
 let comments = [];
 
-// Initialize rating stars functionality
 function initializeRatingStars() {
   const stars = document.querySelectorAll(".rating-input .star");
   const ratingLabel = document.getElementById("rating-label");
@@ -319,12 +320,24 @@ function initializeRatingStars() {
   });
 
   const ratingContainer = document.querySelector(".rating-input");
-  ratingContainer.addEventListener("mouseleave", () => {
-    updateStarDisplay();
+  if (ratingContainer) {
+    ratingContainer.addEventListener("mouseleave", () => {
+      updateStarDisplay();
+    });
+  }
+}
+
+function highlightStars(count) {
+  const stars = document.querySelectorAll(".rating-input .star");
+  stars.forEach((star, index) => {
+    if (index < count) {
+      star.classList.add("active");
+    } else {
+      star.classList.remove("active");
+    }
   });
 }
 
-// Update star display based on selected rating
 function updateStarDisplay() {
   const stars = document.querySelectorAll(".rating-input .star");
   stars.forEach((star, index) => {
@@ -336,7 +349,6 @@ function updateStarDisplay() {
   });
 }
 
-// Update rating label text
 function updateRatingLabel() {
   const ratingLabel = document.getElementById("rating-label");
   const ratingTexts = {
@@ -347,31 +359,26 @@ function updateRatingLabel() {
     5: "Sangat Bagus",
   };
 
-  if (selectedRating > 0) {
-    ratingLabel.textContent = ratingTexts[selectedRating];
-  } else {
-    ratingLabel.textContent = "Pilih rating";
+  if (ratingLabel) {
+    ratingLabel.textContent = selectedRating > 0 
+      ? ratingTexts[selectedRating] 
+      : "Pilih rating";
   }
 }
 
-// Initialize character counter
 function initializeCharCounter() {
   const textarea = document.getElementById("comment-text");
   const charCount = document.getElementById("char-count");
 
-  textarea.addEventListener("input", () => {
-    const currentLength = textarea.value.length;
-    charCount.textContent = `${currentLength}/500 karakter`;
-
-    if (currentLength > 450) {
-      charCount.style.color = "#e74c3c";
-    } else {
-      charCount.style.color = "#999";
-    }
-  });
+  if (textarea && charCount) {
+    textarea.addEventListener("input", () => {
+      const currentLength = textarea.value.length;
+      charCount.textContent = `${currentLength}/500 karakter`;
+      charCount.style.color = currentLength > 450 ? "#e74c3c" : "#999";
+    });
+  }
 }
 
-// Load comments from localStorage
 function loadCommentsFromStorage() {
   const productId = getProductIdFromUrl();
   if (!productId) return;
@@ -382,7 +389,6 @@ function loadCommentsFromStorage() {
   }
 }
 
-// Save comments to localStorage
 function saveCommentsToStorage() {
   const productId = getProductIdFromUrl();
   if (!productId) return;
@@ -390,15 +396,13 @@ function saveCommentsToStorage() {
   localStorage.setItem(`comments_${productId}`, JSON.stringify(comments));
 }
 
-// Add comment functionality
 function addComment() {
   const usernameInput = document.getElementById("username");
   const commentTextarea = document.getElementById("comment-text");
 
-  const username = usernameInput.value.trim() || "Anonim"; // Default to "Anonim" if empty
+  const username = usernameInput.value.trim() || "Anonim";
   const commentText = commentTextarea.value.trim();
 
-  // Validation
   if (!commentText) {
     alert("Silakan masukkan komentar terlebih dahulu!");
     commentTextarea.focus();
@@ -410,22 +414,17 @@ function addComment() {
     return;
   }
 
-  // Create new comment
   const newComment = {
-    id: Date.now(), // Simple ID generation
+    id: Date.now(),
     username: username,
     rating: selectedRating,
     text: commentText,
-    date: new Date().toISOString().split("T")[0], // Format: YYYY-MM-DD
+    date: new Date().toISOString().split("T")[0],
   };
 
-  // Add to comments array
   comments.push(newComment);
-
-  // Save to localStorage
   saveCommentsToStorage();
 
-  // Update display
   const productId = getProductIdFromUrl();
   const product = productsData.find((p) => p.id === productId);
   if (product) {
@@ -433,30 +432,21 @@ function addComment() {
     updateOverallRating();
   }
 
-  // Clear form
   usernameInput.value = "";
   commentTextarea.value = "";
   selectedRating = 0;
   updateStarDisplay();
   updateRatingLabel();
-
-  // Update character counter
   document.getElementById("char-count").textContent = "0/500 karakter";
 
-  // Show success message
   showSuccessMessage("Komentar berhasil ditambahkan!");
 }
 
-// Delete comment functionality
 function deleteComment(commentId) {
   if (confirm("Apakah Anda yakin ingin menghapus komentar ini?")) {
-    // Remove comment from array
     comments = comments.filter((comment) => comment.id !== commentId);
-
-    // Save updated comments to localStorage
     saveCommentsToStorage();
 
-    // Update display
     const productId = getProductIdFromUrl();
     const product = productsData.find((p) => p.id === productId);
     if (product) {
@@ -464,38 +454,11 @@ function deleteComment(commentId) {
       updateOverallRating();
     }
 
-    // Show success message
     showSuccessMessage("Komentar berhasil dihapus!");
   }
 }
 
-// Clear all comments for current product
-function clearAllComments() {
-  if (
-    confirm(
-      "Apakah Anda yakin ingin menghapus semua komentar untuk produk ini?"
-    )
-  ) {
-    const productId = getProductIdFromUrl();
-    if (productId) {
-      localStorage.removeItem(`comments_${productId}`);
-      comments = [];
-
-      // Update display
-      const product = productsData.find((p) => p.id === productId);
-      if (product) {
-        displayComments(product.comments);
-        updateOverallRating();
-      }
-
-      showSuccessMessage("Semua komentar berhasil dihapus!");
-    }
-  }
-}
-
-// Show success message
 function showSuccessMessage(message) {
-  // Create temporary success message
   const successDiv = document.createElement("div");
   successDiv.style.cssText = `
     position: fixed;
@@ -513,26 +476,21 @@ function showSuccessMessage(message) {
 
   document.body.appendChild(successDiv);
 
-  // Remove after 3 seconds
   setTimeout(() => {
     document.body.removeChild(successDiv);
   }, 3000);
 }
 
-// Update overall rating display
 function updateOverallRating() {
   const productId = getProductIdFromUrl();
   if (!productId) return;
 
-  // Get original product comments
   const product = productsData.find((p) => p.id === productId);
   if (!product) return;
 
-  // Combine all comments
   const allComments = [...product.comments, ...comments];
 
   if (allComments.length === 0) {
-    // Show original product rating if no comments
     const overallStars = document.getElementById("overall-stars");
     if (overallStars) {
       overallStars.textContent = "⭐".repeat(product.rating);
@@ -545,29 +503,24 @@ function updateOverallRating() {
     return;
   }
 
-  const totalRating = allComments.reduce(
-    (sum, comment) => sum + comment.rating,
-    0
-  );
+  const totalRating = allComments.reduce((sum, comment) => sum + comment.rating, 0);
   const averageRating = totalRating / allComments.length;
   const roundedRating = Math.round(averageRating);
 
-  // Update stars display
   const overallStars = document.getElementById("overall-stars");
   if (overallStars) {
     overallStars.textContent = "⭐".repeat(roundedRating);
   }
 
-  // Update rating text
   const ratingText = document.getElementById("rating-text");
   if (ratingText) {
-    ratingText.textContent = `Rating rata-rata: ${averageRating.toFixed(
-      1
-    )} dari ${allComments.length} komentar`;
+    ratingText.textContent = `Rating rata-rata: ${averageRating.toFixed(1)} dari ${allComments.length} komentar`;
   }
 }
 
-// Initialize page based on current page
+// ========================================
+// PAGE INITIALIZATION
+// ========================================
 document.addEventListener("DOMContentLoaded", function () {
   console.log("DOM Content Loaded");
   const currentPage = window.location.pathname.split("/").pop();
@@ -579,13 +532,5 @@ document.addEventListener("DOMContentLoaded", function () {
   } else if (currentPage === "product-detail.html") {
     console.log("Initializing product detail page");
     displayProductDetail();
-  } else {
-    console.log("Unknown page, trying to initialize anyway");
-    // Try to initialize based on URL
-    if (window.location.pathname.includes("product.html")) {
-      displayProducts();
-    } else if (window.location.pathname.includes("product-detail.html")) {
-      displayProductDetail();
-    }
   }
 });
