@@ -4,7 +4,6 @@ let productsData = [];
 // Load data product dari JSON
 async function loadProductsData() {
   try {
-    
     let response;
     response = await fetch("../app/data.json");
 
@@ -56,40 +55,6 @@ async function displayProducts() {
     const productCard = createProductCard(product);
     productsContainer.appendChild(productCard);
   });
-}
-
-// Create product card HTML element
-function createProductCard(product) {
-  const col = document.createElement("div");
-  col.className = "col-md-4 col-sm-6 mb-4";
-
-  const stars = "⭐".repeat(product.rating);
-  const categories = product.categories.join(", ");
-
-  col.innerHTML = `
-        <div class="card shadow-sm product-card" onclick="goToProductDetail('${
-          product.id
-        }')">
-            <img src="${product.image}" class="card-img-top" alt="${
-    product.name
-  }" style="height: 200px; width: 100%; object-fit: cover;">
-            <div class="card-body">
-                <h6 class="card-title">${product.name}</h6>
-                <p class="card-text text-success">Rp. ${product.price.toLocaleString(
-                  "id-ID"
-                )}</p>
-                <p class="rating">${stars}</p>
-                <small class="text-muted">${categories}</small>
-            </div>
-        </div>
-    `;
-
-  return col;
-}
-
-// Navigate to product detail page with ID parameter
-function goToProductDetail(productId) {
-  window.location.href = `product-detail.html?id=${productId}`;
 }
 
 // Get product by ID from URL parameter
@@ -275,53 +240,15 @@ function displayComments(originalComments) {
   }
 }
 
-// Display related products (other products excluding current one)
-async function displayRelatedProducts(currentProductId) {
-  const products = await loadProductsData();
-  const relatedProducts = products
-    .filter((p) => p.id !== currentProductId)
-    .slice(0, 4);
-
-  const relatedProductsContainer = document.querySelector(".products-grid");
-  if (!relatedProductsContainer) return;
-
-  relatedProductsContainer.innerHTML = "";
-
-  relatedProducts.forEach((product) => {
-    const productCard = document.createElement("div");
-    productCard.className = "product-card";
-    productCard.onclick = () => goToProductDetail(product.id);
-
-    const stars = "⭐".repeat(product.rating);
-
-    productCard.innerHTML = `
-            <img src="${product.image}" alt="${
-      product.name
-    }" style="width: 100%; height: 150px; object-fit: cover;">
-            <div class="product-info-card">
-                <h3>${product.name}</h3>
-                <div class="product-price">Rp. ${product.price.toLocaleString(
-                  "id-ID"
-                )}</div>
-                <div class="rating">
-                    <span class="stars">${stars}</span>
-                </div>
-            </div>
-        `;
-
-    relatedProductsContainer.appendChild(productCard);
-  });
-}
-
-// Tab functionality
+// Fungsi untuk hide desc dan show desc
 function showTab(tabName) {
-  // Hide all tab contents
+  // Hide desc
   const tabContents = document.querySelectorAll(".tab-content");
   tabContents.forEach((content) => {
     content.classList.remove("active");
   });
 
-  // Remove active class from all tabs
+  // Remove active class
   const tabs = document.querySelectorAll(".tab");
   tabs.forEach((tab) => {
     tab.classList.remove("active");
