@@ -104,7 +104,7 @@ function updateFilterBadges(
   // Filter text dengan icon
   const prefix = document.createElement("span");
   prefix.className = "filter-label";
-  prefix.style.cursor = "pointer";
+  // prefix.style.cursor = "pointer";
   prefix.innerHTML = `
     <img src="../public/assets/images/icons/filter-icon.svg" alt="Filter Icon" style="width:20px; height:20px; margin-bottom:4px;">
     </img>
@@ -127,7 +127,7 @@ function updateFilterBadges(
     "makanan-berat": "Makanan Berat",
   };
 
-  // Tambahkan icon ›
+  // Tambahkan icon '›'
   const createClosableBadge = (text) => {
     const item = document.createElement("span");
     item.className = "filter-breadcrumb-item";

@@ -61,7 +61,7 @@ body {
 /* Product Cards */
 .card.product-card {
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   overflow: hidden;
@@ -70,7 +70,7 @@ body {
 }
 
 .card.product-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -79,10 +79,6 @@ body {
   width: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
-}
-
-.card.product-card:hover .card-img-top {
-  transform: scale(1.05);
 }
 
 .card.product-card .card-body {

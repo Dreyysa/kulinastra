@@ -448,6 +448,7 @@ body {
 }
 
 .product-card {
+  cursor: pointer;
   background-color: white;
   border-radius: 8px;
   overflow: hidden;
@@ -456,7 +457,7 @@ body {
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-2px);
 }
 
 .product-card img {

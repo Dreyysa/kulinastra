@@ -72,7 +72,8 @@ function getProductIdFromUrl() {
 async function displayProductDetail() {
   const productId = getProductIdFromUrl();
 
-  if (!productId) { // Invalid ID
+  if (!productId) {
+    // Invalid ID
     document.getElementById("product-detail").innerHTML =
       '<div class="text-center"><h2>Produk tidak ditemukan</h2><p>ID produk tidak valid.</p></div>';
     return;
@@ -82,8 +83,11 @@ async function displayProductDetail() {
   const productTitleElement = document.getElementById("product-title");
   const productPriceElement = document.getElementById("product-price");
   const productStockElement = document.getElementById("product-stock");
-  const productCategoriesElement = document.getElementById("product-categories");
-  const productDescriptionElement = document.getElementById("product-description");
+  const productCategoriesElement =
+    document.getElementById("product-categories");
+  const productDescriptionElement = document.getElementById(
+    "product-description"
+  );
 
   if (productTitleElement) productTitleElement.textContent = "Loading...";
   if (productPriceElement) productPriceElement.textContent = "Loading...";
@@ -231,15 +235,6 @@ function displayComments(originalComments) {
 
     commentsList.appendChild(commentItem);
   });
-
-  // Add clear all button if there are localStorage comments
-  if (comments.length > 0) {
-    const clearAllBtn = document.createElement("button");
-    clearAllBtn.className = "clear-all-btn";
-    clearAllBtn.textContent = "Hapus Semua Komentar";
-    clearAllBtn.onclick = clearAllComments;
-    commentsList.appendChild(clearAllBtn);
-  }
 }
 
 // Display related products (other products excluding current one)
@@ -304,7 +299,11 @@ function showTab(tabName) {
   event.target.classList.add("active");
 }
 
-// Global variables for comment functionality
+/**
+ * Comment section
+ */
+
+// Global variables for comment
 let selectedRating = 0;
 let comments = [];
 
@@ -339,18 +338,6 @@ function updateStarDisplay() {
       star.classList.add("active");
     } else {
       star.classList.remove("active");
-    }
-  });
-}
-
-// Highlight stars on hover
-function highlightStars(rating) {
-  const stars = document.querySelectorAll(".rating-input .star");
-  stars.forEach((star, index) => {
-    if (index < rating) {
-      star.style.color = "#FFD700";
-    } else {
-      star.style.color = "#ddd";
     }
   });
 }
