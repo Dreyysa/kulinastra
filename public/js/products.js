@@ -7,12 +7,6 @@ async function loadProductsData() {
     let response;
     response = await fetch("../app/data.json");
 
-    let lastError;
-
-    if (!response || !response.ok) {
-      throw lastError || new Error(`HTTP error! status: ${response?.status}`);
-    }
-
     const data = await response.json();
     productsData = data.products;
     console.log("Products loaded:", productsData.length);
