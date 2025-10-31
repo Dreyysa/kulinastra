@@ -5,7 +5,7 @@
       "name": "Gethuk",
       "price": 10000,
       "image": "../public/assets/images/products/gethukLindri.png",
-      "description": "Klepon khas KuliNastra adalah jajanan tradisional Jawa yang terbuat dari tepung beras ketan dengan isian gula merah yang meleleh. Dibalut dengan parutan kelapa yang segar, memberikan cita rasa manis yang khas dengan tekstur yang kenyal dan lembut. Sempurna sebagai camilan sore atau teman minum teh.",
+      "description": "Gethuk khas KuliNastra adalah jajanan tradisional Jawa yang terbuat dari singkong pilihan yang diolah dengan gula dan sedikit garam, menghasilkan rasa manis gurih yang khas. Teksturnya lembut dan padat, sering disajikan dengan taburan parutan kelapa segar yang menambah cita rasa alami. Sempurna sebagai camilan sore atau teman minum teh.",
       "categories": ["manis", "nabati", "jajan"],
       "rating": 5,
       "stock": "Tersedia",
