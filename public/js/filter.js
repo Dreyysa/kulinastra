@@ -1,7 +1,9 @@
 let allProducts = [];
 let isFilterOpen = true;
 
-// === Inisialisasi ===
+/**
+ * Inisialisasi 
+*/ 
 function initializeFilters() {
   createFilterBadgeContainer();
 
@@ -28,7 +30,9 @@ function initializeFilters() {
   }
 }
 
-// === Membuat container badge ===
+/**
+ *  Membuat container badge
+ */
 function createFilterBadgeContainer() {
   const productsContainer = document.getElementById("products-container");
   if (!productsContainer) return;
@@ -44,7 +48,9 @@ function createFilterBadgeContainer() {
   }
 }
 
-// Show filter
+/**
+ * Show filter
+ */
 function openFilterSidebar() {
   const filterColumn = document.querySelector(".col-md-3");
   if (!filterColumn) return;
@@ -52,7 +58,9 @@ function openFilterSidebar() {
   isFilterOpen = true;
 }
 
-// Apply filter
+/**
+ * Terapkan filter
+ */
 function applyFilters() {
   const selectedCategories = [];
   document.querySelectorAll(".filter-category:checked").forEach((cb) => {
@@ -77,7 +85,9 @@ function applyFilters() {
   updateFilterBadges(selectedCategories, minPrice, maxPrice, rating4Plus);
 }
 
-// Update tampilan badge
+/**
+ * Perbarui badge filter
+ */
 function updateFilterBadges(
   selectedCategories,
   minPrice,
@@ -172,7 +182,9 @@ function updateFilterBadges(
   }
 }
 
-// Tampilkan produk
+/**
+ * Tampilkan produk yang difilter
+ */
 function displayFilteredProducts(products) {
   const container = document.getElementById("products-container");
   if (!container) return;
@@ -208,7 +220,9 @@ function displayFilteredProducts(products) {
   });
 }
 
-// Load produk dan set allProducts
+/**
+ * Muat data produk dan simpan  
+ */
 async function loadAndStoreProducts() {
   if (typeof loadProductsData === "function") {
     allProducts = await loadProductsData();
@@ -217,7 +231,9 @@ async function loadAndStoreProducts() {
   initializeFilters();
 }
 
-// Ekspor ke global
+/**
+ * Set semua produk 
+*/
 window.setAllProducts = function (products) {
   allProducts = products;
   displayFilteredProducts(products);

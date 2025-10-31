@@ -29,7 +29,7 @@ function getAllComments() {
   productsData.forEach((product) => {
     if (product.comments && product.comments.length > 0) {
       product.comments.forEach((comment) => {
-        // Only include comments with rating 5 stars (excellent only)
+        // Only include comments with rating 5 stars
         if (comment.rating === 5) {
           allComments.push({
             ...comment,

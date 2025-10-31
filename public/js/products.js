@@ -1,14 +1,14 @@
-// ========================================
-// GLOBAL VARIABLE - SINGLE SOURCE OF TRUTH
-// ========================================
+/**
+ * PRODUCTS.JS
+ * GLOBAL VARBLES
+ */
 let productsData = [];
 let isDataLoaded = false;
 
-// ========================================
-// LOAD DATA (ONCE) - WITH CACHING
-// ========================================
+/**
+ * LOAD PRODUCTS DATA FROM JSON  (data.json)
+ */
 async function loadProductsData() {
-  // Cek cache - jika sudah load, langsung return
   if (isDataLoaded && productsData.length > 0) {
     console.log("Using cached products data");
     return productsData;
@@ -19,7 +19,7 @@ async function loadProductsData() {
     const data = await response.json();
     productsData = data.products;
     isDataLoaded = true;
-    
+
     console.log("Products loaded:", productsData.length);
 
     // Notify filter.js bahwa data sudah ready
@@ -28,16 +28,15 @@ async function loadProductsData() {
     }
 
     return productsData;
-
   } catch (error) {
     console.error("Error loading products data:", error);
     return [];
   }
 }
 
-// ========================================
-// DISPLAY PRODUCTS (product.html)
-// ========================================
+/**
+ * DISPLAY PRODUCTS (product.html)
+ */
 async function displayProducts() {
   const productsContainer = document.getElementById("products-container");
   if (!productsContainer) return;
@@ -54,28 +53,26 @@ async function displayProducts() {
       '<div class="col-12"><p class="text-center text-muted">Tidak ada produk yang ditemukan.</p></div>';
     return;
   }
-
-  // Filter.js akan handle display setelah ini
 }
 
-// ========================================
-// NAVIGATION - GLOBAL FUNCTION
-// ========================================
-window.goToProductDetail = function(productId) {
+/**
+ * GO TO PRODUCT DETAIL PAGE
+ */
+window.goToProductDetail = function (productId) {
   window.location.href = `product-detail.html?id=${productId}`;
 };
 
-// ========================================
-// GET PRODUCT BY ID
-// ========================================
+/**
+ * GET PRODUCT BY ID FROM URL
+ */
 function getProductIdFromUrl() {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get("id");
 }
 
-// ========================================
-// DISPLAY PRODUCT DETAIL (product-detail.html)
-// ========================================
+/**
+ * DISPLAY PRODUCT DETAIL (product-detail.html)
+ */
 async function displayProductDetail() {
   const productId = getProductIdFromUrl();
 
@@ -99,44 +96,44 @@ async function displayProductDetail() {
 
   // Update all product information
   updateProductDisplay(product);
-  
+
   // Load comments from localStorage
   loadCommentsFromStorage();
-  
+
   // Display comments
   displayComments(product.comments);
-  
+
   // Update rating
   updateOverallRating();
-  
+
   // Initialize features
   initializeRatingStars();
   initializeCharCounter();
-  
+
   // Display related products
   displayRelatedProducts(productId);
 }
 
-// ========================================
-// HELPER: Show Loading State
-// ========================================
+/**
+ * SHOW LOADING STATE
+ */
 function showLoadingState() {
   const elements = {
     title: document.getElementById("product-title"),
     price: document.getElementById("product-price"),
     stock: document.getElementById("product-stock"),
     categories: document.getElementById("product-categories"),
-    description: document.getElementById("product-description")
+    description: document.getElementById("product-description"),
   };
 
-  Object.values(elements).forEach(el => {
+  Object.values(elements).forEach((el) => {
     if (el) el.textContent = "Loading...";
   });
 }
 
-// ========================================
-// HELPER: Update Product Display
-// ========================================
+/**
+ * UPDATE PRODUCT DISPLAY
+ */
 function updateProductDisplay(product) {
   // Update page title
   document.title = `${product.name} - KuliNastra`;
@@ -157,7 +154,9 @@ function updateProductDisplay(product) {
   // Update price
   const productPriceInfo = document.querySelector(".product-info .price");
   if (productPriceInfo) {
-    productPriceInfo.textContent = `Rp. ${product.price.toLocaleString("id-ID")}`;
+    productPriceInfo.textContent = `Rp. ${product.price.toLocaleString(
+      "id-ID"
+    )}`;
   }
 
   // Update stock
@@ -167,7 +166,9 @@ function updateProductDisplay(product) {
   }
 
   // Update categories
-  const categoryValue = document.querySelector(".detail-row:nth-child(2) .value");
+  const categoryValue = document.querySelector(
+    ".detail-row:nth-child(2) .value"
+  );
   if (categoryValue) {
     const categoryNames = {
       manis: "Manis",
@@ -195,9 +196,9 @@ function updateProductDisplay(product) {
   }
 }
 
-// ========================================
-// DISPLAY COMMENTS
-// ========================================
+/**
+ * DISPLAY COMMENTS
+ */
 function displayComments(originalComments) {
   const commentsList = document.querySelector(".comments-list");
   if (!commentsList) return;
@@ -241,9 +242,9 @@ function displayComments(originalComments) {
   });
 }
 
-// ========================================
-// DISPLAY RELATED PRODUCTS
-// ========================================
+/**
+ * DISPLAY RELATED PRODUCTS
+ */
 async function displayRelatedProducts(currentProductId) {
   const products = await loadProductsData();
   const relatedProducts = products
@@ -263,10 +264,14 @@ async function displayRelatedProducts(currentProductId) {
     const stars = "⭐".repeat(product.rating);
 
     productCard.innerHTML = `
-      <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 150px; object-fit: cover;">
+      <img src="${product.image}" alt="${
+      product.name
+    }" style="width: 100%; height: 150px; object-fit: cover;">
       <div class="product-info-card">
         <h3>${product.name}</h3>
-        <div class="product-price">Rp. ${product.price.toLocaleString("id-ID")}</div>
+        <div class="product-price">Rp. ${product.price.toLocaleString(
+          "id-ID"
+        )}</div>
         <div class="rating">
           <span class="stars">${stars}</span>
         </div>
@@ -277,9 +282,9 @@ async function displayRelatedProducts(currentProductId) {
   });
 }
 
-// ========================================
-// TAB FUNCTIONALITY
-// ========================================
+/**
+ * TAB NAVIGATION FUNCTIONALITY
+ */
 function showTab(tabName) {
   document.querySelectorAll(".tab-content").forEach((content) => {
     content.classList.remove("active");
@@ -297,9 +302,9 @@ function showTab(tabName) {
   event.target.classList.add("active");
 }
 
-// ========================================
-// COMMENT SECTION
-// ========================================
+/**
+ * COMMENT AND RATING FUNCTIONALITY
+ */
 let selectedRating = 0;
 let comments = [];
 
@@ -360,9 +365,8 @@ function updateRatingLabel() {
   };
 
   if (ratingLabel) {
-    ratingLabel.textContent = selectedRating > 0 
-      ? ratingTexts[selectedRating] 
-      : "Pilih rating";
+    ratingLabel.textContent =
+      selectedRating > 0 ? ratingTexts[selectedRating] : "Pilih rating";
   }
 }
 
@@ -503,7 +507,10 @@ function updateOverallRating() {
     return;
   }
 
-  const totalRating = allComments.reduce((sum, comment) => sum + comment.rating, 0);
+  const totalRating = allComments.reduce(
+    (sum, comment) => sum + comment.rating,
+    0
+  );
   const averageRating = totalRating / allComments.length;
   const roundedRating = Math.round(averageRating);
 
@@ -514,13 +521,15 @@ function updateOverallRating() {
 
   const ratingText = document.getElementById("rating-text");
   if (ratingText) {
-    ratingText.textContent = `Rating rata-rata: ${averageRating.toFixed(1)} dari ${allComments.length} komentar`;
+    ratingText.textContent = `Rating rata-rata: ${averageRating.toFixed(
+      1
+    )} dari ${allComments.length} komentar`;
   }
 }
 
-// ========================================
-// PAGE INITIALIZATION
-// ========================================
+/**
+ * INITIALIZATION BASED ON PAGE
+ */
 document.addEventListener("DOMContentLoaded", function () {
   console.log("DOM Content Loaded");
   const currentPage = window.location.pathname.split("/").pop();
